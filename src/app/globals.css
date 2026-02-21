@@ -74,6 +74,26 @@ html { scroll-behavior: smooth; }
   min-height: 100vh;
 }
 
+/* ── LIGHT MODE ── */
+body.light .sp-page {
+  --sp-bg: #f6f8fa;
+  --sp-surface: #ffffff;
+  --sp-surface2: #f0f2f5;
+  --sp-surface3: #e8ebef;
+  --sp-border: rgba(0,0,0,0.09);
+  --sp-border-active: rgba(0,0,0,0.18);
+  --sp-text: #1c2128;
+  --sp-muted: #57606a;
+  --sp-dim: #adb5c0;
+  --sp-brand: #16a34a;
+  --sp-brand-dim: rgba(22,163,74,0.08);
+  background: var(--sp-bg);
+  color: var(--sp-text);
+}
+body.light .sp-page::before { display: none; }
+body.light .sp-page .sp-glow { display: none; }
+body.light { background: #f6f8fa; }
+
 /* Scanlines overlay */
 .sp-page::before {
   content: '';

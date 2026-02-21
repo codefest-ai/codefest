@@ -9,6 +9,7 @@ import {
   CATEGORIES, CAT_COLORS, DIFF_COLORS,
   AUDIENCE_ARCHETYPES, PROBLEM_FRAMES,
 } from "@/data/constants"
+import { ThemeToggle } from "@/components/ThemeToggle"
 
 // ── TYPES ────────────────────────────────────────────────────
 
@@ -185,6 +186,30 @@ export default function WorkspacePage() {
     })
   }
 
+  // ── AUTO-POPULATE GO! from session context ──────────────────
+  // When domain is picked above, pre-answer q3 so GO! isn't redundant
+  useEffect(() => {
+    if (!selectedDomain || goState.q3) return
+    const d = selectedDomain.toLowerCase()
+    let q3 = "General / Open"
+    if (d.includes("climate") || d.includes("environment") || d.includes("energy") || d.includes("water") || d.includes("food")) q3 = "Climate / Environment"
+    else if (d.includes("health") || d.includes("accessibility")) q3 = "Health / Social Impact"
+    else if (d.includes("civic") || d.includes("community") || d.includes("safety") || d.includes("justice")) q3 = "Civic / Open Data"
+    setGoState(prev => ({ ...prev, q3 }))
+  }, [selectedDomain]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // When audience is picked, pre-answer q2
+  useEffect(() => {
+    if (!selectedAudience || goState.q2) return
+    const map: Record<string, string> = {
+      developer: "Full-stack / Node",
+      student: "Frontend / React",
+      designer: "Frontend / React",
+      expert: "Mixed",
+    }
+    if (map[selectedAudience]) setGoState(prev => ({ ...prev, q2: map[selectedAudience] }))
+  }, [selectedAudience]) // eslint-disable-line react-hooks/exhaustive-deps
+
   const getGoRec = () => {
     if (!goState.q3) return null
     if (goState.q3.includes("Climate")) return RECS.climate
@@ -243,6 +268,7 @@ export default function WorkspacePage() {
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <ThemeToggle mono />
           <Link href="/" className="sp-hdr-link">← browse</Link>
           {user ? (
             <>
@@ -672,6 +698,9 @@ export default function WorkspacePage() {
                       <div style={{ paddingTop: "18px", maxWidth: "600px" }}>
                         <div style={{ fontFamily: "var(--sp-mono)", fontSize: "10px", color: "var(--sp-dim)", marginBottom: "16px" }}>
                           3 quick questions → 1 opinionated stack recommendation.
+                          {(goState.q2 || goState.q3) && (
+                            <span style={{ marginLeft: "8px", color: "var(--sp-brand)" }}>✦ some answers pre-filled from your session</span>
+                          )}
                         </div>
                         {GO_QUESTIONS.map(({ key, q, opts }, i) => {
                           const prevKey = i > 0 ? GO_QUESTIONS[i - 1].key : null

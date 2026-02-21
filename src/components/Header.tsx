@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useState, useRef, useEffect } from "react"
 import { Menu, X, Zap, LogOut, User, GraduationCap, Bookmark } from "lucide-react"
 import { useAuth } from "@/components/AuthProvider"
+import { ThemeToggle } from "@/components/ThemeToggle"
 
 const navItems = [
   { label: "Library", href: "/library" },
@@ -74,6 +75,7 @@ export function Header() {
 
         {/* Right side */}
         <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle />
           {loading ? (
             <div className="h-8 w-20 rounded-lg bg-surface-2 animate-pulse" />
           ) : user ? (

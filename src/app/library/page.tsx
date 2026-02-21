@@ -31,6 +31,10 @@ type Component = {
   tags: string[]
 }
 
+function toSlug(name: string): string {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")
+}
+
 const components: Component[] = componentsData.components
 
 const categories = Array.from(new Set(components.map((c) => c.category))).sort()
@@ -349,8 +353,10 @@ export default function LibraryPage() {
                 return (
                   <div
                     key={comp.name}
-                    className="group rounded-2xl border border-white/[0.06] bg-surface-1/80 p-6 transition-all duration-200 hover:border-white/[0.12] hover:bg-surface-2/80"
+                    className="group relative rounded-2xl border border-white/[0.06] bg-surface-1/80 p-6 transition-all duration-200 hover:border-white/[0.12] hover:bg-surface-2/80"
                   >
+                    {/* Stretch link — covers whole card, sits behind interactive elements */}
+                    <Link href={`/library/${toSlug(comp.name)}`} className="absolute inset-0 z-0 rounded-2xl" aria-label={`View ${comp.name} details`} />
                     {/* Top row */}
                     <div className="flex items-start justify-between mb-3">
                       <div className="min-w-0">
@@ -373,7 +379,7 @@ export default function LibraryPage() {
                       {user && (
                         <button
                           onClick={() => toggleBookmark(comp.name)}
-                          className={`p-2 rounded-lg transition-all shrink-0 ${
+                          className={`relative z-10 p-2 rounded-lg transition-all shrink-0 ${
                             isBookmarked
                               ? "text-brand-400 bg-brand-500/10 hover:bg-brand-500/20"
                               : "text-zinc-600 hover:text-zinc-400 hover:bg-white/5"
@@ -411,7 +417,7 @@ export default function LibraryPage() {
                         <Clock className="h-3 w-3" />
                         {comp.setup_time_minutes} min setup
                       </span>
-                      <div className="flex items-center gap-3">
+                      <div className="relative z-10 flex items-center gap-3">
                         {comp.github_url && (
                           <a
                             href={comp.github_url}
