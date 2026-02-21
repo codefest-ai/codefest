@@ -60,6 +60,8 @@ export default function SubmitShowcasePage() {
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [stackInput, setStackInput] = useState("")
+  const [githubFetching, setGithubFetching] = useState(false)
+  const [githubFetched, setGithubFetched] = useState(false)
 
   function set(field: keyof ShowcaseFormData, value: string | string[]) {
     setForm(f => ({ ...f, [field]: value }))
@@ -75,6 +77,31 @@ export default function SubmitShowcasePage() {
     set("stack", form.stack.includes(item)
       ? form.stack.filter(s => s !== item)
       : [...form.stack, item])
+  }
+
+  async function fetchFromGitHub(url: string) {
+    const match = url.match(/github\.com\/([^/]+)\/([^/]+)/)
+    if (!match) return
+    const [, owner, repo] = match
+    setGithubFetching(true)
+    setGithubFetched(false)
+    try {
+      const res = await fetch(`https://api.github.com/repos/${owner}/${repo.replace(/\.git$/, "")}`)
+      if (!res.ok) return
+      const data = await res.json()
+      // Auto-fill fields only if currently empty
+      if (!form.title && data.name) set("title", data.name.replace(/-/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase()))
+      if (!form.description && data.description) set("description", data.description)
+      // Add detected language + topics to stack
+      const detected: string[] = []
+      if (data.language) detected.push(data.language)
+      if (Array.isArray(data.topics)) data.topics.slice(0, 6).forEach((t: string) => detected.push(t))
+      if (detected.length > 0) {
+        set("stack", [...new Set([...form.stack, ...detected])])
+      }
+      setGithubFetched(true)
+    } catch {}
+    finally { setGithubFetching(false) }
   }
 
   function addCustomStack() {
@@ -213,7 +240,24 @@ export default function SubmitShowcasePage() {
 
             <div style={fieldStyle}>
               <label style={labelStyle}>GitHub URL</label>
-              <input style={inputStyle} type="url" value={form.github_url} onChange={e => set("github_url", e.target.value)} placeholder="https://github.com/you/your-project" />
+              <div style={{ position: "relative" }}>
+                <input
+                  style={inputStyle}
+                  type="url"
+                  value={form.github_url}
+                  onChange={e => { set("github_url", e.target.value); setGithubFetched(false) }}
+                  onBlur={e => { if (e.target.value.includes("github.com")) fetchFromGitHub(e.target.value) }}
+                  placeholder="https://github.com/you/your-project"
+                />
+                {githubFetching && (
+                  <span style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", fontFamily: "var(--sp-mono)", fontSize: "10px", color: "var(--sp-dim)" }}>fetching…</span>
+                )}
+              </div>
+              {githubFetched && (
+                <div style={{ marginTop: "6px", fontFamily: "var(--sp-mono)", fontSize: "10px", color: "var(--sp-brand)" }}>
+                  ✓ title, description + stack auto-filled from GitHub
+                </div>
+              )}
             </div>
 
             <div style={{ ...fieldStyle, marginBottom: 0 }}>
