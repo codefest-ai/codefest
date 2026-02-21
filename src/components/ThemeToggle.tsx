@@ -2,35 +2,46 @@
 
 import { useEffect, useState } from "react"
 
+type Theme = "system" | "dark" | "light"
+
+function applyTheme(theme: Theme) {
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+  const isDark = theme === "dark" || (theme === "system" && prefersDark)
+  document.body.classList.toggle("light", !isDark)
+}
+
 export function ThemeToggle({ mono = false }: { mono?: boolean }) {
-  const [light, setLight] = useState(false)
+  const [theme, setTheme] = useState<Theme>("system")
 
   useEffect(() => {
-    const saved = localStorage.getItem("codefest-theme")
-    if (saved === "light") {
-      document.body.classList.add("light")
-      setLight(true)
+    const saved = (localStorage.getItem("codefest-theme") as Theme) ?? "system"
+    setTheme(saved)
+    applyTheme(saved)
+
+    // Listen for OS preference changes when in system mode
+    const mq = window.matchMedia("(prefers-color-scheme: dark)")
+    const handler = () => {
+      if ((localStorage.getItem("codefest-theme") ?? "system") === "system") applyTheme("system")
     }
+    mq.addEventListener("change", handler)
+    return () => mq.removeEventListener("change", handler)
   }, [])
 
-  const toggle = () => {
-    const next = !light
-    setLight(next)
-    if (next) {
-      document.body.classList.add("light")
-      localStorage.setItem("codefest-theme", "light")
-    } else {
-      document.body.classList.remove("light")
-      localStorage.setItem("codefest-theme", "dark")
-    }
+  const cycle = () => {
+    const next: Theme = theme === "system" ? "light" : theme === "light" ? "dark" : "system"
+    setTheme(next)
+    localStorage.setItem("codefest-theme", next)
+    applyTheme(next)
   }
 
+  const icon = theme === "light" ? "☀" : theme === "dark" ? "◑" : "⊙"
+  const label = theme === "light" ? "light" : theme === "dark" ? "dark" : "system"
+
   if (mono) {
-    // Minimal version for workspace header
     return (
       <button
-        onClick={toggle}
-        title={light ? "Switch to dark mode" : "Switch to light mode"}
+        onClick={cycle}
+        title={`Theme: ${label} — click to cycle`}
         style={{
           fontFamily: "var(--sp-mono)", fontSize: "10px",
           padding: "3px 8px", background: "none",
@@ -38,19 +49,19 @@ export function ThemeToggle({ mono = false }: { mono?: boolean }) {
           color: "var(--sp-dim)", cursor: "pointer",
         }}
       >
-        {light ? "◑ dark" : "◐ light"}
+        {icon} {label}
       </button>
     )
   }
 
-  // Version for library header (Tailwind)
   return (
     <button
-      onClick={toggle}
-      title={light ? "Switch to dark mode" : "Switch to light mode"}
-      className="p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5 transition-colors text-xs font-mono"
+      onClick={cycle}
+      title={`Theme: ${label} — click to cycle`}
+      className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5 transition-colors text-xs font-mono"
     >
-      {light ? "◑" : "◐"}
+      <span>{icon}</span>
+      <span className="hidden sm:inline">{label}</span>
     </button>
   )
 }
