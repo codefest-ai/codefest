@@ -1,0 +1,480 @@
+{
+  "components": [
+    {
+      "name": "Supabase Auth",
+      "category": "auth",
+      "description": "Complete authentication with OAuth, magic links, and email/password. Works seamlessly with Supabase database.",
+      "github_url": "https://github.com/supabase/supabase",
+      "docs_url": "https://supabase.com/docs/guides/auth",
+      "setup_time_minutes": 15,
+      "difficulty": "beginner",
+      "tags": ["oauth", "magic-link", "social-login", "free-tier"]
+    },
+    {
+      "name": "NextAuth.js",
+      "category": "auth",
+      "description": "Authentication for Next.js with 50+ providers. Supports JWT and database sessions.",
+      "github_url": "https://github.com/nextauthjs/next-auth",
+      "docs_url": "https://next-auth.js.org",
+      "setup_time_minutes": 20,
+      "difficulty": "beginner",
+      "tags": ["oauth", "jwt", "session", "providers"]
+    },
+    {
+      "name": "Clerk",
+      "category": "auth",
+      "description": "Drop-in authentication UI with user management, organizations, and MFA built-in.",
+      "github_url": "https://github.com/clerkinc/javascript",
+      "docs_url": "https://clerk.com/docs",
+      "setup_time_minutes": 10,
+      "difficulty": "beginner",
+      "tags": ["managed", "ui-components", "user-management", "mfa"]
+    },
+    {
+      "name": "Lucia Auth",
+      "category": "auth",
+      "description": "Simple, lightweight authentication library. Full control, no vendor lock-in.",
+      "github_url": "https://github.com/lucia-auth/lucia",
+      "docs_url": "https://lucia-auth.com",
+      "setup_time_minutes": 30,
+      "difficulty": "intermediate",
+      "tags": ["lightweight", "sessions", "flexible"]
+    },
+    {
+      "name": "Stripe",
+      "category": "payments",
+      "description": "Industry standard payment processing. Subscriptions, one-time payments, invoicing.",
+      "github_url": "https://github.com/stripe/stripe-node",
+      "docs_url": "https://stripe.com/docs",
+      "setup_time_minutes": 30,
+      "difficulty": "intermediate",
+      "tags": ["subscriptions", "checkout", "invoicing", "webhooks"]
+    },
+    {
+      "name": "LemonSqueezy",
+      "category": "payments",
+      "description": "Merchant of record. Handles payments, taxes, and compliance for you.",
+      "github_url": "https://github.com/lmsqueezy/lemonsqueezy.js",
+      "docs_url": "https://docs.lemonsqueezy.com",
+      "setup_time_minutes": 20,
+      "difficulty": "beginner",
+      "tags": ["subscriptions", "tax", "merchant-of-record", "simple"]
+    },
+    {
+      "name": "Paddle",
+      "category": "payments",
+      "description": "Complete payments infrastructure. Tax handling and compliance included.",
+      "docs_url": "https://developer.paddle.com",
+      "setup_time_minutes": 25,
+      "difficulty": "intermediate",
+      "tags": ["subscriptions", "tax", "global"]
+    },
+    {
+      "name": "OpenAI API",
+      "category": "ai",
+      "description": "GPT-4, DALL-E, Whisper, and embeddings. The most widely used AI API.",
+      "github_url": "https://github.com/openai/openai-node",
+      "docs_url": "https://platform.openai.com/docs",
+      "setup_time_minutes": 10,
+      "difficulty": "beginner",
+      "tags": ["llm", "gpt-4", "image-gen", "embeddings"]
+    },
+    {
+      "name": "Anthropic Claude",
+      "category": "ai",
+      "description": "Claude API for conversational AI. Strong reasoning and instruction following.",
+      "github_url": "https://github.com/anthropics/anthropic-sdk-typescript",
+      "docs_url": "https://docs.anthropic.com",
+      "setup_time_minutes": 10,
+      "difficulty": "beginner",
+      "tags": ["llm", "claude", "conversational", "reasoning"]
+    },
+    {
+      "name": "Vercel AI SDK",
+      "category": "ai",
+      "description": "Unified SDK for OpenAI, Anthropic, Google, and more. Built-in streaming.",
+      "github_url": "https://github.com/vercel/ai",
+      "docs_url": "https://sdk.vercel.ai/docs",
+      "setup_time_minutes": 15,
+      "difficulty": "beginner",
+      "tags": ["streaming", "multi-provider", "react-hooks", "unified"]
+    },
+    {
+      "name": "LangChain.js",
+      "category": "ai",
+      "description": "Framework for LLM applications. Chains, agents, RAG, and tools.",
+      "github_url": "https://github.com/langchain-ai/langchainjs",
+      "docs_url": "https://js.langchain.com",
+      "setup_time_minutes": 30,
+      "difficulty": "intermediate",
+      "tags": ["chains", "agents", "rag", "tools"]
+    },
+    {
+      "name": "Pinecone",
+      "category": "ai",
+      "description": "Vector database for semantic search, RAG, and recommendations.",
+      "github_url": "https://github.com/pinecone-io/pinecone-ts-client",
+      "docs_url": "https://docs.pinecone.io",
+      "setup_time_minutes": 20,
+      "difficulty": "intermediate",
+      "tags": ["vector-db", "embeddings", "rag", "search"]
+    },
+    {
+      "name": "Replicate",
+      "category": "ai",
+      "description": "Run open-source ML models in the cloud. Stable Diffusion, Llama, and more.",
+      "docs_url": "https://replicate.com/docs",
+      "setup_time_minutes": 10,
+      "difficulty": "beginner",
+      "tags": ["ml-models", "image-gen", "open-source", "api"]
+    },
+    {
+      "name": "Hugging Face",
+      "category": "ai",
+      "description": "Hub for ML models. Inference API and Transformers.js for browser.",
+      "github_url": "https://github.com/huggingface/huggingface.js",
+      "docs_url": "https://huggingface.co/docs",
+      "setup_time_minutes": 15,
+      "difficulty": "intermediate",
+      "tags": ["models", "inference", "transformers", "open-source"]
+    },
+    {
+      "name": "Supabase",
+      "category": "database",
+      "description": "Postgres + Auth + Realtime + Storage. The all-in-one backend.",
+      "github_url": "https://github.com/supabase/supabase",
+      "docs_url": "https://supabase.com/docs",
+      "setup_time_minutes": 15,
+      "difficulty": "beginner",
+      "tags": ["postgres", "realtime", "storage", "auth", "free-tier"]
+    },
+    {
+      "name": "PlanetScale",
+      "category": "database",
+      "description": "Serverless MySQL with branching. Scale infinitely.",
+      "github_url": "https://github.com/planetscale/database-js",
+      "docs_url": "https://planetscale.com/docs",
+      "setup_time_minutes": 15,
+      "difficulty": "beginner",
+      "tags": ["mysql", "serverless", "branching", "scale"]
+    },
+    {
+      "name": "Neon",
+      "category": "database",
+      "description": "Serverless Postgres with branching and autoscaling.",
+      "github_url": "https://github.com/neondatabase/neon",
+      "docs_url": "https://neon.tech/docs",
+      "setup_time_minutes": 10,
+      "difficulty": "beginner",
+      "tags": ["postgres", "serverless", "branching", "free-tier"]
+    },
+    {
+      "name": "Turso",
+      "category": "database",
+      "description": "Edge SQLite database. Replicate globally, query locally.",
+      "github_url": "https://github.com/tursodatabase/libsql",
+      "docs_url": "https://docs.turso.tech",
+      "setup_time_minutes": 15,
+      "difficulty": "beginner",
+      "tags": ["sqlite", "edge", "global", "fast"]
+    },
+    {
+      "name": "Prisma",
+      "category": "database",
+      "description": "Type-safe ORM. Auto-generated types, migrations, and studio.",
+      "github_url": "https://github.com/prisma/prisma",
+      "docs_url": "https://www.prisma.io/docs",
+      "setup_time_minutes": 20,
+      "difficulty": "beginner",
+      "tags": ["orm", "typescript", "migrations", "studio"]
+    },
+    {
+      "name": "Drizzle ORM",
+      "category": "database",
+      "description": "Lightweight TypeScript ORM. SQL-like syntax, zero dependencies.",
+      "github_url": "https://github.com/drizzle-team/drizzle-orm",
+      "docs_url": "https://orm.drizzle.team",
+      "setup_time_minutes": 15,
+      "difficulty": "beginner",
+      "tags": ["orm", "typescript", "lightweight", "sql-like"]
+    },
+    {
+      "name": "Upstash Redis",
+      "category": "database",
+      "description": "Serverless Redis. Caching, rate limiting, and queues.",
+      "github_url": "https://github.com/upstash/upstash-redis",
+      "docs_url": "https://upstash.com/docs/redis",
+      "setup_time_minutes": 10,
+      "difficulty": "beginner",
+      "tags": ["redis", "serverless", "caching", "rate-limiting"]
+    },
+    {
+      "name": "shadcn/ui",
+      "category": "ui",
+      "description": "Beautiful components. Copy-paste, not npm install. You own the code.",
+      "github_url": "https://github.com/shadcn-ui/ui",
+      "docs_url": "https://ui.shadcn.com",
+      "setup_time_minutes": 10,
+      "difficulty": "beginner",
+      "tags": ["components", "tailwind", "radix", "accessible"]
+    },
+    {
+      "name": "Radix UI",
+      "category": "ui",
+      "description": "Unstyled, accessible primitives. Build your own design system.",
+      "github_url": "https://github.com/radix-ui/primitives",
+      "docs_url": "https://www.radix-ui.com",
+      "setup_time_minutes": 15,
+      "difficulty": "intermediate",
+      "tags": ["primitives", "accessible", "unstyled", "headless"]
+    },
+    {
+      "name": "Tremor",
+      "category": "ui",
+      "description": "Dashboard components. Charts, KPIs, and tables for React.",
+      "github_url": "https://github.com/tremorlabs/tremor",
+      "docs_url": "https://tremor.so/docs",
+      "setup_time_minutes": 15,
+      "difficulty": "beginner",
+      "tags": ["dashboard", "charts", "tailwind", "analytics"]
+    },
+    {
+      "name": "Recharts",
+      "category": "ui",
+      "description": "Composable charting library built on D3.",
+      "github_url": "https://github.com/recharts/recharts",
+      "docs_url": "https://recharts.org",
+      "setup_time_minutes": 15,
+      "difficulty": "beginner",
+      "tags": ["charts", "d3", "composable", "responsive"]
+    },
+    {
+      "name": "Framer Motion",
+      "category": "ui",
+      "description": "Production-ready animations. Gestures, layout animations, and more.",
+      "github_url": "https://github.com/framer/motion",
+      "docs_url": "https://www.framer.com/motion",
+      "setup_time_minutes": 10,
+      "difficulty": "beginner",
+      "tags": ["animation", "gestures", "layout", "spring"]
+    },
+    {
+      "name": "React Hook Form",
+      "category": "ui",
+      "description": "Performant forms. Minimal re-renders, easy validation.",
+      "github_url": "https://github.com/react-hook-form/react-hook-form",
+      "docs_url": "https://react-hook-form.com",
+      "setup_time_minutes": 15,
+      "difficulty": "beginner",
+      "tags": ["forms", "validation", "performance", "hooks"]
+    },
+    {
+      "name": "Zod",
+      "category": "ui",
+      "description": "TypeScript-first schema validation. Works great with React Hook Form.",
+      "github_url": "https://github.com/colinhacks/zod",
+      "docs_url": "https://zod.dev",
+      "setup_time_minutes": 10,
+      "difficulty": "beginner",
+      "tags": ["validation", "typescript", "schemas", "parsing"]
+    },
+    {
+      "name": "TanStack Table",
+      "category": "ui",
+      "description": "Headless table library. Sorting, filtering, pagination.",
+      "github_url": "https://github.com/TanStack/table",
+      "docs_url": "https://tanstack.com/table",
+      "setup_time_minutes": 20,
+      "difficulty": "intermediate",
+      "tags": ["tables", "headless", "sorting", "filtering"]
+    },
+    {
+      "name": "cmdk",
+      "category": "ui",
+      "description": "Command palette component. Fast, accessible, composable.",
+      "github_url": "https://github.com/pacocoursey/cmdk",
+      "docs_url": "https://cmdk.paco.me",
+      "setup_time_minutes": 10,
+      "difficulty": "beginner",
+      "tags": ["command-palette", "search", "keyboard", "accessible"]
+    },
+    {
+      "name": "Resend",
+      "category": "api",
+      "description": "Email API for developers. Simple, fast, reliable.",
+      "github_url": "https://github.com/resendlabs/resend-node",
+      "docs_url": "https://resend.com/docs",
+      "setup_time_minutes": 10,
+      "difficulty": "beginner",
+      "tags": ["email", "transactional", "api"]
+    },
+    {
+      "name": "React Email",
+      "category": "api",
+      "description": "Build emails with React components. Preview and test locally.",
+      "github_url": "https://github.com/resendlabs/react-email",
+      "docs_url": "https://react.email",
+      "setup_time_minutes": 15,
+      "difficulty": "beginner",
+      "tags": ["email", "react", "templates", "preview"]
+    },
+    {
+      "name": "Twilio",
+      "category": "api",
+      "description": "SMS, voice, and video APIs. Global reach.",
+      "github_url": "https://github.com/twilio/twilio-node",
+      "docs_url": "https://www.twilio.com/docs",
+      "setup_time_minutes": 20,
+      "difficulty": "intermediate",
+      "tags": ["sms", "voice", "video", "communications"]
+    },
+    {
+      "name": "Uploadthing",
+      "category": "api",
+      "description": "File uploads for Next.js. Type-safe, fast, free tier.",
+      "github_url": "https://github.com/pingdotgg/uploadthing",
+      "docs_url": "https://uploadthing.com/docs",
+      "setup_time_minutes": 15,
+      "difficulty": "beginner",
+      "tags": ["uploads", "files", "images", "nextjs"]
+    },
+    {
+      "name": "Cloudinary",
+      "category": "api",
+      "description": "Image and video management. Transformations, optimization, CDN.",
+      "docs_url": "https://cloudinary.com/documentation",
+      "setup_time_minutes": 15,
+      "difficulty": "beginner",
+      "tags": ["images", "video", "transformations", "cdn"]
+    },
+    {
+      "name": "Inngest",
+      "category": "api",
+      "description": "Background jobs and workflows. Event-driven, durable execution.",
+      "github_url": "https://github.com/inngest/inngest",
+      "docs_url": "https://www.inngest.com/docs",
+      "setup_time_minutes": 20,
+      "difficulty": "intermediate",
+      "tags": ["background-jobs", "workflows", "events", "durable"]
+    },
+    {
+      "name": "Trigger.dev",
+      "category": "api",
+      "description": "Background jobs with observability. Cron, webhooks, and long-running tasks.",
+      "github_url": "https://github.com/triggerdotdev/trigger.dev",
+      "docs_url": "https://trigger.dev/docs",
+      "setup_time_minutes": 20,
+      "difficulty": "intermediate",
+      "tags": ["background-jobs", "cron", "webhooks", "observability"]
+    },
+    {
+      "name": "Pusher",
+      "category": "api",
+      "description": "Realtime infrastructure. Channels, presence, and webhooks.",
+      "docs_url": "https://pusher.com/docs",
+      "setup_time_minutes": 15,
+      "difficulty": "beginner",
+      "tags": ["realtime", "websockets", "channels", "presence"]
+    },
+    {
+      "name": "Socket.io",
+      "category": "api",
+      "description": "Realtime bidirectional communication. Works everywhere.",
+      "github_url": "https://github.com/socketio/socket.io",
+      "docs_url": "https://socket.io/docs",
+      "setup_time_minutes": 20,
+      "difficulty": "intermediate",
+      "tags": ["realtime", "websockets", "bidirectional", "fallback"]
+    },
+    {
+      "name": "Liveblocks",
+      "category": "api",
+      "description": "Collaboration infrastructure. Presence, cursors, and conflict-free data.",
+      "github_url": "https://github.com/liveblocks/liveblocks",
+      "docs_url": "https://liveblocks.io/docs",
+      "setup_time_minutes": 20,
+      "difficulty": "intermediate",
+      "tags": ["collaboration", "presence", "multiplayer", "crdt"]
+    },
+    {
+      "name": "Excalidraw",
+      "category": "devtools",
+      "description": "Virtual whiteboard. Hand-drawn feel, real-time collaboration.",
+      "github_url": "https://github.com/excalidraw/excalidraw",
+      "docs_url": "https://docs.excalidraw.com",
+      "setup_time_minutes": 10,
+      "difficulty": "beginner",
+      "tags": ["whiteboard", "collaboration", "diagrams", "embed"]
+    },
+    {
+      "name": "tldraw",
+      "category": "devtools",
+      "description": "Infinite canvas. Drawing, shapes, and real-time sync.",
+      "github_url": "https://github.com/tldraw/tldraw",
+      "docs_url": "https://tldraw.dev",
+      "setup_time_minutes": 15,
+      "difficulty": "beginner",
+      "tags": ["canvas", "drawing", "collaboration", "infinite"]
+    },
+    {
+      "name": "Monaco Editor",
+      "category": "devtools",
+      "description": "VS Code's editor as a component. Syntax highlighting, intellisense.",
+      "github_url": "https://github.com/microsoft/monaco-editor",
+      "docs_url": "https://microsoft.github.io/monaco-editor",
+      "setup_time_minutes": 20,
+      "difficulty": "intermediate",
+      "tags": ["code-editor", "syntax", "intellisense", "vscode"]
+    },
+    {
+      "name": "Sandpack",
+      "category": "devtools",
+      "description": "Live code editor and preview. In-browser bundling.",
+      "github_url": "https://github.com/codesandbox/sandpack",
+      "docs_url": "https://sandpack.codesandbox.io/docs",
+      "setup_time_minutes": 15,
+      "difficulty": "beginner",
+      "tags": ["code-editor", "preview", "playground", "bundling"]
+    },
+    {
+      "name": "Zustand",
+      "category": "devtools",
+      "description": "Simple state management. Tiny, fast, scalable.",
+      "github_url": "https://github.com/pmndrs/zustand",
+      "docs_url": "https://docs.pmnd.rs/zustand",
+      "setup_time_minutes": 10,
+      "difficulty": "beginner",
+      "tags": ["state", "simple", "hooks", "devtools"]
+    },
+    {
+      "name": "TanStack Query",
+      "category": "devtools",
+      "description": "Async state management. Caching, refetching, and more.",
+      "github_url": "https://github.com/TanStack/query",
+      "docs_url": "https://tanstack.com/query",
+      "setup_time_minutes": 15,
+      "difficulty": "beginner",
+      "tags": ["data-fetching", "caching", "async", "devtools"]
+    },
+    {
+      "name": "Posthog",
+      "category": "devtools",
+      "description": "Product analytics. Session replay, feature flags, A/B tests.",
+      "github_url": "https://github.com/PostHog/posthog",
+      "docs_url": "https://posthog.com/docs",
+      "setup_time_minutes": 15,
+      "difficulty": "beginner",
+      "tags": ["analytics", "session-replay", "feature-flags", "open-source"]
+    },
+    {
+      "name": "Sentry",
+      "category": "devtools",
+      "description": "Error tracking and performance monitoring.",
+      "github_url": "https://github.com/getsentry/sentry-javascript",
+      "docs_url": "https://docs.sentry.io",
+      "setup_time_minutes": 15,
+      "difficulty": "beginner",
+      "tags": ["errors", "monitoring", "performance", "debugging"]
+    }
+  ]
+}

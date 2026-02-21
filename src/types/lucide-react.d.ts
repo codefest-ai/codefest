@@ -1,0 +1,36 @@
+declare module "lucide-react" {
+  import { FC, SVGProps } from "react"
+
+  export interface IconProps extends SVGProps<SVGSVGElement> {
+    size?: number | string
+    absoluteStrokeWidth?: boolean
+  }
+
+  export type LucideIcon = FC<IconProps>
+
+  export const ArrowRight: LucideIcon
+  export const ArrowLeft: LucideIcon
+  export const ArrowUpDown: LucideIcon
+  export const Bookmark: LucideIcon
+  export const BookOpen: LucideIcon
+  export const Clock: LucideIcon
+  export const Code2: LucideIcon
+  export const ExternalLink: LucideIcon
+  export const Filter: LucideIcon
+  export const GitFork: LucideIcon
+  export const GraduationCap: LucideIcon
+  export const Layers: LucideIcon
+  export const Library: LucideIcon
+  export const LogIn: LucideIcon
+  export const LogOut: LucideIcon
+  export const Menu: LucideIcon
+  export const Rocket: LucideIcon
+  export const Search: LucideIcon
+  export const Sparkles: LucideIcon
+  export const Timer: LucideIcon
+  export const Trophy: LucideIcon
+  export const Users: LucideIcon
+  export const User: LucideIcon
+  export const X: LucideIcon
+  export const Zap: LucideIcon
+}

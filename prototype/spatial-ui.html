@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>codefest.ai — prototype</title>
+<style>
+  :root {
+    --bg: #080b0f;
+    --surface: #0d1117;
+    --surface2: #161b22;
+    --surface3: #1c2128;
+    --border: rgba(255,255,255,0.06);
+    --border-active: rgba(255,255,255,0.14);
+    --text: #e6edf3;
+    --muted: #7d8590;
+    --dim: #3d444d;
+    --brand: #22c55e;
+    --brand-dim: rgba(34,197,94,0.08);
+    --cyan: #22d3ee;
+    --amber: #fbbf24;
+    --purple: #a78bfa;
+    --orange: #fb923c;
+    --pink: #f472b6;
+    --blue: #60a5fa;
+    --mono: 'SF Mono', 'Fira Code', monospace;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    overflow-x: hidden;
+  }
+
+  /* scanlines */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.025) 2px, rgba(0,0,0,0.025) 4px);
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    height: 50px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 1.5rem;
+    background: rgba(8,11,15,0.9);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo { display: flex; align-items: center; gap: 9px; text-decoration: none; }
+  .logo-mark {
+    width: 26px; height: 26px; border-radius: 6px;
+    background: var(--brand);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+  }
+  .logo-name { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
+  .logo-name em { color: var(--brand); font-style: normal; }
+
+  .search-wrap {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 5px 12px;
+    width: 320px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .search-wrap:focus-within {
+    border-color: rgba(34,197,94,0.35);
+    box-shadow: 0 0 0 3px rgba(34,197,94,0.07);
+  }
+  .search-prompt { font-family: var(--mono); font-size: 12px; color: var(--brand); }
+  #searchInput {
+    background: none; border: none; outline: none;
+    color: var(--text); font-family: var(--mono); font-size: 12px;
+    width: 100%; caret-color: var(--brand);
+  }
+  #searchInput::placeholder { color: var(--dim); }
+  .kbd { font-family: var(--mono); font-size: 9px; color: var(--dim); border: 1px solid var(--dim); border-radius: 3px; padding: 1px 5px; }
+
+  .hdr-right { display: flex; align-items: center; gap: 14px; font-family: var(--mono); font-size: 11px; color: var(--dim); }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--brand); box-shadow: 0 0 5px var(--brand); animation: blink 2s ease-in-out infinite; display: inline-block; margin-right: 4px; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.35} }
+
+  /* ── NAV RAIL ── */
+  .nav-rail {
+    position: fixed; left: 0; top: 50px; bottom: 0; width: 48px;
+    display: flex; flex-direction: column; align-items: center;
+    padding-top: 1.5rem; gap: 6px;
+    border-right: 1px solid var(--border);
+    background: rgba(8,11,15,0.7);
+    z-index: 100;
+  }
+  .rail-btn {
+    width: 34px; height: 34px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.15s;
+    text-decoration: none;
+    color: var(--dim);
+  }
+  .rail-btn:hover, .rail-btn.active { background: var(--surface2); border-color: var(--border-active); color: var(--text); }
+  .rail-btn.active { color: var(--brand); border-color: rgba(34,197,94,0.2); }
+  .rail-divider { width: 20px; height: 1px; background: var(--border); margin: 4px 0; }
+
+  /* ── MAIN LAYOUT ── */
+  main { margin-left: 48px; padding-top: 50px; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 92vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 4rem 2rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+    background-size: 52px 52px;
+  }
+  .hero-glow {
+    position: absolute; top: 40%; left: 50%; transform: translate(-50%,-50%);
+    width: 700px; height: 500px;
+    background: radial-gradient(ellipse, rgba(34,197,94,0.055) 0%, transparent 68%);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 660px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--mono); font-size: 10px; color: var(--brand);
+    border: 1px solid rgba(34,197,94,0.22); background: rgba(34,197,94,0.05);
+    border-radius: 100px; padding: 4px 12px; margin-bottom: 2rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .hero-badge::before { content: '◉'; font-size: 7px; animation: blink 2s infinite; }
+
+  h1 { font-size: clamp(2.8rem, 6vw, 4.8rem); font-weight: 700; line-height: 1.04; letter-spacing: -0.035em; margin-bottom: 1.4rem; }
+  .grad { background: linear-gradient(130deg, var(--brand) 0%, #a3e635 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  .hero-sub { font-size: 1.05rem; color: var(--muted); line-height: 1.75; margin-bottom: 2.5rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+  .hero-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 7px; padding: 11px 22px; border-radius: 9px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; text-decoration: none; border: none; }
+  .btn-green { background: var(--brand); color: #000; }
+  .btn-green:hover { background: #4ade80; box-shadow: 0 6px 20px rgba(34,197,94,0.22); transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: var(--muted); border: 1px solid var(--border-active); }
+  .btn-outline:hover { color: var(--text); border-color: rgba(255,255,255,0.2); background: var(--surface2); }
+
+  .scroll-cue {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    font-family: var(--mono); font-size: 10px; color: var(--dim);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    animation: nudge 2.5s ease-in-out infinite;
+  }
+  @keyframes nudge { 0%,100%{transform:translateX(-50%) translateY(0);opacity:.5} 50%{transform:translateX(-50%) translateY(5px);opacity:1} }
+
+  /* ── SECTION ── */
+  .section { padding: 5rem 2.5rem; border-top: 1px solid var(--border); }
+  .section-head { margin-bottom: 2.5rem; }
+  .section-eyebrow { font-family: var(--mono); font-size: 10px; color: var(--brand); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px; }
+  .section-title { font-size: 1.7rem; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 8px; }
+  .section-sub { font-size: 13px; color: var(--muted); max-width: 560px; line-height: 1.6; }
+
+  /* ── DOMAINS ── */
+  .domains-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+  .domain-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px; cursor: pointer; transition: all 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .domain-card:hover { border-color: var(--border-active); transform: translateY(-2px); background: var(--surface2); }
+  .domain-card:hover .domain-arrow { opacity: 1; transform: translateX(0); }
+  .domain-icon { font-size: 22px; margin-bottom: 10px; }
+  .domain-name { font-size: 14px; font-weight: 600; margin-bottom: 5px; letter-spacing: -0.01em; }
+  .domain-desc { font-size: 11px; color: var(--muted); line-height: 1.55; margin-bottom: 10px; }
+  .domain-meta { display: flex; align-items: center; justify-content: space-between; }
+  .domain-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+  .dtag { font-family: var(--mono); font-size: 9px; color: var(--brand); border: 1px solid rgba(34,197,94,0.25); border-radius: 3px; padding: 1px 6px; }
+  .domain-count { font-family: var(--mono); font-size: 10px; color: var(--dim); }
+  .domain-arrow { font-size: 14px; color: var(--brand); opacity: 0; transform: translateX(-4px); transition: all 0.2s; margin-left: 8px; }
+
+  /* ── PATTERNS ── */
+  .patterns-row { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 12px; }
+  .patterns-row::-webkit-scrollbar { height: 3px; }
+  .patterns-row::-webkit-scrollbar-track { background: transparent; }
+  .patterns-row::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 2px; }
+
+  .pattern-card {
+    flex: 0 0 330px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 20px; cursor: pointer; transition: all 0.2s; position: relative;
+  }
+  .pattern-card:hover { border-color: rgba(34,197,94,0.25); background: var(--surface2); box-shadow: 0 0 30px rgba(34,197,94,0.05); }
+  .pattern-badge { position: absolute; top: 14px; right: 14px; font-family: var(--mono); font-size: 9px; color: var(--amber); border: 1px solid rgba(251,191,36,0.3); border-radius: 4px; padding: 2px 7px; }
+  .pattern-event { font-family: var(--mono); font-size: 9px; color: var(--brand); letter-spacing: 0.06em; margin-bottom: 8px; }
+  .pattern-name { font-size: 15px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 6px; padding-right: 70px; }
+  .pattern-desc { font-size: 11px; color: var(--muted); line-height: 1.55; margin-bottom: 14px; }
+  .pattern-stack { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+  .spill { font-family: var(--mono); font-size: 10px; padding: 3px 9px; border-radius: 5px; border: 1px solid var(--border); background: var(--surface3); color: var(--muted); cursor: pointer; transition: all 0.15s; }
+  .spill:hover { border-color: var(--brand); color: var(--brand); background: var(--brand-dim); }
+  .pattern-sdgs { display: flex; gap: 5px; flex-wrap: wrap; }
+  .sdg-chip { font-family: var(--mono); font-size: 9px; padding: 2px 7px; border-radius: 4px; background: rgba(96,165,250,0.08); color: var(--blue); border: 1px solid rgba(96,165,250,0.18); }
+
+  /* ── LIBRARY ── */
+  .lib-controls { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.5rem; align-items: center; }
+  .flabel { font-family: var(--mono); font-size: 9px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.1em; margin-right: 2px; }
+  .fpill { font-family: var(--mono); font-size: 11px; padding: 4px 11px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface2); color: var(--muted); cursor: pointer; transition: all 0.15s; }
+  .fpill:hover { color: var(--text); border-color: var(--border-active); }
+  .fpill.on { color: var(--brand); background: var(--brand-dim); border-color: rgba(34,197,94,0.28); }
+
+  .comp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 9px; }
+  .comp-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 11px;
+    padding: 16px; transition: all 0.18s; position: relative; overflow: hidden;
+    border-left: 2px solid transparent;
+  }
+  .comp-card:hover { background: var(--surface2); border-color: var(--border-active); transform: translateY(-1px); }
+  .comp-card.highlight { border-left-color: var(--brand) !important; box-shadow: 0 0 18px rgba(34,197,94,0.1); }
+
+  .comp-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 7px; }
+  .comp-name { font-size: 13px; font-weight: 600; letter-spacing: -0.01em; transition: color 0.15s; }
+  .comp-card:hover .comp-name { color: var(--brand); }
+  .comp-cat { font-family: var(--mono); font-size: 9px; padding: 2px 7px; border-radius: 4px; border: 1px solid currentColor; opacity: 0.65; }
+  .comp-desc { font-size: 11px; color: var(--muted); line-height: 1.55; margin-bottom: 10px; }
+  .comp-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 10px; }
+  .ctag { font-family: var(--mono); font-size: 9px; color: var(--dim); background: var(--surface3); border-radius: 3px; padding: 1px 5px; }
+  .comp-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 9px; border-top: 1px solid var(--border); }
+  .comp-time { font-family: var(--mono); font-size: 10px; color: var(--dim); }
+  .comp-links { display: flex; gap: 10px; }
+  .clink { font-family: var(--mono); font-size: 10px; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+  .clink:hover { color: var(--brand); }
+
+  /* cat colors */
+  .cat-auth { color: var(--cyan); }
+  .cat-ai { color: var(--purple); }
+  .cat-database { color: var(--blue); }
+  .cat-ui { color: var(--brand); }
+  .cat-payments { color: var(--amber); }
+  .cat-api { color: var(--orange); }
+  .cat-devtools { color: var(--pink); }
+
+  /* ── GO MODE ── */
+  .go-wrap { max-width: 640px; }
+  .go-step { margin-bottom: 1.8rem; transition: opacity 0.25s; }
+  .go-step.locked { opacity: 0.25; pointer-events: none; }
+  .go-q { font-family: var(--mono); font-size: 12px; color: var(--brand); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .go-q::before { content: '›'; font-size: 16px; }
+  .go-opts { display: flex; flex-wrap: wrap; gap: 7px; }
+  .go-opt { font-size: 12px; padding: 7px 15px; border: 1px solid var(--border-active); border-radius: 8px; cursor: pointer; transition: all 0.14s; background: var(--surface); color: var(--muted); }
+  .go-opt:hover { border-color: var(--brand); color: var(--brand); background: var(--brand-dim); }
+  .go-opt.sel { border-color: var(--brand); color: var(--brand); background: var(--brand-dim); }
+  .go-result { margin-top: 1.5rem; padding: 20px; background: var(--surface2); border: 1px solid rgba(34,197,94,0.2); border-radius: 12px; display: none; }
+  .go-result.show { display: block; }
+  .go-result-eye { font-family: var(--mono); font-size: 9px; color: var(--brand); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+  .go-result-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.02em; }
+  .go-result-desc { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
+  .go-stack { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  /* ── SDGs ── */
+  .sdg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 7px; }
+  .sdg-card { background: var(--surface); border: 1px solid var(--border); border-radius: 9px; padding: 12px 14px; cursor: pointer; transition: all 0.18s; display: flex; align-items: center; gap: 12px; }
+  .sdg-card:hover { border-color: rgba(96,165,250,0.28); background: rgba(96,165,250,0.04); transform: translateY(-1px); }
+  .sdg-n { font-family: var(--mono); font-size: 17px; font-weight: 700; color: var(--blue); min-width: 26px; }
+  .sdg-name { font-size: 11px; font-weight: 600; margin-bottom: 2px; }
+  .sdg-proj { font-family: var(--mono); font-size: 9px; color: var(--dim); }
+
+  /* ── FOOTER ── */
+  footer { border-top: 1px solid var(--border); padding: 1.5rem 2.5rem; margin-left: 48px; display: flex; align-items: center; justify-content: space-between; }
+  .foot-l { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 10px; color: var(--dim); }
+  .foot-r { font-family: var(--mono); font-size: 10px; color: var(--dim); }
+
+  /* ── CURSOR GLOW ── */
+  #glow { position: fixed; width: 280px; height: 280px; border-radius: 50%; pointer-events: none; z-index: 9990; background: radial-gradient(circle, rgba(34,197,94,0.035) 0%, transparent 70%); transform: translate(-50%,-50%); transition: opacity 0.3s; }
+
+  @media (max-width: 700px) {
+    .nav-rail { display: none; }
+    main, footer { margin-left: 0; }
+    .search-wrap { width: 180px; }
+    .hdr-right { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="glow"></div>
+
+<!-- Header -->
+<header>
+  <a class="logo" href="#">
+    <div class="logo-mark">⚡</div>
+    <span class="logo-name">codefest<em>.ai</em></span>
+  </a>
+  <div class="search-wrap">
+    <span class="search-prompt">&gt;</span>
+    <input id="searchInput" placeholder="search tools, domains, strategies…" />
+    <span class="kbd">/ focus</span>
+  </div>
+  <div class="hdr-right">
+    <span><span class="status-dot"></span>online</span>
+    <span id="compTotal">50 components</span>
+    <span id="liveClock"></span>
+  </div>
+</header>
+
+<!-- Nav Rail -->
+<nav class="nav-rail" id="navRail">
+  <a class="rail-btn active" href="#hero" title="Home">⚡</a>
+  <div class="rail-divider"></div>
+  <a class="rail-btn" href="#domains" title="Challenge Domains">🌍</a>
+  <a class="rail-btn" href="#patterns" title="Winning Patterns">🏆</a>
+  <a class="rail-btn" href="#library" title="Component Library">📦</a>
+  <a class="rail-btn" href="#gomode" title="GO! Mode">▶</a>
+  <a class="rail-btn" href="#impact" title="Impact Frameworks">🎯</a>
+</nav>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div class="hero-badge">hackathon operating system · live</div>
+      <h1>Stop wasting<br><span class="grad">the first hour.</span></h1>
+      <p class="hero-sub">Strategic intelligence for hackathon teams. Challenge domains, winning stacks, impact frameworks — everything you need at GO.</p>
+      <div class="hero-actions">
+        <a href="#domains" class="btn btn-green">Browse Domains ↓</a>
+        <a href="#gomode" class="btn btn-outline">▶ GO! Mode</a>
+      </div>
+    </div>
+    <div class="scroll-cue"><span>scroll to navigate</span><span>↓</span></div>
+  </section>
+
+  <!-- Challenge Domains -->
+  <section class="section" id="domains">
+    <div class="section-head">
+      <div class="section-eyebrow">01 · navigate</div>
+      <div class="section-title">Challenge Domains</div>
+      <div class="section-sub">Start here. Pick your challenge domain to surface winning patterns, component stacks, and SDG alignment used in similar projects.</div>
+    </div>
+    <div class="domains-grid" id="domainsGrid"></div>
+  </section>
+
+  <!-- Winning Patterns -->
+  <section class="section" id="patterns">
+    <div class="section-head">
+      <div class="section-eyebrow">02 · learn</div>
+      <div class="section-title">Winning Patterns</div>
+      <div class="section-sub">Real projects from top hackathons. Click any component pill to jump to it in the library below — that's "shop the look."</div>
+    </div>
+    <div class="patterns-row" id="patternsRow"></div>
+  </section>
+
+  <!-- Component Library -->
+  <section class="section" id="library">
+    <div class="section-head">
+      <div class="section-eyebrow">03 · build</div>
+      <div class="section-title">Component Library</div>
+      <div class="section-sub">Curated tools with setup times, difficulty ratings, and direct links. Press <code style="font-family:var(--mono);background:var(--surface2);padding:1px 5px;border-radius:3px;font-size:11px;">/</code> to search.</div>
+    </div>
+    <div class="lib-controls" id="libControls"></div>
+    <div class="comp-grid" id="compGrid"></div>
+  </section>
+
+  <!-- GO! Mode -->
+  <section class="section" id="gomode">
+    <div class="section-head">
+      <div class="section-eyebrow">04 · orient</div>
+      <div class="section-title">GO! Mode</div>
+      <div class="section-sub">Three questions. One stack recommendation. For when the clock just started and you need orientation fast.</div>
+    </div>
+    <div class="go-wrap" id="goWrap"></div>
+  </section>
+
+  <!-- Impact Frameworks -->
+  <section class="section" id="impact">
+    <div class="section-head">
+      <div class="section-eyebrow">05 · align</div>
+      <div class="section-title">Impact Frameworks</div>
+      <div class="section-sub">SDG alignment is increasingly mandatory. Navigate from goal to implementation — see which projects addressed each goal and how.</div>
+    </div>
+    <div class="sdg-grid" id="sdgGrid"></div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot-l"><span>⚡</span><span>codefest.ai</span><span>·</span><span>throughline systems llc</span></div>
+  <div class="foot-r">built for builders · © 2026</div>
+</footer>
+
+<script>
+// ── DATA ─────────────────────────────────────────────────────
+
+const DOMAINS = [
+  { e:'🌍', n:'Climate & Environment', d:'Carbon tracking, energy optimization, climate modeling.', tags:['GIS','IoT','SDG-13'], p:47 },
+  { e:'🏥', n:'Health & Equity', d:'Patient access, mental health, rural care, public health.', tags:['SDG-3','accessibility','NLP'], p:61 },
+  { e:'🏙️', n:'Civic Infrastructure', d:'Government services, transit, housing, civic engagement.', tags:['open-data','mapping','SDG-11'], p:38 },
+  { e:'📚', n:'Education & Access', d:'Learning tools, skill gaps, literacy, student support.', tags:['SDG-4','NLP','mobile'], p:52 },
+  { e:'💰', n:'Financial Inclusion', d:'Unbanked populations, microfinance, financial literacy.', tags:['SDG-10','payments','mobile'], p:29 },
+  { e:'🌾', n:'Food Systems', d:'Food insecurity, supply chains, urban farming, nutrition.', tags:['SDG-2','GIS','data'], p:33 },
+  { e:'⚡', n:'Energy & Grid', d:'Renewable integration, smart grids, energy access.', tags:['SDG-7','IoT','optimization'], p:24 },
+  { e:'💧', n:'Water & Sanitation', d:'Clean water access, infrastructure monitoring, WASH.', tags:['SDG-6','IoT','sensors'], p:18 },
+  { e:'🤝', n:'Community & Social', d:'Volunteering, local networks, community resilience.', tags:['SDG-17','realtime','maps'], p:41 },
+  { e:'♿', n:'Accessibility', d:'Disability tech, language barriers, inclusive design.', tags:['a11y','NLP','hardware'], p:22 },
+  { e:'🔒', n:'Safety & Justice', d:'Legal access, domestic safety, crisis response.', tags:['privacy','realtime','SDG-16'], p:17 },
+  { e:'💼', n:'Economic Opportunity', d:'Jobs, skills, gig economy, small business.', tags:['SDG-8','matching','data'], p:35 },
+];
+
+const PATTERNS = [
+  { ev:'HACKMIT 2024', pl:'1st Place', n:'FoodBridge', d:'Real-time food rescue connecting restaurants with shelters via geolocation and route optimization.', dom:'Food Systems', stack:['Next.js','Supabase','Mapbox','Turf.js','Twilio','Vercel'], sdgs:['SDG 2','SDG 11','SDG 17'] },
+  { ev:'TREEHACKS 2024', pl:'1st Place', n:'CarbonLens', d:'Browser extension estimating product carbon footprints in real-time while shopping online.', dom:'Climate', stack:['React','Python FastAPI','OpenAI API','MongoDB','Chrome Extensions'], sdgs:['SDG 12','SDG 13'] },
+  { ev:'PENNAPPS 2024', pl:'2nd Place', n:'MedBridge', d:'Multilingual health intake system for underserved clinics with real-time translation and summaries.', dom:'Health Equity', stack:['Next.js','Anthropic Claude','Supabase','Vercel AI SDK','React Hook Form'], sdgs:['SDG 3','SDG 10'] },
+  { ev:'CALTECH 2025', pl:'1st Place', n:'GridWatch', d:'Community energy monitoring with low-cost sensors, anomaly detection, and public dashboards.', dom:'Energy', stack:['React','Supabase Realtime','Python','Recharts','Vercel'], sdgs:['SDG 7','SDG 11'] },
+  { ev:'NWPLUS 2025', pl:'1st Place', n:'LexPath', d:'Plain-language legal document explainer for immigrants navigating complex paperwork.', dom:'Civic', stack:['Next.js','OpenAI GPT-4','Supabase','LangChain.js','Framer Motion'], sdgs:['SDG 16','SDG 10'] },
+  { ev:'HACKHARVARD 2024', pl:'1st Place', n:'SkillBridge', d:"AI-powered skills gap analyzer mapping workers' skills to local jobs and micro-certifications.", dom:'Economic', stack:['Next.js','Vercel AI SDK','Supabase','Drizzle ORM','TanStack Table'], sdgs:['SDG 8','SDG 4'] },
+];
+
+const COMPONENTS = [
+  { n:'Supabase Auth', c:'auth', d:'Complete auth — OAuth, magic links, email/password. Free tier.', gh:'https://github.com/supabase/supabase', doc:'https://supabase.com/docs/guides/auth', t:15, diff:'beginner', tags:['oauth','magic-link','free-tier'] },
+  { n:'NextAuth.js', c:'auth', d:'50+ auth providers for Next.js. JWT and database sessions.', gh:'https://github.com/nextauthjs/next-auth', doc:'https://next-auth.js.org', t:20, diff:'beginner', tags:['oauth','jwt','providers'] },
+  { n:'Clerk', c:'auth', d:'Drop-in auth UI. User management, orgs, MFA built-in.', gh:'https://github.com/clerkinc/javascript', doc:'https://clerk.com/docs', t:10, diff:'beginner', tags:['managed','ui-components','mfa'] },
+  { n:'OpenAI API', c:'ai', d:'GPT-4o, DALL-E, Whisper, embeddings. Most-used AI API.', gh:'https://github.com/openai/openai-node', doc:'https://platform.openai.com/docs', t:10, diff:'beginner', tags:['llm','gpt-4','embeddings'] },
+  { n:'Anthropic Claude', c:'ai', d:'Claude API — strong reasoning, instruction following, long context.', gh:'https://github.com/anthropics/anthropic-sdk-typescript', doc:'https://docs.anthropic.com', t:10, diff:'beginner', tags:['llm','reasoning','claude'] },
+  { n:'Vercel AI SDK', c:'ai', d:'Unified SDK for OpenAI, Anthropic, Google. Streaming built-in.', gh:'https://github.com/vercel/ai', doc:'https://sdk.vercel.ai/docs', t:15, diff:'beginner', tags:['streaming','multi-provider','hooks'] },
+  { n:'LangChain.js', c:'ai', d:'LLM framework — chains, agents, RAG, tool use.', gh:'https://github.com/langchain-ai/langchainjs', doc:'https://js.langchain.com', t:30, diff:'intermediate', tags:['chains','agents','rag'] },
+  { n:'Pinecone', c:'ai', d:'Vector database for semantic search and RAG.', gh:'https://github.com/pinecone-io/pinecone-ts-client', doc:'https://docs.pinecone.io', t:20, diff:'intermediate', tags:['vector-db','embeddings','rag'] },
+  { n:'Supabase', c:'database', d:'Postgres + Auth + Realtime + Storage. All-in-one backend.', gh:'https://github.com/supabase/supabase', doc:'https://supabase.com/docs', t:15, diff:'beginner', tags:['postgres','realtime','free-tier'] },
+  { n:'Neon', c:'database', d:'Serverless Postgres with branching and autoscaling.', gh:'https://github.com/neondatabase/neon', doc:'https://neon.tech/docs', t:10, diff:'beginner', tags:['postgres','serverless','free-tier'] },
+  { n:'Prisma', c:'database', d:'Type-safe ORM — generated types, migrations, studio.', gh:'https://github.com/prisma/prisma', doc:'https://www.prisma.io/docs', t:20, diff:'beginner', tags:['orm','typescript','migrations'] },
+  { n:'Drizzle ORM', c:'database', d:'Lightweight TypeScript ORM. SQL-like syntax, zero deps.', gh:'https://github.com/drizzle-team/drizzle-orm', doc:'https://orm.drizzle.team', t:15, diff:'beginner', tags:['orm','typescript','lightweight'] },
+  { n:'Upstash Redis', c:'database', d:'Serverless Redis — caching, rate limiting, queues.', gh:'https://github.com/upstash/upstash-redis', doc:'https://upstash.com/docs/redis', t:10, diff:'beginner', tags:['redis','serverless','caching'] },
+  { n:'shadcn/ui', c:'ui', d:'Copy-paste components. Tailwind + Radix. You own the code.', gh:'https://github.com/shadcn-ui/ui', doc:'https://ui.shadcn.com', t:10, diff:'beginner', tags:['components','tailwind','accessible'] },
+  { n:'Framer Motion', c:'ui', d:'Production animations — gestures, layout, spring physics.', gh:'https://github.com/framer/motion', doc:'https://www.framer.com/motion', t:10, diff:'beginner', tags:['animation','gestures','spring'] },
+  { n:'Recharts', c:'ui', d:'Composable charts built on D3. Responsive by default.', gh:'https://github.com/recharts/recharts', doc:'https://recharts.org', t:15, diff:'beginner', tags:['charts','d3','responsive'] },
+  { n:'Tremor', c:'ui', d:'Dashboard UI — charts, KPIs, tables for React.', gh:'https://github.com/tremorlabs/tremor', doc:'https://tremor.so/docs', t:15, diff:'beginner', tags:['dashboard','charts','analytics'] },
+  { n:'React Hook Form', c:'ui', d:'Performant forms. Minimal re-renders, easy validation.', gh:'https://github.com/react-hook-form/react-hook-form', doc:'https://react-hook-form.com', t:15, diff:'beginner', tags:['forms','validation','performance'] },
+  { n:'Zod', c:'ui', d:'TypeScript-first schema validation. Pairs with React Hook Form.', gh:'https://github.com/colinhacks/zod', doc:'https://zod.dev', t:10, diff:'beginner', tags:['validation','typescript','schemas'] },
+  { n:'Stripe', c:'payments', d:'Industry-standard payments — subscriptions, checkout, invoicing.', gh:'https://github.com/stripe/stripe-node', doc:'https://stripe.com/docs', t:30, diff:'intermediate', tags:['subscriptions','checkout','webhooks'] },
+  { n:'LemonSqueezy', c:'payments', d:'Merchant of record — handles payments, tax, compliance.', gh:'https://github.com/lmsqueezy/lemonsqueezy.js', doc:'https://docs.lemonsqueezy.com', t:20, diff:'beginner', tags:['subscriptions','tax','simple'] },
+  { n:'Resend', c:'api', d:'Email API for devs — simple, fast, reliable.', gh:'https://github.com/resendlabs/resend-node', doc:'https://resend.com/docs', t:10, diff:'beginner', tags:['email','transactional'] },
+  { n:'Uploadthing', c:'api', d:'File uploads for Next.js — type-safe, fast, free tier.', gh:'https://github.com/pingdotgg/uploadthing', doc:'https://uploadthing.com/docs', t:15, diff:'beginner', tags:['uploads','files','nextjs'] },
+  { n:'Inngest', c:'api', d:'Background jobs and durable workflows. Event-driven.', gh:'https://github.com/inngest/inngest', doc:'https://www.inngest.com/docs', t:20, diff:'intermediate', tags:['background-jobs','workflows','durable'] },
+  { n:'Pusher', c:'api', d:'Realtime channels — presence, websockets, webhooks.', doc:'https://pusher.com/docs', t:15, diff:'beginner', tags:['realtime','websockets','channels'] },
+  { n:'Liveblocks', c:'api', d:'Multiplayer collaboration — presence, cursors, CRDT.', gh:'https://github.com/liveblocks/liveblocks', doc:'https://liveblocks.io/docs', t:20, diff:'intermediate', tags:['collaboration','multiplayer','crdt'] },
+  { n:'Twilio', c:'api', d:'SMS, voice, video APIs. Global reach.', gh:'https://github.com/twilio/twilio-node', doc:'https://www.twilio.com/docs', t:20, diff:'intermediate', tags:['sms','voice','communications'] },
+  { n:'Excalidraw', c:'devtools', d:'Virtual whiteboard — hand-drawn feel, embeddable.', gh:'https://github.com/excalidraw/excalidraw', doc:'https://docs.excalidraw.com', t:10, diff:'beginner', tags:['whiteboard','collaboration','embed'] },
+  { n:'Zustand', c:'devtools', d:'Simple state management. Tiny, fast, scalable.', gh:'https://github.com/pmndrs/zustand', doc:'https://docs.pmnd.rs/zustand', t:10, diff:'beginner', tags:['state','simple','hooks'] },
+  { n:'TanStack Query', c:'devtools', d:'Async state — caching, refetching, background sync.', gh:'https://github.com/TanStack/query', doc:'https://tanstack.com/query', t:15, diff:'beginner', tags:['data-fetching','caching','async'] },
+  { n:'Posthog', c:'devtools', d:'Analytics, session replay, feature flags. Open source.', gh:'https://github.com/PostHog/posthog', doc:'https://posthog.com/docs', t:15, diff:'beginner', tags:['analytics','session-replay','open-source'] },
+  { n:'Sentry', c:'devtools', d:'Error tracking and performance monitoring.', gh:'https://github.com/getsentry/sentry-javascript', doc:'https://docs.sentry.io', t:15, diff:'beginner', tags:['errors','monitoring','debugging'] },
+  { n:'Monaco Editor', c:'devtools', d:"VS Code's editor as a React component. Intellisense, syntax.", gh:'https://github.com/microsoft/monaco-editor', doc:'https://microsoft.github.io/monaco-editor', t:20, diff:'intermediate', tags:['code-editor','syntax','vscode'] },
+];
+
+const SDGS = [
+  {n:'01',name:'No Poverty',p:12},{n:'02',name:'Zero Hunger',p:33},{n:'03',name:'Good Health',p:61},
+  {n:'04',name:'Quality Education',p:52},{n:'05',name:'Gender Equality',p:28},{n:'06',name:'Clean Water',p:18},
+  {n:'07',name:'Affordable Energy',p:24},{n:'08',name:'Decent Work',p:35},{n:'09',name:'Industry & Innovation',p:44},
+  {n:'10',name:'Reduced Inequalities',p:39},{n:'11',name:'Sustainable Cities',p:38},{n:'13',name:'Climate Action',p:47},
+  {n:'16',name:'Peace & Justice',p:17},{n:'17',name:'Partnerships',p:21},
+];
+
+const GO_TREE = {
+  q1: { q: 'Team size?', opts: ['Solo / 2 people', '3–4 people', '5+ people'] },
+  q2: { q: 'Primary skills?', opts: ['Frontend / React', 'Full-stack / Node', 'Backend / Python', 'Mixed'] },
+  q3: { q: 'Challenge domain?', opts: ['Climate / Environment', 'Health / Social Impact', 'Civic / Open Data', 'General / Open'] },
+};
+
+const RECS = {
+  default: { title: 'Next.js + Supabase + Vercel AI SDK', desc: 'Fast, deployable, covers auth + DB + AI in one cohesive stack. Consistent winner across domains.', stack: ['Next.js','Supabase Auth','Supabase DB','Vercel AI SDK','shadcn/ui','Vercel'] },
+  climate: { title: 'Next.js + Mapbox + Supabase + Recharts', desc: 'Geospatial visualization is the winning pattern for climate. Judges expect to see it on a map.', stack: ['Next.js','Mapbox GL JS','Supabase Realtime','Recharts','Turf.js','Vercel'] },
+  health: { title: 'Next.js + Anthropic Claude + Supabase', desc: 'Claude handles multilingual and sensitive content better for health contexts. Accessibility + NLP = judges notice.', stack: ['Next.js','Anthropic Claude','Supabase','Vercel AI SDK','React Hook Form','Zod'] },
+  civic: { title: 'Next.js + Open Data APIs + Recharts + Mapbox', desc: 'Open data integration = instant credibility. Census API, OpenStreetMap, local government APIs.', stack: ['Next.js','Recharts','Mapbox GL JS','TanStack Query','Supabase','Vercel'] },
+};
+
+// ── RENDER ───────────────────────────────────────────────────
+
+function renderDomains() {
+  document.getElementById('domainsGrid').innerHTML = DOMAINS.map(d => `
+    <div class="domain-card" onclick="domainFilter('${d.n}')">
+      <div class="domain-icon">${d.e}</div>
+      <div class="domain-name">${d.n}</div>
+      <div class="domain-desc">${d.d}</div>
+      <div class="domain-meta">
+        <div class="domain-tags">${d.tags.map(t=>`<span class="dtag">${t}</span>`).join('')}</div>
+        <span class="domain-count">${d.p} projects<span class="domain-arrow">→</span></span>
+      </div>
+    </div>`).join('');
+}
+
+function renderPatterns() {
+  document.getElementById('patternsRow').innerHTML = PATTERNS.map(p => `
+    <div class="pattern-card">
+      <span class="pattern-badge">${p.pl}</span>
+      <div class="pattern-event">${p.ev} · ${p.dom}</div>
+      <div class="pattern-name">${p.n}</div>
+      <div class="pattern-desc">${p.d}</div>
+      <div class="pattern-stack">${p.stack.map(s=>`<span class="spill" onclick="jumpToComp('${s}')">${s}</span>`).join('')}</div>
+      <div class="pattern-sdgs">${p.sdgs.map(s=>`<span class="sdg-chip">${s}</span>`).join('')}</div>
+    </div>`).join('');
+}
+
+let activeFilter = null;
+function renderLibrary(filter, search='') {
+  let list = [...COMPONENTS];
+  if (filter) list = list.filter(c => c.c === filter);
+  if (search) { const q = search.toLowerCase(); list = list.filter(c => c.n.toLowerCase().includes(q)||c.d.toLowerCase().includes(q)||c.tags.some(t=>t.includes(q))); }
+  const dc = { auth:'var(--cyan)', ai:'var(--purple)', database:'var(--blue)', ui:'var(--brand)', payments:'var(--amber)', api:'var(--orange)', devtools:'var(--pink)' };
+  const dd = { beginner:'var(--brand)', intermediate:'var(--amber)', advanced:'var(--pink)' };
+  document.getElementById('compGrid').innerHTML = list.map(c => `
+    <div class="comp-card cat-${c.c}" id="comp-${slug(c.n)}">
+      <div class="comp-top">
+        <div class="comp-name">${c.n}</div>
+        <span class="comp-cat cat-${c.c}">${c.c}</span>
+      </div>
+      <div class="comp-desc">${c.d}</div>
+      <div class="comp-tags">${c.tags.map(t=>`<span class="ctag">${t}</span>`).join('')}</div>
+      <div class="comp-foot">
+        <span class="comp-time">⏱ ${c.t}min · <span style="color:${dd[c.diff]}">${c.diff}</span></span>
+        <div class="comp-links">
+          ${c.gh?`<a class="clink" href="${c.gh}" target="_blank">GitHub↗</a>`:''}
+          ${c.doc?`<a class="clink" href="${c.doc}" target="_blank">Docs↗</a>`:''}
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function renderFilters() {
+  const cats = ['auth','ai','database','ui','payments','api','devtools'];
+  document.getElementById('libControls').innerHTML =
+    `<span class="flabel">filter</span>` +
+    cats.map(c=>`<button class="fpill cat-${c}" onclick="toggleFilter('${c}',this)">${c}</button>`).join('');
+}
+
+let goState = {};
+function renderGoMode() {
+  const steps = Object.entries(GO_TREE);
+  document.getElementById('goWrap').innerHTML = steps.map(([k,step],i) => {
+    const prev = i>0 ? Object.keys(GO_TREE)[i-1] : null;
+    const locked = i>0 && !goState[prev];
+    return `<div class="go-step ${locked?'locked':''}" id="go-${k}">
+      <div class="go-q">${step.q}</div>
+      <div class="go-opts">${step.opts.map(o=>`<div class="go-opt ${goState[k]===o?'sel':''}" onclick="pickGo('${k}','${o}')">${o}</div>`).join('')}</div>
+    </div>`;
+  }).join('') + `<div class="go-result ${goState.q1&&goState.q2&&goState.q3?'show':''}" id="goResult"></div>`;
+
+  if (goState.q1 && goState.q2 && goState.q3) {
+    let rec = RECS.default;
+    if (goState.q3.includes('Climate')) rec = RECS.climate;
+    if (goState.q3.includes('Health')) rec = RECS.health;
+    if (goState.q3.includes('Civic')) rec = RECS.civic;
+    document.getElementById('goResult').innerHTML = `
+      <div class="go-result-eye">⚡ recommended stack</div>
+      <div class="go-result-title">${rec.title}</div>
+      <div class="go-result-desc">${rec.desc}</div>
+      <div class="go-stack">${rec.stack.map(s=>`<span class="spill" onclick="jumpToComp('${s}')">${s}</span>`).join('')}</div>`;
+  }
+}
+
+function renderSDGs() {
+  document.getElementById('sdgGrid').innerHTML = SDGS.map(s=>`
+    <div class="sdg-card">
+      <span class="sdg-n">${s.n}</span>
+      <div><div class="sdg-name">${s.name}</div><div class="sdg-proj">${s.p} projects</div></div>
+    </div>`).join('');
+}
+
+// ── INTERACTIONS ─────────────────────────────────────────────
+
+function slug(s) { return s.replace(/[^a-z0-9]/gi,'-').toLowerCase(); }
+
+function toggleFilter(cat, el) {
+  if (activeFilter===cat) { activeFilter=null; document.querySelectorAll('.fpill').forEach(p=>p.classList.remove('on')); }
+  else { activeFilter=cat; document.querySelectorAll('.fpill').forEach(p=>p.classList.remove('on')); el.classList.add('on'); }
+  renderLibrary(activeFilter, document.getElementById('searchInput').value);
+}
+
+function domainFilter(name) {
+  document.getElementById('library').scrollIntoView({behavior:'smooth',block:'start'});
+  setTimeout(()=>{
+    const q = name.split(' ')[0].toLowerCase();
+    document.getElementById('searchInput').value = q;
+    renderLibrary(null, q);
+  }, 600);
+}
+
+function jumpToComp(name) {
+  document.getElementById('library').scrollIntoView({behavior:'smooth',block:'start'});
+  setTimeout(()=>{
+    const id = 'comp-' + slug(name);
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({behavior:'smooth',block:'center'});
+      el.classList.add('highlight');
+      setTimeout(()=>el.classList.remove('highlight'), 2200);
+    }
+  }, 500);
+}
+
+function pickGo(key, val) {
+  goState[key] = val;
+  if (key==='q1') { delete goState.q2; delete goState.q3; }
+  if (key==='q2') { delete goState.q3; }
+  renderGoMode();
+}
+
+// Search
+document.getElementById('searchInput').addEventListener('input', e => {
+  renderLibrary(activeFilter, e.target.value);
+  if (e.target.value) document.getElementById('library').scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', e => {
+  if (e.key==='/' && document.activeElement!==document.getElementById('searchInput')) {
+    e.preventDefault(); document.getElementById('searchInput').focus();
+  }
+  if (e.key==='Escape') document.getElementById('searchInput').blur();
+});
+
+// Clock
+function tick() {
+  const n = new Date();
+  document.getElementById('liveClock').textContent =
+    n.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+}
+tick(); setInterval(tick, 1000);
+
+// Cursor glow
+const glow = document.getElementById('glow');
+document.addEventListener('mousemove', e => {
+  glow.style.left = e.clientX+'px';
+  glow.style.top = e.clientY+'px';
+});
+
+// Nav rail active state on scroll
+const sections = ['hero','domains','patterns','library','gomode','impact'];
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.querySelectorAll('.rail-btn').forEach(b=>b.classList.remove('active'));
+      const btn = document.querySelector(`.rail-btn[href="#${e.target.id}"]`);
+      if (btn) btn.classList.add('active');
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(id => { const el=document.getElementById(id); if(el) observer.observe(el); });
+
+// ── INIT ─────────────────────────────────────────────────────
+renderDomains();
+renderPatterns();
+renderLibrary(null);
+renderFilters();
+renderGoMode();
+renderSDGs();
+</script>
+</body>
+</html>
