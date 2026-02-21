@@ -47,6 +47,49 @@ export const RECS: Record<string, { title: string; desc: string; stack: string[]
   civic: { title: "Next.js + Open Data APIs + Recharts + Mapbox", desc: "Open data integration = instant credibility. Census API, OpenStreetMap, local government APIs.", stack: ["Next.js", "Recharts", "Mapbox", "TanStack Query", "Supabase", "Vercel"] },
 }
 
+export const AUDIENCE_ARCHETYPES = [
+  {
+    id: "student",
+    icon: "🎓",
+    label: "Student / First-timer",
+    desc: "First hackathon or new to building. Learning as you go.",
+    prompt: "What problem do you wish someone had already solved for your community?",
+    hint: "Think about a frustration you've personally experienced or seen others struggle with.",
+  },
+  {
+    id: "developer",
+    icon: "💻",
+    label: "Developer / Technical",
+    desc: "Comfortable with code. Want to ship fast and impress judges.",
+    prompt: "What broken system have you noticed that could be fixed with the right data or API?",
+    hint: "Think about inefficiencies you've seen in industries, services, or workflows.",
+  },
+  {
+    id: "designer",
+    icon: "🎨",
+    label: "Designer / Product Thinker",
+    desc: "Focused on user experience and problem framing, not just code.",
+    prompt: "Who is underserved in your community, and what does their frustration look like day-to-day?",
+    hint: "Describe a real person. What do they try to do? Where do they get stuck?",
+  },
+  {
+    id: "expert",
+    icon: "🏥",
+    label: "Domain Expert / Non-technical",
+    desc: "Deep knowledge in a field — health, law, education, environment.",
+    prompt: "What do you see in your field that technology hasn't touched yet — but should?",
+    hint: "You have knowledge that most hackers don't. That gap is your superpower.",
+  },
+]
+
+export const PROBLEM_FRAMES = [
+  "I want to help ___ do ___ more easily.",
+  "The barrier is ___ — and most tools ignore it.",
+  "If someone built ___, it would save ___ hours per week.",
+  "The existing solution fails because ___.",
+  "People in ___ can't access ___ because ___.",
+]
+
 export const CATEGORIES = ["auth", "ai", "database", "ui", "payments", "api", "devtools"]
 
 export const CAT_COLORS: Record<string, string> = {
