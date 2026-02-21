@@ -90,6 +90,61 @@ export const PROBLEM_FRAMES = [
   "People in ___ can't access ___ because ___.",
 ]
 
+export const CATEGORY_META: Record<string, {
+  label: string; icon: string; color: string;
+  tagline: string; why: string; pitfall: string; tip: string;
+}> = {
+  auth: {
+    label: "Authentication", icon: "🔐", color: "#22d3ee",
+    tagline: "The setup killer. Get this right in the first 30 minutes.",
+    why: "Every hackathon project that needs user accounts lives or dies on auth. Wrong choice means hours of debugging OAuth redirects at 2am instead of building features. The good news: modern auth providers handle the hard parts for you — Google sign-in, session management, email magic links — in under 30 minutes if you pick the right tool.",
+    pitfall: "Don't roll your own. Don't start with email+password unless it's core to your concept. Don't use two auth providers. Pick one and commit.",
+    tip: "Supabase Auth if you're already using Supabase. Clerk if you want the fastest drop-in with the best UI out of the box. NextAuth if you're deep in the Next.js ecosystem and want full control.",
+  },
+  ai: {
+    label: "AI & LLMs", icon: "🤖", color: "#a78bfa",
+    tagline: "The feature judges remember. The differentiator that wins tracks.",
+    why: "AI features are what separate 'cool project' from 'this could be a real product.' Judges have seen dashboards. They've seen CRUD apps. An LLM integration that does something genuinely useful — explains a medical record in plain language, translates a legal document, routes a crisis to the right resource — that's what gets remembered. The barrier to entry is now low enough that not having an AI layer is a missed opportunity.",
+    pitfall: "Don't add AI as a gimmick. 'We used ChatGPT to generate descriptions' isn't a feature. The AI should solve a real problem that would be hard to solve any other way.",
+    tip: "Claude for nuanced, sensitive, or multilingual content (health, legal, social). GPT-4o for speed and general tasks. HuggingFace for open-source and specialized models. Vercel AI SDK if you want streaming built-in.",
+  },
+  database: {
+    label: "Database", icon: "🗄️", color: "#60a5fa",
+    tagline: "Your data layer. Pick once and don't look back.",
+    why: "The database decision shapes everything else — your queries, your auth, your realtime features, your deployment. Most hackathon teams overthink this. You don't need a distributed database. You need something that's live, has a free tier, and lets you write SQL or call an ORM without fighting it.",
+    pitfall: "Don't pick a database that requires you to manage infrastructure during the hackathon. Don't use multiple databases. Don't add an ORM if you're already comfortable with raw SQL in your provider's client.",
+    tip: "Supabase if you want Postgres + auth + realtime + storage all in one. Neon if you just want serverless Postgres. PlanetScale if you're on MySQL. Add Prisma or Drizzle ORM only if you're doing complex relational logic that benefits from type safety.",
+  },
+  ui: {
+    label: "UI Components", icon: "🎨", color: "#22c55e",
+    tagline: "Don't design from scratch. Ship something polished in hours.",
+    why: "Judges form an impression in the first 10 seconds of a demo. A polished UI signals that you know what you're doing, even if the backend is still being held together with duct tape. Component libraries give you that polish without spending half the hackathon on CSS. Tailwind handles spacing and layout. shadcn/ui gives you production-quality components you own.",
+    pitfall: "Don't spend more than 2 hours on UI before your core feature works end-to-end. Beautiful empty state > buggy feature.",
+    tip: "Tailwind + shadcn/ui is the dominant pattern in winning projects. Framer Motion for transitions if you have time and they add clarity. Recharts or Chart.js for data visualization — judges love a good chart.",
+  },
+  payments: {
+    label: "Payments", icon: "💳", color: "#fbbf24",
+    tagline: "Only add this if payments are core to your value prop.",
+    why: "Payments are a credibility signal when they're core to the concept — a marketplace, a subscription tool, a fintech project. Judges understand the business model immediately when they see Stripe integrated correctly. But payment integration is time-intensive and error-prone under time pressure. Only add it if the project doesn't make sense without it.",
+    pitfall: "Don't add payments as an afterthought to show 'monetization potential.' It takes time you don't have and adds complexity to your demo. Use Stripe's test mode — never real cards in a hackathon.",
+    tip: "Stripe for everything if you need card payments. LemonSqueezy if you want a simpler API for digital products. Always use test mode. Always have a fallback demo flow if the payment integration breaks during the presentation.",
+  },
+  api: {
+    label: "APIs & Integration", icon: "🔌", color: "#fb923c",
+    tagline: "Your secret weapon. A great API integration beats building from scratch.",
+    why: "The best hackathon projects aren't built from scratch — they're assembled from the right pieces. A team that knows how to find and integrate the right API can build something in 12 hours that would take weeks to build without it. Mapping APIs (Mapbox, Google Maps) make civic and climate projects credible. Communication APIs (Twilio, Resend) make user-facing features real. Open government data APIs give you instant legitimacy.",
+    pitfall: "Don't integrate an API before you've verified it works in your language/framework. Don't rely on a single third-party API for your core demo — have a fallback if it's down.",
+    tip: "Check rate limits before you commit to an API during a hackathon. Many free tiers are generous but have low rate limits that will bite you during a live demo. Test with your actual expected data volume.",
+  },
+  devtools: {
+    label: "Developer Tools", icon: "⚙️", color: "#f472b6",
+    tagline: "Ship on day one. No excuses for 'it only works locally.'",
+    why: "A project that's deployed beats a project on localhost every single time. Judges want to click a link. Vercel gives you continuous deployment from GitHub in one click — every push deploys automatically. TypeScript catches errors before runtime. Zod validates your data at the edges. These tools aren't glamorous but they're the difference between a demo that works and one that crashes.",
+    pitfall: "Don't leave deployment for the last hour. Deploy an empty skeleton on day one. That way you're always shipping to a live URL and you catch deployment issues early instead of at 11pm before the deadline.",
+    tip: "Vercel for Next.js, always. Railway or Render if you need a backend with persistent state. Bun or tsx for fast local TypeScript execution. Add TypeScript and Zod from the start — the time cost is minimal and the error-catching is worth it.",
+  },
+}
+
 export const CATEGORIES = ["auth", "ai", "database", "ui", "payments", "api", "devtools"]
 
 export const CAT_COLORS: Record<string, string> = {

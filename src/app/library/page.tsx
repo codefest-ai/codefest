@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer"
 import { useAuth } from "@/components/AuthProvider"
 import { getBookmarks, addBookmark, removeBookmark } from "@/lib/bookmarks"
 import componentsData from "@/data/components_seed.json"
+import { CATEGORY_META, CATEGORIES } from "@/data/constants"
 import {
   Search,
   ExternalLink,
@@ -185,6 +186,35 @@ export default function LibraryPage() {
                   Sign in to bookmark
                 </Link>
               )}
+            </div>
+          </div>
+
+          {/* Category Building Blocks */}
+          <div className="mb-10">
+            <div className="flex items-center justify-between mb-4">
+              <p className="text-xs uppercase tracking-widest text-zinc-600 font-mono">Browse by building block</p>
+              <span className="text-xs text-zinc-600 font-mono">7 categories</span>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2">
+              {CATEGORIES.map((cat) => {
+                const meta = CATEGORY_META[cat]
+                const count = components.filter(c => c.category === cat).length
+                return (
+                  <Link
+                    key={cat}
+                    href={`/library/category/${cat}`}
+                    className="group flex flex-col gap-2 rounded-xl border border-white/[0.06] bg-surface-1/60 p-4 transition-all hover:border-white/[0.14] hover:bg-surface-2/80"
+                  >
+                    <div className="text-2xl">{meta.icon}</div>
+                    <div>
+                      <div className="text-sm font-semibold text-white leading-tight mb-0.5 group-hover:text-brand-400 transition-colors">
+                        {meta.label}
+                      </div>
+                      <div className="text-[11px] font-mono" style={{ color: meta.color }}>{count} tools</div>
+                    </div>
+                  </Link>
+                )
+              })}
             </div>
           </div>
 
