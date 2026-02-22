@@ -15,7 +15,12 @@
       "plainLanguageWhy": "So you don't have to build a login system from scratch. Supabase Auth handles security, password resets, and session management for you.",
       "commonUse": "User accounts for health apps, student portals, community platforms, civic tools — any app where different people need their own space.",
       "relatedComponents": ["Supabase", "NextAuth.js"],
-      "skillRequired": "Beginner-friendly. Copy a few code snippets, add your Google credentials, and it works. No deep coding knowledge required."
+      "skillRequired": "Beginner-friendly. Copy a few code snippets, add your Google credentials, and it works. No deep coding knowledge required.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "NextAuth.js",
@@ -32,7 +37,13 @@
       "plainLanguageWhy": "If you're building with Next.js and need users to log in, this is the most common choice. It works out of the box with 50+ sign-in options.",
       "commonUse": "Student logins, community platforms, content tools, civic apps — anywhere you need user accounts quickly.",
       "relatedComponents": ["Supabase Auth", "Prisma", "Neon"],
-      "skillRequired": "Beginner. You'll need to follow a setup guide but no advanced skills needed. Takes about 20 minutes."
+      "skillRequired": "Beginner. You'll need to follow a setup guide but no advanced skills needed. Takes about 20 minutes.",
+      "notes": "Also known as Auth.js — same library, rebranded. Works with any database via adapters.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Clerk",
@@ -49,7 +60,12 @@
       "plainLanguageWhy": "The fastest way to get user accounts working. Clerk handles the design, security, and user management dashboard for you.",
       "commonUse": "School platforms, nonprofit tools, health apps, any project where you need accounts up and running in under 30 minutes.",
       "relatedComponents": ["Supabase", "Neon", "Prisma"],
-      "skillRequired": "Very beginner-friendly. Paste in a few lines of code and your login screen is live. No design or security knowledge needed."
+      "skillRequired": "Very beginner-friendly. Paste in a few lines of code and your login screen is live. No design or security knowledge needed.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Lucia Auth",
@@ -65,8 +81,35 @@
       "plainLanguageWhat": "A lightweight login library that gives you full control over how authentication works in your app. No third-party services involved.",
       "plainLanguageWhy": "If you need custom login behavior, care about data privacy, or can't use third-party auth services, Lucia lets you build exactly what you need.",
       "commonUse": "Privacy-sensitive apps, tools where you control all user data, justice or advocacy platforms with specific compliance needs.",
-      "relatedComponents": ["Drizzle ORM", "Prisma", "Neon"],
-      "skillRequired": "Intermediate. Requires understanding of how sessions and cookies work. Good documentation but not plug-and-play."
+      "relatedComponents": ["Drizzle ORM", "Prisma", "Neon", "Better Auth"],
+      "skillRequired": "Intermediate. Requires understanding of how sessions and cookies work. Good documentation but not plug-and-play.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
+    },
+    {
+      "name": "Better Auth",
+      "category": "auth",
+      "description": "Modern, full-featured auth library. Type-safe, plugin-based, framework-agnostic.",
+      "github_url": "https://github.com/better-auth/better-auth",
+      "docs_url": "https://www.better-auth.com/docs",
+      "setup_time_minutes": 25,
+      "difficulty": "intermediate",
+      "tags": ["typescript", "plugins", "sessions", "oauth", "flexible"],
+      "domains": ["Justice & Rights", "Civic Tech", "Education & Access", "Health & Wellbeing"],
+      "sdgs": ["Peace & Justice", "Reduced Inequalities", "Quality Education", "Good Health"],
+      "plainLanguageWhat": "A newer auth library with excellent TypeScript support and a plugin system. Handles sessions, OAuth, magic links, and more without locking you into any vendor.",
+      "plainLanguageWhy": "When you want full control like Lucia but with better TypeScript ergonomics and built-in plugins for organizations, two-factor auth, and more.",
+      "commonUse": "Projects where type safety and data ownership matter — health platforms, justice tools, any app handling sensitive user data.",
+      "relatedComponents": ["Lucia Auth", "Drizzle ORM", "Prisma", "Neon"],
+      "skillRequired": "Intermediate. Cleaner API than Lucia. If you understand TypeScript and basic auth concepts, the setup is straightforward.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Stripe",
@@ -83,7 +126,12 @@
       "plainLanguageWhy": "When your app needs to charge money — for services, memberships, or products — Stripe is the industry standard and trusted by millions of businesses.",
       "commonUse": "Sliding-scale services for low-income users, subscription tools, marketplace platforms, donation collection for nonprofits.",
       "relatedComponents": ["LemonSqueezy", "Supabase", "Inngest"],
-      "skillRequired": "Intermediate. You'll need to understand webhooks (automated notifications) and follow Stripe's setup guide carefully. Worth the effort."
+      "skillRequired": "Intermediate. You'll need to understand webhooks (automated notifications) and follow Stripe's setup guide carefully. Worth the effort.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "LemonSqueezy",
@@ -100,23 +148,12 @@
       "plainLanguageWhy": "If you want to accept payments without worrying about international tax laws, LemonSqueezy takes care of that complexity.",
       "commonUse": "Digital tools and products sold globally, educational resources, software licenses, creator tools.",
       "relatedComponents": ["Stripe", "Supabase"],
-      "skillRequired": "Beginner. Simpler than Stripe. Works well for digital products without complex custom checkout needs."
-    },
-    {
-      "name": "Paddle",
-      "category": "payments",
-      "description": "Complete payments infrastructure. Tax handling and compliance included.",
-      "docs_url": "https://developer.paddle.com",
-      "setup_time_minutes": 25,
-      "difficulty": "intermediate",
-      "tags": ["subscriptions", "tax", "global"],
-      "domains": ["Economic Equity", "Education & Access"],
-      "sdgs": ["Decent Work", "Reduced Inequalities"],
-      "plainLanguageWhat": "A global payment platform that handles taxes and compliance across 200+ countries automatically.",
-      "plainLanguageWhy": "If your app needs to sell in many countries with different tax rules, Paddle handles all of that automatically.",
-      "commonUse": "Global SaaS tools, digital products sold internationally, subscription services.",
-      "relatedComponents": ["Stripe", "LemonSqueezy"],
-      "skillRequired": "Intermediate. More complex setup than LemonSqueezy but handles more edge cases for global payments."
+      "skillRequired": "Beginner. Simpler than Stripe. Works well for digital products without complex custom checkout needs.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "OpenAI API",
@@ -132,8 +169,13 @@
       "plainLanguageWhat": "Access to ChatGPT's intelligence from your own app. You send it a question or task, it responds intelligently — and you control the experience.",
       "plainLanguageWhy": "To add AI-powered features: answering questions, summarizing documents, translating languages, generating content, or understanding what users write.",
       "commonUse": "Multilingual health chatbots, document summarizers for legal aid, food resource finders, crisis triage tools, tutoring assistants.",
-      "relatedComponents": ["Anthropic Claude", "Vercel AI SDK", "LangChain.js", "Pinecone"],
-      "skillRequired": "Beginner. Send text in, get text back. The API is straightforward. The harder part is designing what to ask the AI."
+      "relatedComponents": ["Anthropic Claude", "Vercel AI SDK", "LangChain.js", "Pinecone", "Groq"],
+      "skillRequired": "Beginner. Send text in, get text back. The API is straightforward. The harder part is designing what to ask the AI.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Anthropic Claude",
@@ -150,7 +192,12 @@
       "plainLanguageWhy": "When your app needs AI that reasons carefully, handles sensitive topics well, or needs to follow specific guidelines — Claude is especially strong at this.",
       "commonUse": "Legal document analysis, healthcare information tools, mental health support assistants, complex document summarization, equity-focused advisory tools.",
       "relatedComponents": ["OpenAI API", "Vercel AI SDK", "LangChain.js"],
-      "skillRequired": "Beginner. Same pattern as OpenAI: send a message, get a response. Great documentation and free API tier to start."
+      "skillRequired": "Beginner. Same pattern as OpenAI: send a message, get a response. Great documentation and free API tier to start.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Vercel AI SDK",
@@ -166,8 +213,13 @@
       "plainLanguageWhat": "A toolkit that makes it easy to add AI chat features to a Next.js app, with responses that stream in word-by-word (like ChatGPT does).",
       "plainLanguageWhy": "Instead of writing complex AI integration code, this gives you React hooks and components that handle streaming AI responses automatically.",
       "commonUse": "Chat interfaces, AI assistants, Q&A tools, real-time document summarization — anything where the AI response should appear as it's generated.",
-      "relatedComponents": ["OpenAI API", "Anthropic Claude", "LangChain.js"],
-      "skillRequired": "Beginner. If you're using Next.js, this is the easiest way to add AI chat features. Works with multiple AI providers."
+      "relatedComponents": ["OpenAI API", "Anthropic Claude", "LangChain.js", "Groq"],
+      "skillRequired": "Beginner. If you're using Next.js, this is the easiest way to add AI chat features. Works with multiple AI providers.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "LangChain.js",
@@ -184,7 +236,12 @@
       "plainLanguageWhy": "When your AI app needs to search your own documents, remember context, or chain multiple AI steps together — LangChain is the standard approach.",
       "commonUse": "Document Q&A systems ('ask questions about this PDF'), policy research tools, multi-step health intake processes, civic data exploration.",
       "relatedComponents": ["OpenAI API", "Anthropic Claude", "Pinecone", "Vercel AI SDK"],
-      "skillRequired": "Intermediate. More complex than calling the AI directly. Best if you understand basic JavaScript and have 30–45 minutes to follow the quickstart."
+      "skillRequired": "Intermediate. More complex than calling the AI directly. Best if you understand basic JavaScript and have 30–45 minutes to follow the quickstart.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Pinecone",
@@ -201,7 +258,12 @@
       "plainLanguageWhy": "When you want your AI to search through a large collection of documents and find the most relevant one — not just keyword matching, but actual meaning matching.",
       "commonUse": "Search through grant databases, legal aid resources, health guidelines, food assistance programs — 'find me grants for youth housing in California.'",
       "relatedComponents": ["OpenAI API", "LangChain.js", "Anthropic Claude"],
-      "skillRequired": "Intermediate. You need to understand the concept of embeddings (turning text into numbers that represent meaning). Good tutorials available."
+      "skillRequired": "Intermediate. You need to understand the concept of embeddings (turning text into numbers that represent meaning). Good tutorials available.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Replicate",
@@ -217,7 +279,12 @@
       "plainLanguageWhy": "When you need to generate images, run specialized AI models, or use AI tools that aren't available through OpenAI — Replicate hosts thousands of open-source models.",
       "commonUse": "Generating visual aids for educational tools, food identification from photos, health symptom image analysis, accessibility tools like image captioning.",
       "relatedComponents": ["OpenAI API", "Cloudinary", "Vercel AI SDK"],
-      "skillRequired": "Beginner. Simple API: send an input (image, text), get an output back. The model browser makes it easy to find what you need."
+      "skillRequired": "Beginner. Simple API: send an input (image, text), get an output back. The model browser makes it easy to find what you need.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Hugging Face",
@@ -234,7 +301,76 @@
       "plainLanguageWhy": "When you need AI that runs without sending data to a third-party company, or when you need specialized models (like translation for a minority language, or medical text analysis).",
       "commonUse": "Multilingual health tools, offline-capable community apps, food classification from photos, environmental monitoring analysis.",
       "relatedComponents": ["Replicate", "OpenAI API", "LangChain.js"],
-      "skillRequired": "Intermediate. More setup than OpenAI/Claude but much more flexibility. Good for teams with someone who understands Python or ML basics."
+      "skillRequired": "Intermediate. More setup than OpenAI/Claude but much more flexibility. Good for teams with someone who understands Python or ML basics.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
+    },
+    {
+      "name": "Groq",
+      "category": "ai",
+      "description": "Fastest AI inference available. Run Llama 3, Mixtral, and Gemma at 500+ tokens/sec.",
+      "docs_url": "https://console.groq.com/docs",
+      "setup_time_minutes": 10,
+      "difficulty": "beginner",
+      "tags": ["fast-inference", "llama", "mixtral", "free-tier", "openai-compatible"],
+      "domains": ["Health & Wellbeing", "Education & Access", "Crisis & Disaster Response", "Civic Tech", "Economic Equity"],
+      "sdgs": ["Good Health", "Quality Education", "Reduced Inequalities", "Peace & Justice"],
+      "plainLanguageWhat": "An AI API that runs open-source models at extreme speed — responses come back in under a second, compared to several seconds with other providers.",
+      "plainLanguageWhy": "When your app needs AI that feels instant — live chat, real-time suggestions, low-latency assistants — Groq's speed is unmatched. Also has a generous free tier.",
+      "commonUse": "Real-time health Q&A, instant crisis resource recommendations, fast document processing, live coding assistance tools.",
+      "relatedComponents": ["OpenAI API", "Vercel AI SDK", "Anthropic Claude"],
+      "skillRequired": "Beginner. Drop-in replacement for OpenAI API — same SDK format, just point it at Groq's endpoint. Free tier covers most hackathon usage.",
+      "notes": "OpenAI-compatible API — if you've used OpenAI, you can switch to Groq in two lines of code.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
+    },
+    {
+      "name": "Mistral API",
+      "category": "ai",
+      "description": "European AI with strong models. GDPR-compliant, competitive performance.",
+      "docs_url": "https://docs.mistral.ai",
+      "setup_time_minutes": 10,
+      "difficulty": "beginner",
+      "tags": ["llm", "gdpr", "european", "open-source", "free-tier"],
+      "domains": ["Health & Wellbeing", "Justice & Rights", "Education & Access", "Civic Tech", "Economic Equity"],
+      "sdgs": ["Good Health", "Peace & Justice", "Quality Education", "Reduced Inequalities"],
+      "plainLanguageWhat": "An AI API from a French company with strong, privacy-respecting models. Offers both closed and open-source options at competitive prices.",
+      "plainLanguageWhy": "When your app handles sensitive data (health, legal, personal) and you need GDPR compliance, or when you want European data residency. Strong performance at lower cost.",
+      "commonUse": "GDPR-sensitive health tools, legal aid platforms for EU users, multilingual civic apps, privacy-focused community tools.",
+      "relatedComponents": ["OpenAI API", "Anthropic Claude", "Vercel AI SDK"],
+      "skillRequired": "Beginner. Same API pattern as OpenAI. Free tier available. Especially good choice for teams building for European users or privacy-sensitive contexts.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
+    },
+    {
+      "name": "Together AI",
+      "category": "ai",
+      "description": "Run 100+ open-source models via API. Llama 3, Falcon, SDXL, and more.",
+      "docs_url": "https://docs.together.ai",
+      "setup_time_minutes": 10,
+      "difficulty": "beginner",
+      "tags": ["open-source", "llm", "image-gen", "fine-tuning", "free-tier"],
+      "domains": ["Education & Access", "Health & Wellbeing", "Arts & Culture", "Climate & Environment", "Food & Agriculture"],
+      "sdgs": ["Quality Education", "Good Health", "Climate Action", "Zero Hunger"],
+      "plainLanguageWhat": "A cloud platform for running any of 100+ open-source AI models — language, image, code, and audio — through a single API.",
+      "plainLanguageWhy": "When you want the flexibility of open-source models (more control, lower cost, community-maintained) without setting up your own servers.",
+      "commonUse": "Specialized model selection for niche domains (medical, legal, environmental), image generation alternatives, teams wanting model variety.",
+      "relatedComponents": ["Replicate", "Hugging Face", "Vercel AI SDK"],
+      "skillRequired": "Beginner. API pattern similar to OpenAI. Free credits on signup. Good model browser to find the right model for your use case.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Supabase",
@@ -251,24 +387,12 @@
       "plainLanguageWhy": "Instead of setting up a server, database, and auth system separately, Supabase gives you everything in one place for free to start.",
       "commonUse": "Community health records, student progress tracking, neighborhood resource maps, emergency contact systems, food pantry inventory, case management tools.",
       "relatedComponents": ["Supabase Auth", "Prisma", "Drizzle ORM"],
-      "skillRequired": "Beginner. The visual dashboard makes it easy to create tables and manage data without writing code. SQL knowledge is helpful but not required."
-    },
-    {
-      "name": "PlanetScale",
-      "category": "database",
-      "description": "Serverless MySQL with branching. Scale infinitely.",
-      "github_url": "https://github.com/planetscale/database-js",
-      "docs_url": "https://planetscale.com/docs",
-      "setup_time_minutes": 15,
-      "difficulty": "beginner",
-      "tags": ["mysql", "serverless", "branching", "scale"],
-      "domains": ["Economic Equity", "Education & Access", "Civic Tech", "Health & Wellbeing"],
-      "sdgs": ["Decent Work", "Quality Education", "Good Health"],
-      "plainLanguageWhat": "A database that scales automatically and lets you make schema changes safely — like having a test copy of your database before applying changes to the real one.",
-      "plainLanguageWhy": "When you need a reliable, scalable database that handles growth automatically and lets you safely experiment with changes.",
-      "commonUse": "Civic platforms expecting large user bases, education tools that need to scale, economic data tools.",
-      "relatedComponents": ["Prisma", "Drizzle ORM", "Neon"],
-      "skillRequired": "Beginner. Similar to Supabase but MySQL-based. Good if your team already knows MySQL."
+      "skillRequired": "Beginner. The visual dashboard makes it easy to create tables and manage data without writing code. SQL knowledge is helpful but not required.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Neon",
@@ -285,7 +409,12 @@
       "plainLanguageWhy": "A great free alternative to Supabase for just the database layer. Ideal if you're using a separate auth system but need solid Postgres storage.",
       "commonUse": "Community tools, education platforms, health apps — any project that needs a reliable free-tier database.",
       "relatedComponents": ["Prisma", "Drizzle ORM", "NextAuth.js"],
-      "skillRequired": "Beginner. Quick setup, free tier, good documentation. Works well with Prisma or Drizzle for easier data management."
+      "skillRequired": "Beginner. Quick setup, free tier, good documentation. Works well with Prisma or Drizzle for easier data management.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Turso",
@@ -302,7 +431,12 @@
       "plainLanguageWhy": "When your app needs to work fast globally, or even partially offline — Turso replicates data close to wherever your users are.",
       "commonUse": "Disaster response apps that need to work in low-connectivity areas, food supply tracking across regions, field health worker tools.",
       "relatedComponents": ["Drizzle ORM", "Prisma"],
-      "skillRequired": "Beginner. Simple SQLite-based. Good for teams building apps that need to work offline or in areas with poor internet."
+      "skillRequired": "Beginner. Simple SQLite-based. Good for teams building apps that need to work offline or in areas with poor internet.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Prisma",
@@ -318,8 +452,13 @@
       "plainLanguageWhat": "A tool that makes working with databases much easier from TypeScript/JavaScript. It lets you interact with your database using code instead of SQL queries.",
       "plainLanguageWhy": "Instead of writing database queries by hand, Prisma auto-generates safe, typed functions so your code knows exactly what shape the data is.",
       "commonUse": "Any project using a database where the team wants type safety and easy migrations — health records, education platforms, civic tools.",
-      "relatedComponents": ["Supabase", "Neon", "PlanetScale", "Drizzle ORM"],
-      "skillRequired": "Beginner. Prisma Studio (a visual database browser) makes it easy to explore data without SQL. The schema file is readable even without coding experience."
+      "relatedComponents": ["Supabase", "Neon", "Drizzle ORM"],
+      "skillRequired": "Beginner. Prisma Studio (a visual database browser) makes it easy to explore data without SQL. The schema file is readable even without coding experience.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Drizzle ORM",
@@ -335,8 +474,13 @@
       "plainLanguageWhat": "A lightweight database toolkit for TypeScript. It writes SQL queries in a way that looks like regular code, so it's easier to read and less error-prone.",
       "plainLanguageWhy": "A leaner alternative to Prisma. If you like writing SQL but want TypeScript safety on top, Drizzle is minimal and fast.",
       "commonUse": "Civic data tools, economic reporting platforms, lightweight community apps where you want precise database control.",
-      "relatedComponents": ["Prisma", "Neon", "Turso", "PlanetScale"],
-      "skillRequired": "Beginner to intermediate. Helpful if you understand basic SQL. The syntax is intuitive and well-documented."
+      "relatedComponents": ["Prisma", "Neon", "Turso"],
+      "skillRequired": "Beginner to intermediate. Helpful if you understand basic SQL. The syntax is intuitive and well-documented.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Upstash Redis",
@@ -353,7 +497,12 @@
       "plainLanguageWhy": "When your app needs to respond quickly to many users at once, or needs to store short-lived data like session tokens, rate limits, or live counts.",
       "commonUse": "Crisis dashboards showing live counts, health tools managing high traffic, real-time resource availability boards, abuse prevention.",
       "relatedComponents": ["Supabase", "Inngest", "Trigger.dev"],
-      "skillRequired": "Beginner. Simple key-value API. Takes about 10 minutes to set up. Free tier is generous for most hackathon projects."
+      "skillRequired": "Beginner. Simple key-value API. Takes about 10 minutes to set up. Free tier is generous for most hackathon projects.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "shadcn/ui",
@@ -370,7 +519,12 @@
       "plainLanguageWhy": "Instead of designing every button and form from scratch, shadcn gives you polished, accessible components that look professional immediately.",
       "commonUse": "Dashboards for health workers, community portals, civic data tools, resource directories — any app that needs a clean, professional UI quickly.",
       "relatedComponents": ["Radix UI", "React Hook Form", "Tailwind CSS"],
-      "skillRequired": "Beginner. The component examples are clearly documented. You copy the code, paste it in, and style it with Tailwind. No deep design skills needed."
+      "skillRequired": "Beginner. The component examples are clearly documented. You copy the code, paste it in, and style it with Tailwind. No deep design skills needed.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Radix UI",
@@ -387,7 +541,12 @@
       "plainLanguageWhy": "When you need full design control but still want accessibility built in. Radix handles keyboard navigation and screen reader support automatically.",
       "commonUse": "Accessibility-focused civic tools, health apps that need to serve users with disabilities, custom design systems for government-adjacent platforms.",
       "relatedComponents": ["shadcn/ui", "Tailwind CSS"],
-      "skillRequired": "Intermediate. You'll need CSS/Tailwind knowledge to style these components. Best for teams with a designer or strong frontend developer."
+      "skillRequired": "Intermediate. You'll need CSS/Tailwind knowledge to style these components. Best for teams with a designer or strong frontend developer.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Tremor",
@@ -404,7 +563,12 @@
       "plainLanguageWhy": "When your app needs to show data visually to users — counts, trends, comparisons — Tremor gives you professional-looking charts without building them from scratch.",
       "commonUse": "Community health dashboards, environmental monitoring displays, food security reporting, civic open data visualization, energy usage tracking.",
       "relatedComponents": ["Recharts", "shadcn/ui", "TanStack Table"],
-      "skillRequired": "Beginner. Component props are intuitive. Pass your data in, get a chart out. Works well without deep charting knowledge."
+      "skillRequired": "Beginner. Component props are intuitive. Pass your data in, get a chart out. Works well without deep charting knowledge.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Recharts",
@@ -421,7 +585,12 @@
       "plainLanguageWhy": "When your app needs to visualize data — trends over time, comparisons between groups, geographic distributions — Recharts makes it easy to build interactive charts.",
       "commonUse": "Climate data visualization, health outcome tracking, economic inequality charts, food access mapping, energy usage graphs.",
       "relatedComponents": ["Tremor", "shadcn/ui", "TanStack Table"],
-      "skillRequired": "Beginner. Lots of examples to copy from. You'll need to understand your data structure to pass it in correctly, but the API is approachable."
+      "skillRequired": "Beginner. Lots of examples to copy from. You'll need to understand your data structure to pass it in correctly, but the API is approachable.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Framer Motion",
@@ -438,7 +607,12 @@
       "plainLanguageWhy": "Animations make your app feel polished and alive. Framer Motion makes adding them easy without needing CSS animation expertise.",
       "commonUse": "Educational tools that guide users step by step, health apps with calming transitions, civic platforms that need to feel trustworthy and polished.",
       "relatedComponents": ["shadcn/ui", "React Hook Form"],
-      "skillRequired": "Beginner. Wrap your component in a `motion.div`, add animation props, and it just works. Excellent documentation."
+      "skillRequired": "Beginner. Wrap your component in a `motion.div`, add animation props, and it just works. Excellent documentation.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "React Hook Form",
@@ -455,7 +629,12 @@
       "plainLanguageWhy": "Forms are everywhere in social-impact apps: health intake, resource requests, civic feedback. React Hook Form makes them fast to build and reliable.",
       "commonUse": "Health intake forms, shelter registration, grant applications, civic feedback tools, food assistance enrollment, legal aid intake.",
       "relatedComponents": ["Zod", "shadcn/ui", "Supabase"],
-      "skillRequired": "Beginner. Works by adding hooks to your form inputs. Pairs well with Zod for validation. Clear documentation."
+      "skillRequired": "Beginner. Works by adding hooks to your form inputs. Pairs well with Zod for validation. Clear documentation.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Zod",
@@ -472,7 +651,12 @@
       "plainLanguageWhy": "To catch bad data before it causes problems. Especially important in health, legal, or crisis apps where incorrect data can have real consequences.",
       "commonUse": "Validating health intake forms, checking API responses, ensuring civic data submissions are complete, validating grant application fields.",
       "relatedComponents": ["React Hook Form", "shadcn/ui"],
-      "skillRequired": "Beginner. Define what your data should look like, and Zod checks it. Very readable syntax. Pairs naturally with React Hook Form."
+      "skillRequired": "Beginner. Define what your data should look like, and Zod checks it. Very readable syntax. Pairs naturally with React Hook Form.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "TanStack Table",
@@ -489,7 +673,12 @@
       "plainLanguageWhy": "When your app needs to display a lot of rows of data that users need to sort and filter — like a list of resources, people, cases, or records.",
       "commonUse": "Resource directories, patient or client lists, open data civic tools, food pantry inventories, grant tracking systems.",
       "relatedComponents": ["shadcn/ui", "Tremor", "TanStack Query"],
-      "skillRequired": "Intermediate. More setup than basic tables but very powerful. Good documentation and examples to copy from."
+      "skillRequired": "Intermediate. More setup than basic tables but very powerful. Good documentation and examples to copy from.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "cmdk",
@@ -506,11 +695,16 @@
       "plainLanguageWhy": "Makes your app feel powerful and keyboard-accessible. Users can search across all features without clicking through menus.",
       "commonUse": "Resource search tools, civic data explorers, health service finders, educational content navigation.",
       "relatedComponents": ["shadcn/ui", "Radix UI"],
-      "skillRequired": "Beginner. Drop it in, define your commands, and it works. shadcn/ui includes a version that's even easier to add."
+      "skillRequired": "Beginner. Drop it in, define your commands, and it works. shadcn/ui includes a version that's even easier to add.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Resend",
-      "category": "api",
+      "category": "services",
       "description": "Email API for developers. Simple, fast, reliable.",
       "github_url": "https://github.com/resendlabs/resend-node",
       "docs_url": "https://resend.com/docs",
@@ -523,11 +717,17 @@
       "plainLanguageWhy": "Email is essential for most apps: confirming signups, sending resource alerts, notifying users. Resend makes sending transactional emails simple.",
       "commonUse": "Appointment reminders for health apps, shelter availability alerts, educational progress updates, crisis notifications, housing application status.",
       "relatedComponents": ["React Email", "Supabase Auth"],
-      "skillRequired": "Beginner. Send an email in 5 lines of code. Great documentation and generous free tier."
+      "skillRequired": "Beginner. Send an email in 5 lines of code. Great documentation and generous free tier.",
+      "notes": "Pair with React Email for beautiful, cross-client HTML templates. Resend handles sending; React Email handles design.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "React Email",
-      "category": "api",
+      "category": "services",
       "description": "Build emails with React components. Preview and test locally.",
       "github_url": "https://github.com/resendlabs/react-email",
       "docs_url": "https://react.email",
@@ -540,11 +740,17 @@
       "plainLanguageWhy": "HTML emails are notoriously hard to style. React Email gives you components that render correctly in Gmail, Outlook, and Apple Mail.",
       "commonUse": "Welcome emails for community platforms, health appointment reminders, civic update newsletters, educational progress reports.",
       "relatedComponents": ["Resend", "Supabase"],
-      "skillRequired": "Beginner. If you know React, writing email templates feels natural. Preview server lets you see how emails look before sending."
+      "skillRequired": "Beginner. If you know React, writing email templates feels natural. Preview server lets you see how emails look before sending.",
+      "notes": "Pair with Resend — React Email handles the template design, Resend handles the actual sending.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Twilio",
-      "category": "api",
+      "category": "services",
       "description": "SMS, voice, and video APIs. Global reach.",
       "github_url": "https://github.com/twilio/twilio-node",
       "docs_url": "https://www.twilio.com/docs",
@@ -557,11 +763,16 @@
       "plainLanguageWhy": "When your users may not have smartphones or internet access but do have a basic phone — SMS reaches everyone. Critical for crisis and health tools.",
       "commonUse": "Health appointment reminders by SMS, emergency alerts, food pantry availability texts, legal aid notification, shelter bed availability.",
       "relatedComponents": ["Resend", "Supabase", "Inngest"],
-      "skillRequired": "Intermediate. You'll need a Twilio account with a phone number and understanding of webhooks. Worth it for apps targeting non-smartphone users."
+      "skillRequired": "Intermediate. You'll need a Twilio account with a phone number and understanding of webhooks. Worth it for apps targeting non-smartphone users.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Uploadthing",
-      "category": "api",
+      "category": "services",
       "description": "File uploads for Next.js. Type-safe, fast, free tier.",
       "github_url": "https://github.com/pingdotgg/uploadthing",
       "docs_url": "https://uploadthing.com/docs",
@@ -574,11 +785,16 @@
       "plainLanguageWhy": "When your app needs users to submit documents — health records, IDs, legal forms, school assignments — Uploadthing handles the storage and security.",
       "commonUse": "Health document uploads, legal aid form submissions, housing application documents, educational assignment submissions.",
       "relatedComponents": ["Cloudinary", "Supabase", "React Hook Form"],
-      "skillRequired": "Beginner. Purpose-built for Next.js. Good documentation and type-safe file handling. Free tier handles most hackathon use cases."
+      "skillRequired": "Beginner. Purpose-built for Next.js. Good documentation and type-safe file handling. Free tier handles most hackathon use cases.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Cloudinary",
-      "category": "api",
+      "category": "services",
       "description": "Image and video management. Transformations, optimization, CDN.",
       "docs_url": "https://cloudinary.com/documentation",
       "setup_time_minutes": 15,
@@ -589,12 +805,38 @@
       "plainLanguageWhat": "A service that stores, optimizes, and delivers images and videos for your app. It automatically resizes and compresses media for fast loading.",
       "plainLanguageWhy": "When your app handles lots of photos or videos — health images, educational media, food photos — Cloudinary serves them fast and optimized automatically.",
       "commonUse": "Food identification photos, health visual aids, educational video libraries, civic documentation photos, arts platforms.",
-      "relatedComponents": ["Uploadthing", "Replicate"],
-      "skillRequired": "Beginner. Upload an image, get a URL back with automatic optimization. Free tier is generous. Good SDK documentation."
+      "relatedComponents": ["Uploadthing", "Replicate", "Cloudflare R2"],
+      "skillRequired": "Beginner. Upload an image, get a URL back with automatic optimization. Free tier is generous. Good SDK documentation.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
+    },
+    {
+      "name": "Cloudflare R2",
+      "category": "services",
+      "description": "S3-compatible object storage. Zero egress fees.",
+      "docs_url": "https://developers.cloudflare.com/r2",
+      "setup_time_minutes": 15,
+      "difficulty": "intermediate",
+      "tags": ["storage", "s3-compatible", "cdn", "free-tier"],
+      "domains": ["Health & Wellbeing", "Crisis & Disaster Response", "Education & Access", "Civic Tech", "Food & Agriculture"],
+      "sdgs": ["Good Health", "Quality Education", "Zero Hunger", "Reduced Inequalities"],
+      "plainLanguageWhat": "A cloud file storage service (like Amazon S3) that charges zero fees for downloading files — which makes it much cheaper for apps with lots of content.",
+      "plainLanguageWhy": "When your app serves many files (documents, images, reports) to many users, S3 egress fees add up fast. R2 eliminates that cost entirely.",
+      "commonUse": "Document archives for legal or health apps, civic open data file hosting, educational content libraries, food safety report storage.",
+      "relatedComponents": ["Uploadthing", "Cloudinary", "Supabase"],
+      "skillRequired": "Intermediate. Works with any S3-compatible SDK. More setup than Uploadthing but much cheaper at scale. Cloudflare dashboard is approachable.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Inngest",
-      "category": "api",
+      "category": "services",
       "description": "Background jobs and workflows. Event-driven, durable execution.",
       "github_url": "https://github.com/inngest/inngest",
       "docs_url": "https://www.inngest.com/docs",
@@ -607,11 +849,17 @@
       "plainLanguageWhy": "When you need to do something that takes longer than a web request — like sending 500 emails, processing data overnight, or retrying failed tasks automatically.",
       "commonUse": "Batch health alerts, nightly food inventory updates, automated follow-up sequences, civic data processing pipelines.",
       "relatedComponents": ["Trigger.dev", "Resend", "Supabase", "Upstash Redis"],
-      "skillRequired": "Intermediate. Requires understanding of event-driven patterns. Great debugging tools and good documentation for hackathon use."
+      "skillRequired": "Intermediate. Requires understanding of event-driven patterns. Great debugging tools and good documentation for hackathon use.",
+      "notes": "Similar to Trigger.dev — pick one for background jobs. Inngest is better for event-driven workflows; Trigger.dev is better for scheduled/cron jobs.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Trigger.dev",
-      "category": "api",
+      "category": "services",
       "description": "Background jobs with observability. Cron, webhooks, and long-running tasks.",
       "github_url": "https://github.com/triggerdotdev/trigger.dev",
       "docs_url": "https://trigger.dev/docs",
@@ -624,11 +872,17 @@
       "plainLanguageWhy": "When you need scheduled jobs (run every night at midnight) or long-running tasks with visibility into what's happening and easy debugging.",
       "commonUse": "Daily environmental data pulls, weekly food pantry stock reports, scheduled health check-ins, automated civic data refreshes.",
       "relatedComponents": ["Inngest", "Supabase", "Resend"],
-      "skillRequired": "Intermediate. Similar to Inngest. Trigger.dev has strong observability — you can see every job run and what happened. Good for debugging during hackathons."
+      "skillRequired": "Intermediate. Similar to Inngest. Trigger.dev has strong observability — you can see every job run and what happened. Good for debugging during hackathons.",
+      "notes": "Similar to Inngest — pick one for background jobs. Trigger.dev is better for scheduled/cron jobs; Inngest is better for event-driven workflows.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Pusher",
-      "category": "api",
+      "category": "services",
       "description": "Realtime infrastructure. Channels, presence, and webhooks.",
       "docs_url": "https://pusher.com/docs",
       "setup_time_minutes": 15,
@@ -640,11 +894,16 @@
       "plainLanguageWhy": "When your app needs live updates: a crisis dashboard showing current counts, a live food availability board, or a collaborative tool where changes appear instantly.",
       "commonUse": "Live crisis situation dashboards, real-time food pantry availability, live voting or polling tools, collaborative civic planning tools.",
       "relatedComponents": ["Socket.io", "Liveblocks", "Supabase"],
-      "skillRequired": "Beginner. Simpler than Socket.io. Good for most real-time use cases without needing deep WebSocket knowledge."
+      "skillRequired": "Beginner. Simpler than Socket.io. Good for most real-time use cases without needing deep WebSocket knowledge.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Socket.io",
-      "category": "api",
+      "category": "services",
       "description": "Realtime bidirectional communication. Works everywhere.",
       "github_url": "https://github.com/socketio/socket.io",
       "docs_url": "https://socket.io/docs",
@@ -657,11 +916,16 @@
       "plainLanguageWhy": "When users need to communicate in real-time or when the server needs to push urgent updates — Socket.io handles this reliably with fallbacks for poor connections.",
       "commonUse": "Crisis communication tools, live Q&A for civic events, real-time collaborative health intake, emergency coordination apps.",
       "relatedComponents": ["Pusher", "Liveblocks"],
-      "skillRequired": "Intermediate. Requires Node.js server setup. More control than Pusher but more complex. Worth it for apps needing custom real-time behavior."
+      "skillRequired": "Intermediate. Requires Node.js server setup. More control than Pusher but more complex. Worth it for apps needing custom real-time behavior.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Liveblocks",
-      "category": "api",
+      "category": "services",
       "description": "Collaboration infrastructure. Presence, cursors, and conflict-free data.",
       "github_url": "https://github.com/liveblocks/liveblocks",
       "docs_url": "https://liveblocks.io/docs",
@@ -674,11 +938,16 @@
       "plainLanguageWhy": "When your app needs multiple people working on the same thing simultaneously — a shared planning canvas, collaborative resource map, or group document.",
       "commonUse": "Collaborative community planning tools, shared resource maps, educational collaborative tools, civic budget planning interfaces.",
       "relatedComponents": ["Excalidraw", "tldraw", "Pusher"],
-      "skillRequired": "Intermediate. Requires understanding of real-time sync concepts. Good documentation and React hooks make it more accessible."
+      "skillRequired": "Intermediate. Requires understanding of real-time sync concepts. Good documentation and React hooks make it more accessible.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Excalidraw",
-      "category": "devtools",
+      "category": "tooling",
       "description": "Virtual whiteboard. Hand-drawn feel, real-time collaboration.",
       "github_url": "https://github.com/excalidraw/excalidraw",
       "docs_url": "https://docs.excalidraw.com",
@@ -691,11 +960,16 @@
       "plainLanguageWhy": "When your app needs a whiteboard for brainstorming, diagramming, or visual collaboration — Excalidraw embeds in minutes and looks great.",
       "commonUse": "Community planning tools, educational collaborative sessions, health system mapping, civic process diagramming.",
       "relatedComponents": ["tldraw", "Liveblocks"],
-      "skillRequired": "Beginner. Embed with a few lines of code. Real-time collaboration works out of the box. Very well-documented."
+      "skillRequired": "Beginner. Embed with a few lines of code. Real-time collaboration works out of the box. Very well-documented.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "tldraw",
-      "category": "devtools",
+      "category": "tooling",
       "description": "Infinite canvas. Drawing, shapes, and real-time sync.",
       "github_url": "https://github.com/tldraw/tldraw",
       "docs_url": "https://tldraw.dev",
@@ -708,11 +982,16 @@
       "plainLanguageWhy": "When you need an embeddable canvas for visual work — mapping systems, drawing workflows, creative collaboration.",
       "commonUse": "System mapping for civic tools, educational visual exercises, health journey mapping, participatory design tools.",
       "relatedComponents": ["Excalidraw", "Liveblocks"],
-      "skillRequired": "Beginner. Embed and customize with React. Good for non-technical team members once it's set up."
+      "skillRequired": "Beginner. Embed and customize with React. Good for non-technical team members once it's set up.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Monaco Editor",
-      "category": "devtools",
+      "category": "tooling",
       "description": "VS Code's editor as a component. Syntax highlighting, intellisense.",
       "github_url": "https://github.com/microsoft/monaco-editor",
       "docs_url": "https://microsoft.github.io/monaco-editor",
@@ -725,11 +1004,16 @@
       "plainLanguageWhy": "When your app needs users to write or edit code, queries, or configuration — Monaco gives them a professional coding experience inside your tool.",
       "commonUse": "Coding education platforms, civic data query builders, policy text editors, technical training tools.",
       "relatedComponents": ["Sandpack", "shadcn/ui"],
-      "skillRequired": "Intermediate. More setup than Sandpack but more powerful for pure editing use cases. Worth it for coding education tools."
+      "skillRequired": "Intermediate. More setup than Sandpack but more powerful for pure editing use cases. Worth it for coding education tools.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Sandpack",
-      "category": "devtools",
+      "category": "tooling",
       "description": "Live code editor and preview. In-browser bundling.",
       "github_url": "https://github.com/codesandbox/sandpack",
       "docs_url": "https://sandpack.codesandbox.io/docs",
@@ -742,11 +1026,16 @@
       "plainLanguageWhy": "When you're building an educational or coding tool and want users to experiment with code and see results live — Sandpack handles all the complexity.",
       "commonUse": "Coding bootcamp platforms, tech education for underserved communities, interactive programming tutorials, code challenge platforms.",
       "relatedComponents": ["Monaco Editor"],
-      "skillRequired": "Beginner. Embed with a few props. Much easier than Monaco for full live-preview use cases. Built by the CodeSandbox team."
+      "skillRequired": "Beginner. Embed with a few props. Much easier than Monaco for full live-preview use cases. Built by the CodeSandbox team.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Zustand",
-      "category": "devtools",
+      "category": "tooling",
       "description": "Simple state management. Tiny, fast, scalable.",
       "github_url": "https://github.com/pmndrs/zustand",
       "docs_url": "https://docs.pmnd.rs/zustand",
@@ -759,11 +1048,16 @@
       "plainLanguageWhy": "When multiple parts of your app need to share information (like a user's selections or current status), Zustand keeps it organized without complex setup.",
       "commonUse": "Tracking session state in health or crisis apps, managing filter state in civic data tools, storing user preferences across pages.",
       "relatedComponents": ["TanStack Query", "Supabase"],
-      "skillRequired": "Beginner. One of the simplest state management solutions in React. Minimal boilerplate and great documentation."
+      "skillRequired": "Beginner. One of the simplest state management solutions in React. Minimal boilerplate and great documentation.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "TanStack Query",
-      "category": "devtools",
+      "category": "tooling",
       "description": "Async state management. Caching, refetching, and more.",
       "github_url": "https://github.com/TanStack/query",
       "docs_url": "https://tanstack.com/query",
@@ -776,11 +1070,16 @@
       "plainLanguageWhy": "Instead of manually tracking whether data is loading, cached, or outdated, TanStack Query handles all of that. Your components just ask for data and get it.",
       "commonUse": "Live resource availability tools, health data dashboards that auto-refresh, food availability apps, civic data explorers with real-time updates.",
       "relatedComponents": ["Zustand", "Supabase", "TanStack Table"],
-      "skillRequired": "Beginner. Well-documented hooks-based API. The DevTools panel makes debugging data fetching very transparent during a hackathon."
+      "skillRequired": "Beginner. Well-documented hooks-based API. The DevTools panel makes debugging data fetching very transparent during a hackathon.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Posthog",
-      "category": "devtools",
+      "category": "tooling",
       "description": "Product analytics. Session replay, feature flags, A/B tests.",
       "github_url": "https://github.com/PostHog/posthog",
       "docs_url": "https://posthog.com/docs",
@@ -793,11 +1092,16 @@
       "plainLanguageWhy": "After launch, you need to understand if your app is actually solving the problem. Posthog shows you user behavior so you can improve the right things.",
       "commonUse": "Understanding if health app users find the right resources, seeing where civic tool users get confused, tracking feature adoption for educational platforms.",
       "relatedComponents": ["Sentry"],
-      "skillRequired": "Beginner. Add a script tag or install the SDK and you're tracking events. Open-source and self-hostable for privacy-sensitive apps."
+      "skillRequired": "Beginner. Add a script tag or install the SDK and you're tracking events. Open-source and self-hostable for privacy-sensitive apps.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     },
     {
       "name": "Sentry",
-      "category": "devtools",
+      "category": "tooling",
       "description": "Error tracking and performance monitoring.",
       "github_url": "https://github.com/getsentry/sentry-javascript",
       "docs_url": "https://docs.sentry.io",
@@ -810,7 +1114,165 @@
       "plainLanguageWhy": "After launch, bugs will happen. Sentry notifies you immediately when something breaks so you can fix it fast — especially important for health or crisis apps.",
       "commonUse": "Any app where reliability matters: health tools, crisis platforms, civic infrastructure, legal aid tools — you need to know the moment something fails.",
       "relatedComponents": ["Posthog"],
-      "skillRequired": "Beginner. Install the SDK, wrap your app, and errors are automatically captured and reported. Dashboard is clear and actionable."
+      "skillRequired": "Beginner. Install the SDK, wrap your app, and errors are automatically captured and reported. Dashboard is clear and actionable.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
+    },
+    {
+      "name": "next-intl",
+      "category": "tooling",
+      "description": "Internationalization for Next.js. i18n routing, translations, and formatting.",
+      "github_url": "https://github.com/amannn/next-intl",
+      "docs_url": "https://next-intl-docs.vercel.app",
+      "setup_time_minutes": 20,
+      "difficulty": "intermediate",
+      "tags": ["i18n", "internationalization", "translations", "routing"],
+      "domains": ["Health & Wellbeing", "Education & Access", "Crisis & Disaster Response", "Food & Agriculture", "Civic Tech", "Justice & Rights"],
+      "sdgs": ["Good Health", "Quality Education", "Zero Hunger", "Reduced Inequalities", "Peace & Justice"],
+      "plainLanguageWhat": "A tool that makes your Next.js app work in multiple languages — translating all text, formatting dates and numbers correctly, and routing users to the right language version.",
+      "plainLanguageWhy": "SDG-focused apps often serve communities that don't speak English. Without internationalization, you're excluding the people who need your tool most.",
+      "commonUse": "Health apps for non-English-speaking communities, multilingual crisis resources, food assistance tools in Spanish/Portuguese/Somali, civic tools for immigrant populations.",
+      "relatedComponents": ["Vercel AI SDK", "React Hook Form", "shadcn/ui"],
+      "skillRequired": "Intermediate. Requires setting up locale files and routing. The payoff is huge for impact — worth the 20-minute investment if your users need multiple languages.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
+    },
+    {
+      "name": "react-leaflet",
+      "category": "maps",
+      "description": "Interactive maps with React. Open-source, no API key required.",
+      "github_url": "https://github.com/PaulLeCam/react-leaflet",
+      "docs_url": "https://react-leaflet.js.org",
+      "setup_time_minutes": 15,
+      "difficulty": "beginner",
+      "tags": ["maps", "open-source", "tiles", "markers", "no-api-key"],
+      "domains": ["Civic Tech", "Health & Wellbeing", "Food & Agriculture", "Housing & Infrastructure", "Crisis & Disaster Response", "Climate & Environment"],
+      "sdgs": ["Zero Hunger", "Good Health", "Sustainable Cities", "Climate Action", "No Poverty"],
+      "plainLanguageWhat": "A React wrapper for Leaflet.js — the most popular open-source mapping library. Put interactive maps in your app with markers, popups, and layers.",
+      "plainLanguageWhy": "Many SDG domains are location-based. Food deserts, health clinics, housing, crisis resources — showing these on a map is often the difference between useful and transformative. No paid API key required.",
+      "commonUse": "Food resource maps, health clinic finders, crisis shelter locators, neighborhood equity maps, environmental impact visualizations, civic infrastructure tools.",
+      "relatedComponents": ["Mapbox GL JS", "Deck.gl", "Supabase"],
+      "skillRequired": "Beginner. Import the component, give it a center coordinate, and add markers. Uses free OpenStreetMap tiles by default. No account required.",
+      "notes": "Uses OpenStreetMap tiles by default — completely free. Swap in Mapbox or Stadia tiles for better-looking maps.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
+    },
+    {
+      "name": "Mapbox GL JS",
+      "category": "maps",
+      "description": "Beautiful vector maps. Custom styles, 3D terrain, generous free tier.",
+      "github_url": "https://github.com/mapbox/mapbox-gl-js",
+      "docs_url": "https://docs.mapbox.com/mapbox-gl-js",
+      "setup_time_minutes": 20,
+      "difficulty": "beginner",
+      "tags": ["maps", "vector-tiles", "3d", "custom-styles", "free-tier"],
+      "domains": ["Climate & Environment", "Civic Tech", "Food & Agriculture", "Crisis & Disaster Response", "Housing & Infrastructure", "Health & Wellbeing"],
+      "sdgs": ["Climate Action", "Sustainable Cities", "Zero Hunger", "Good Health", "No Poverty"],
+      "plainLanguageWhat": "A powerful mapping library for building beautiful, interactive maps. Supports custom map styles, 3D terrain, smooth zoom, and satellite imagery.",
+      "plainLanguageWhy": "When your map is central to your product and needs to look professional — Mapbox offers stunning visuals and a 50,000 free map loads/month tier.",
+      "commonUse": "Climate data overlays, food desert visualization, housing equity maps, emergency response routing, real-time crisis resource tracking.",
+      "relatedComponents": ["react-leaflet", "Deck.gl", "Supabase"],
+      "skillRequired": "Beginner. Create a free account, get an API token, and follow the quickstart. React wrapper (`react-map-gl`) makes integration easy.",
+      "notes": "50,000 free map loads/month — more than enough for a hackathon demo and early users.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
+    },
+    {
+      "name": "Deck.gl",
+      "category": "maps",
+      "description": "WebGL-powered large-scale data visualization on maps.",
+      "github_url": "https://github.com/visgl/deck.gl",
+      "docs_url": "https://deck.gl",
+      "setup_time_minutes": 30,
+      "difficulty": "intermediate",
+      "tags": ["maps", "data-viz", "webgl", "geospatial", "layers"],
+      "domains": ["Climate & Environment", "Civic Tech", "Economic Equity", "Food & Agriculture", "Transportation", "Energy & Utilities"],
+      "sdgs": ["Climate Action", "Sustainable Cities", "Zero Hunger", "Affordable Energy", "Reduced Inequalities"],
+      "plainLanguageWhat": "A library for visualizing huge amounts of geographic data on a map — think animated flow lines, heat maps of density, or millions of data points rendered smoothly.",
+      "plainLanguageWhy": "When your data story is geographic and the scale is too large for simple markers — poverty rates by block, food access by census tract, carbon emissions by region.",
+      "commonUse": "Environmental impact heat maps, food desert density analysis, economic inequality by geography, climate data over time, transportation network visualization.",
+      "relatedComponents": ["Mapbox GL JS", "react-leaflet", "Recharts"],
+      "skillRequired": "Intermediate. More complex than Leaflet or Mapbox alone. Best for teams with data visualization experience. Extraordinary results possible.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
+    },
+    {
+      "name": "Vercel",
+      "category": "deploy",
+      "description": "The standard for deploying Next.js. Git push to deploy, global CDN.",
+      "docs_url": "https://vercel.com/docs",
+      "setup_time_minutes": 5,
+      "difficulty": "beginner",
+      "tags": ["deployment", "cdn", "serverless", "preview-deploys", "free-tier"],
+      "domains": ["Health & Wellbeing", "Education & Access", "Civic Tech", "Economic Equity", "Crisis & Disaster Response", "Justice & Rights", "Food & Agriculture"],
+      "sdgs": ["Quality Education", "Good Health", "Decent Work", "Reduced Inequalities", "Peace & Justice"],
+      "plainLanguageWhat": "A hosting platform built by the creators of Next.js. Connect your GitHub repo and every push to main automatically deploys your app to the world.",
+      "plainLanguageWhy": "If you're building with Next.js, Vercel is the easiest way to get your app live and keep it live. Free tier covers most hackathon projects with no configuration.",
+      "commonUse": "Deploying any Next.js app. Every hackathon project built with this stack should deploy here first.",
+      "relatedComponents": ["Railway", "Fly.io"],
+      "skillRequired": "Very beginner-friendly. Connect GitHub, click deploy. Preview URLs for every PR. Automatic HTTPS. You're live in under 5 minutes.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
+    },
+    {
+      "name": "Railway",
+      "category": "deploy",
+      "description": "Deploy any app or database. Dockerfile support, generous free tier.",
+      "docs_url": "https://docs.railway.app",
+      "setup_time_minutes": 10,
+      "difficulty": "beginner",
+      "tags": ["deployment", "docker", "postgres", "redis", "free-tier"],
+      "domains": ["Health & Wellbeing", "Education & Access", "Civic Tech", "Economic Equity", "Crisis & Disaster Response"],
+      "sdgs": ["Good Health", "Quality Education", "Decent Work", "Reduced Inequalities"],
+      "plainLanguageWhat": "A deployment platform that can run almost anything — Node apps, Python backends, databases, workers — with a simple UI and generous free tier.",
+      "plainLanguageWhy": "When you need to deploy a backend that isn't a Next.js app, or want to run a database and a service together — Railway handles it without complex DevOps.",
+      "commonUse": "Deploying Python AI backends, running a Node websocket server, hosting a Postgres database alongside your app, any non-Vercel workload.",
+      "relatedComponents": ["Vercel", "Fly.io", "Supabase"],
+      "skillRequired": "Beginner. Connect GitHub or paste a Dockerfile. $5/month of free credits monthly — enough for a hackathon. Simpler than Fly.io for most use cases.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
+    },
+    {
+      "name": "Fly.io",
+      "category": "deploy",
+      "description": "Global app deployment. Run containers close to users, worldwide.",
+      "docs_url": "https://fly.io/docs",
+      "setup_time_minutes": 20,
+      "difficulty": "intermediate",
+      "tags": ["deployment", "docker", "global", "edge", "containers"],
+      "domains": ["Crisis & Disaster Response", "Health & Wellbeing", "Civic Tech", "Food & Agriculture"],
+      "sdgs": ["Good Health", "Zero Hunger", "Sustainable Cities", "Peace & Justice"],
+      "plainLanguageWhat": "A platform that deploys your app as Docker containers across global regions — so users in different countries get low-latency responses.",
+      "plainLanguageWhy": "When your app needs to run close to users globally — crisis tools serving different continents, health apps in low-bandwidth regions, worldwide civic platforms.",
+      "commonUse": "Apps that need to run in specific regions for data residency, global crisis tools, latency-sensitive health or food applications.",
+      "relatedComponents": ["Vercel", "Railway"],
+      "skillRequired": "Intermediate. Requires Docker knowledge and familiarity with CLI. More powerful than Railway but more configuration. Best for teams with a DevOps-comfortable member.",
+      "rating": {
+        "composite_score": null,
+        "rating_count": 0,
+        "dimensions": { "docs": null, "hackathon_fit": null, "setup_smoothness": null, "ecosystem": null }
+      }
     }
   ]
 }
