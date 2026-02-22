@@ -16,7 +16,7 @@ const PRIMARY_NAV = [
 // Secondary — lives in the "More" dropdown on desktop, shown in full on mobile
 const MORE_NAV = [
   { label: "Blog",        href: "/blog",        desc: "Guides and thinking for hackathon builders" },
-  { label: "Showcase",    href: "/showcase",    desc: "Winning projects and stacks from past events" },
+  { label: "Analyze",     href: "/analyze",     desc: "Paste a GitHub or DevPost URL — see their stack" },
   { label: "Organizers",  href: "/organizers",  desc: "Why faculty endorse Codefest at their events" },
   { label: "About",       href: "/about",       desc: "The belief system behind the platform" },
 ]

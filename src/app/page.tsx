@@ -300,17 +300,20 @@ export default function HomePage() {
               <h2 className="text-xl font-semibold tracking-tight">Winning Patterns</h2>
               <p className="text-sm text-zinc-500 mt-1">Real stacks from top hackathons. &ldquo;Shop the look.&rdquo;</p>
             </div>
-            <Link href="/showcase" className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors font-mono">
-              view showcase →
+            <Link href="/analyze" className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors font-mono">
+              analyze a stack →
             </Link>
           </div>
 
           {/* Horizontal scroll */}
           <div className="flex gap-4 overflow-x-auto pb-4 -mx-6 px-6" style={{ scrollSnapType: "x mandatory" }}>
             {PATTERNS.map((p) => (
-              <div
+              <a
                 key={p.n}
-                className="flex-none w-72 rounded-xl border border-white/[0.06] bg-surface-1 p-5"
+                href={p.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-none w-72 rounded-xl border border-white/[0.06] bg-surface-1 p-5 hover:border-white/[0.12] hover:bg-surface-2 transition-all block"
                 style={{ scrollSnapAlign: "start" }}
               >
                 {/* Place badge */}
@@ -341,7 +344,7 @@ export default function HomePage() {
                     </span>
                   ))}
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>
