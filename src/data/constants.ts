@@ -129,19 +129,33 @@ export const CATEGORY_META: Record<string, {
     pitfall: "Don't add payments as an afterthought to show 'monetization potential.' It takes time you don't have and adds complexity to your demo. Use Stripe's test mode — never real cards in a hackathon.",
     tip: "Stripe for everything if you need card payments. LemonSqueezy if you want a simpler API for digital products. Always use test mode. Always have a fallback demo flow if the payment integration breaks during the presentation.",
   },
-  api: {
-    label: "APIs & Integration", icon: "🔌", color: "#fb923c",
+  services: {
+    label: "Services & APIs", icon: "🔌", color: "#fb923c",
     tagline: "Your secret weapon. A great API integration beats building from scratch.",
-    why: "The best hackathon projects aren't built from scratch — they're assembled from the right pieces. A team that knows how to find and integrate the right API can build something in 12 hours that would take weeks to build without it. Mapping APIs (Mapbox, Google Maps) make civic and climate projects credible. Communication APIs (Twilio, Resend) make user-facing features real. Open government data APIs give you instant legitimacy.",
-    pitfall: "Don't integrate an API before you've verified it works in your language/framework. Don't rely on a single third-party API for your core demo — have a fallback if it's down.",
+    why: "The best hackathon projects aren't built from scratch — they're assembled from the right pieces. A team that knows how to find and integrate the right API can build something in 12 hours that would take weeks to build without it. Communication APIs (Twilio, Resend) make user-facing features real. Storage, search, and background job services let you skip building infrastructure entirely.",
+    pitfall: "Don't integrate a service before you've verified it works in your language/framework. Don't rely on a single third-party API for your core demo — have a fallback if it's down.",
     tip: "Check rate limits before you commit to an API during a hackathon. Many free tiers are generous but have low rate limits that will bite you during a live demo. Test with your actual expected data volume.",
   },
-  devtools: {
-    label: "Developer Tools", icon: "⚙️", color: "#f472b6",
+  tooling: {
+    label: "Developer Tooling", icon: "⚙️", color: "#f472b6",
     tagline: "Ship on day one. No excuses for 'it only works locally.'",
     why: "A project that's deployed beats a project on localhost every single time. Judges want to click a link. Vercel gives you continuous deployment from GitHub in one click — every push deploys automatically. TypeScript catches errors before runtime. Zod validates your data at the edges. These tools aren't glamorous but they're the difference between a demo that works and one that crashes.",
     pitfall: "Don't leave deployment for the last hour. Deploy an empty skeleton on day one. That way you're always shipping to a live URL and you catch deployment issues early instead of at 11pm before the deadline.",
     tip: "Vercel for Next.js, always. Railway or Render if you need a backend with persistent state. Bun or tsx for fast local TypeScript execution. Add TypeScript and Zod from the start — the time cost is minimal and the error-catching is worth it.",
+  },
+  maps: {
+    label: "Maps & Geospatial", icon: "🗺️", color: "#34d399",
+    tagline: "Put it on a map. Judges remember what they can see.",
+    why: "Geographic visualization turns abstract data into something anyone can understand immediately. Climate, food, civic, transit, health — almost every impact domain has a location component. A map makes your project's scope and impact legible in seconds. Winning civic and climate projects almost always have a map.",
+    pitfall: "Don't add a map just to have a map. If location isn't core to your problem, skip it. A bad map clutters the demo more than no map.",
+    tip: "react-leaflet for quick, open-source maps with no API key needed. Mapbox GL JS when you need custom styling or vector tiles. Deck.gl for large datasets or 3D visualization. Start with react-leaflet — you can swap later if you need more power.",
+  },
+  deploy: {
+    label: "Deployment", icon: "🚀", color: "#818cf8",
+    tagline: "Live URL beats localhost every time.",
+    why: "Judges want to tap a link, not watch you share your screen with a local server. Getting deployed in the first hour of the hackathon means every subsequent push goes live automatically. It also catches environment issues early — before they surface at 11pm the night before judging.",
+    pitfall: "Don't wait until the last hour to deploy. Deploy an empty shell on day one. The first deployment is always the hardest — get it out of the way early.",
+    tip: "Vercel is the default for Next.js — zero config, free tier, preview deployments per branch. Railway for anything that needs a persistent backend or worker process. Fly.io if you need containers or custom runtimes.",
   },
 }
 
