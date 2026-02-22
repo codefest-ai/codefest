@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
+import Script from "next/script"
 import { getPost, getAllPosts, formatPostDate } from "@/lib/blog"
 import type { Metadata } from "next"
 
@@ -112,8 +113,23 @@ export default function BlogPostPage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: post.html }}
         />
 
+        {/* EthicalAds — developer-relevant, privacy-respecting, category-filtered */}
+        {/* Replace PUBLISHER_ID once approved at ethicalads.io */}
+        {/* Allowlist: developer tools, cloud, education. Financial products excluded. */}
+        <div style={{ margin: "3rem 0" }}>
+          <div
+            data-ea-publisher="PUBLISHER_ID"
+            data-ea-type="text"
+            data-ea-keywords="developer|cloud|devtools|education"
+          />
+          <Script
+            src="https://media.ethicalads.io/media/client/ethicalads.min.js"
+            strategy="afterInteractive"
+          />
+        </div>
+
         {/* Footer */}
-        <div style={{ marginTop: "4rem", paddingTop: "2rem", borderTop: "1px solid var(--sp-border)" }}>
+        <div style={{ marginTop: "2rem", paddingTop: "2rem", borderTop: "1px solid var(--sp-border)" }}>
           <div style={{ display: "flex", gap: "12px" }}>
             <Link
               href="/blog"
