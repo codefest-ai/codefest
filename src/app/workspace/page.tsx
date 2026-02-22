@@ -1,29 +1,25 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { useAuth } from "@/components/AuthProvider"
-import { ThemeToggle } from "@/components/ThemeToggle"
-import { Zap, X, ArrowRight, Clock, ExternalLink, BookOpen } from "lucide-react"
+import { Zap, Clock, ExternalLink, BookOpen, ArrowRight, RotateCcw } from "lucide-react"
 
-// ── Context pack generator ─────────────────────────────────────────────────
-// Generates a personalized .md file the user can load into any AI tool
-// (Claude, ChatGPT, Cursor system prompt, etc.) to get hackathon-aware help.
-
+// ── Context pack generator ────────────────────────────────────────────────
 function generateContextMd(opts: {
+  problem: string
   domainLabel: string
   domainEmoji: string
-  problem: string
   actionLabel: string
   actionDesc: string
   stack: Array<{ name: string; href: string; setup: number; category: string }>
   totalSetup: number
 }): string {
-  const { domainLabel, domainEmoji, problem, actionLabel, actionDesc, stack, totalSetup } = opts
+  const { problem, domainLabel, domainEmoji, actionLabel, actionDesc, stack, totalSetup } = opts
   const stackList = stack
     .sort((a, b) => a.setup - b.setup)
-    .map((s, i) => `${i + 1}. **${s.name}** (${s.category}, ~${s.setup || "?"}m setup) — ${s.href}`)
+    .map((s, i) => `${i + 1}. **${s.name}** (${s.category}, ~${s.setup}m setup) — ${s.href}`)
     .join("\n")
 
   return `# Hackathon Context Pack
@@ -69,16 +65,16 @@ Then use prompts like:
 - *"I'm 4 hours in and [X] isn't working. What should I cut vs. fix?"*
 - *"Write the Supabase schema for [my feature] based on this problem statement"*
 
-Your AI now knows your domain, your problem, and your exact stack. Ask specific questions and you'll get specific answers.
+Your AI now knows your domain, your problem, and your exact stack.
 
 ---
 
 ## Resources
 
 - Full component library: https://codefest.ai/library
-- Auth patterns guide: https://codefest.ai/blog/auth-patterns-for-hackathons
 - Stack selection guide: https://codefest.ai/blog/the-default-stack
 - Demo scoping guide: https://codefest.ai/blog/build-for-the-demo
+- Pre-hackathon checklist: https://codefest.ai/guide
 
 ---
 
@@ -86,107 +82,59 @@ Your AI now knows your domain, your problem, and your exact stack. Ask specific 
 `
 }
 
-// ── Types ──────────────────────────────────────────────────────────────────
-
-type Step = "domain" | "problem" | "action" | "stack" | "go"
-
-const STEP_ORDER: Step[] = ["domain", "problem", "action", "stack", "go"]
-
-// ── Domains ────────────────────────────────────────────────────────────────
+// ── Data ─────────────────────────────────────────────────────────────────
 
 const DOMAINS = [
-  { id: "climate",    emoji: "🌱", label: "Climate & Environment" },
-  { id: "health",     emoji: "🏥", label: "Health & Wellness" },
-  { id: "education",  emoji: "📚", label: "Education & Learning" },
-  { id: "food",       emoji: "🍎", label: "Food & Agriculture" },
-  { id: "finance",    emoji: "💰", label: "Finance & Economic Access" },
-  { id: "civic",      emoji: "🏛️", label: "Civic & Community" },
-  { id: "safety",     emoji: "🛡️", label: "Safety & Emergency" },
-  { id: "transport",  emoji: "🚌", label: "Transport & Mobility" },
-  { id: "other",      emoji: "✨", label: "Something else" },
+  { id: "climate",   emoji: "🌱", label: "Climate & Environment" },
+  { id: "health",    emoji: "🏥", label: "Health & Wellness" },
+  { id: "education", emoji: "📚", label: "Education & Learning" },
+  { id: "food",      emoji: "🍎", label: "Food & Agriculture" },
+  { id: "finance",   emoji: "💰", label: "Finance & Access" },
+  { id: "civic",     emoji: "🏛️", label: "Civic & Community" },
+  { id: "safety",    emoji: "🛡️", label: "Safety & Emergency" },
+  { id: "transport", emoji: "🚌", label: "Transport & Mobility" },
+  { id: "other",     emoji: "✨", label: "Something else" },
 ]
-
-// ── Problem Prompts ────────────────────────────────────────────────────────
-
-const PROBLEM_PROMPTS = [
-  "Who is stuck and what are they stuck doing?",
-  "What do people do today that wastes time or money?",
-  "What information does someone need but can't easily find?",
-]
-
-// ── Core Actions ───────────────────────────────────────────────────────────
 
 const CORE_ACTIONS = [
-  {
-    id: "map",
-    icon: "🗺️",
-    label: "Show things on a map",
-    desc: "Location data, routes, proximity, geographic patterns",
-  },
-  {
-    id: "form",
-    icon: "📝",
-    label: "Collect info from users",
-    desc: "Forms, surveys, multi-step intake, validation",
-  },
-  {
-    id: "ai",
-    icon: "🤖",
-    label: "Answer questions with AI",
-    desc: "Chat, summarization, classification, generation",
-  },
-  {
-    id: "data",
-    icon: "📊",
-    label: "Visualize data and trends",
-    desc: "Charts, dashboards, comparisons, time series",
-  },
-  {
-    id: "realtime",
-    icon: "💬",
-    label: "Connect people in real-time",
-    desc: "Chat, collaboration, live updates, shared state",
-  },
-  {
-    id: "alerts",
-    icon: "🔔",
-    label: "Send alerts and notifications",
-    desc: "Email, SMS, push notifications, background jobs",
-  },
+  { id: "map",      icon: "🗺️", label: "Show things on a map",       desc: "Location, routes, proximity, geographic patterns" },
+  { id: "form",     icon: "📝", label: "Collect info from users",     desc: "Forms, surveys, multi-step intake, validation" },
+  { id: "ai",       icon: "🤖", label: "Answer questions with AI",    desc: "Chat, summarization, classification, generation" },
+  { id: "data",     icon: "📊", label: "Visualize data and trends",   desc: "Charts, dashboards, comparisons, time series" },
+  { id: "realtime", icon: "💬", label: "Connect people in real-time", desc: "Chat, collaboration, live updates, shared state" },
+  { id: "alerts",   icon: "🔔", label: "Send alerts & notifications", desc: "Email, SMS, push notifications, background jobs" },
 ]
-
-// ── Stack Suggestions ──────────────────────────────────────────────────────
 
 type StackItem = { name: string; href: string; setup: number; category: string }
 
 const STACK_SUGGESTIONS: Record<string, StackItem[]> = {
   map: [
-    { name: "Next.js",       href: "https://nextjs.org/docs",                        setup: 5,  category: "framework" },
-    { name: "Tailwind CSS",  href: "https://tailwindcss.com/docs",                   setup: 5,  category: "ui" },
-    { name: "Supabase",      href: "https://supabase.com/docs",                      setup: 10, category: "database" },
-    { name: "react-leaflet", href: "https://react-leaflet.js.org/docs/start-intro",  setup: 15, category: "maps" },
+    { name: "Next.js",       href: "https://nextjs.org/docs",                       setup: 5,  category: "framework" },
+    { name: "Tailwind CSS",  href: "https://tailwindcss.com/docs",                  setup: 5,  category: "ui" },
+    { name: "Supabase",      href: "https://supabase.com/docs",                     setup: 10, category: "database" },
+    { name: "react-leaflet", href: "https://react-leaflet.js.org/docs/start-intro", setup: 15, category: "maps" },
   ],
   form: [
-    { name: "Next.js",          href: "https://nextjs.org/docs",               setup: 5,  category: "framework" },
-    { name: "Tailwind CSS",     href: "https://tailwindcss.com/docs",          setup: 5,  category: "ui" },
-    { name: "shadcn/ui",        href: "https://ui.shadcn.com",                 setup: 10, category: "ui" },
-    { name: "Supabase",         href: "https://supabase.com/docs",             setup: 10, category: "database" },
-    { name: "React Hook Form",  href: "https://react-hook-form.com",           setup: 10, category: "forms" },
-    { name: "Zod",              href: "https://zod.dev",                       setup: 5,  category: "validation" },
+    { name: "Next.js",         href: "https://nextjs.org/docs",      setup: 5,  category: "framework" },
+    { name: "Tailwind CSS",    href: "https://tailwindcss.com/docs", setup: 5,  category: "ui" },
+    { name: "shadcn/ui",       href: "https://ui.shadcn.com",        setup: 10, category: "ui" },
+    { name: "Supabase",        href: "https://supabase.com/docs",    setup: 10, category: "database" },
+    { name: "React Hook Form", href: "https://react-hook-form.com",  setup: 10, category: "forms" },
+    { name: "Zod",             href: "https://zod.dev",              setup: 5,  category: "validation" },
   ],
   ai: [
-    { name: "Next.js",        href: "https://nextjs.org/docs",                  setup: 5,  category: "framework" },
-    { name: "Tailwind CSS",   href: "https://tailwindcss.com/docs",             setup: 5,  category: "ui" },
-    { name: "Supabase",       href: "https://supabase.com/docs",                setup: 10, category: "database" },
-    { name: "Vercel AI SDK",  href: "https://sdk.vercel.ai/docs",               setup: 15, category: "ai" },
-    { name: "Groq",           href: "https://console.groq.com/docs/openai",     setup: 10, category: "ai" },
+    { name: "Next.js",       href: "https://nextjs.org/docs",              setup: 5,  category: "framework" },
+    { name: "Tailwind CSS",  href: "https://tailwindcss.com/docs",         setup: 5,  category: "ui" },
+    { name: "Supabase",      href: "https://supabase.com/docs",            setup: 10, category: "database" },
+    { name: "Vercel AI SDK", href: "https://sdk.vercel.ai/docs",           setup: 15, category: "ai" },
+    { name: "Groq",          href: "https://console.groq.com/docs/openai", setup: 10, category: "ai" },
   ],
   data: [
-    { name: "Next.js",        href: "https://nextjs.org/docs",                            setup: 5,  category: "framework" },
-    { name: "Tailwind CSS",   href: "https://tailwindcss.com/docs",                       setup: 5,  category: "ui" },
-    { name: "shadcn/ui",      href: "https://ui.shadcn.com",                              setup: 10, category: "ui" },
-    { name: "Supabase",       href: "https://supabase.com/docs",                          setup: 10, category: "database" },
-    { name: "Recharts",       href: "https://recharts.org/en-US/api",                     setup: 10, category: "charts" },
+    { name: "Next.js",        href: "https://nextjs.org/docs",                             setup: 5,  category: "framework" },
+    { name: "Tailwind CSS",   href: "https://tailwindcss.com/docs",                        setup: 5,  category: "ui" },
+    { name: "shadcn/ui",      href: "https://ui.shadcn.com",                               setup: 10, category: "ui" },
+    { name: "Supabase",       href: "https://supabase.com/docs",                           setup: 10, category: "database" },
+    { name: "Recharts",       href: "https://recharts.org/en-US/api",                      setup: 10, category: "charts" },
     { name: "Tanstack Table", href: "https://tanstack.com/table/latest/docs/introduction", setup: 15, category: "tables" },
   ],
   realtime: [
@@ -206,66 +154,135 @@ const STACK_SUGGESTIONS: Record<string, StackItem[]> = {
   ],
 }
 
-// ── Component ──────────────────────────────────────────────────────────────
+// ── Sub-components ────────────────────────────────────────────────────────
+
+// Connector line between layers
+function Connector() {
+  return (
+    <div className="flex justify-start pl-4 my-1">
+      <div className="w-px h-6 bg-white/[0.06]" />
+    </div>
+  )
+}
+
+// Completed layer — compact summary, changeable
+function DoneLayer({ label, onReset }: { label: string; onReset: () => void }) {
+  return (
+    <div className="flex items-center justify-between rounded-xl border border-white/[0.04] bg-surface-0 px-4 py-3">
+      <span className="text-sm text-zinc-500">{label}</span>
+      <button
+        onClick={onReset}
+        className="text-xs text-zinc-700 hover:text-zinc-400 transition-colors font-mono"
+      >
+        change
+      </button>
+    </div>
+  )
+}
+
+// Layer wrapper — handles the appear animation
+function Layer({ children, id }: { children: React.ReactNode; id?: string }) {
+  return (
+    <div
+      id={id}
+      className="animate-in fade-in slide-in-from-bottom-3 duration-200"
+    >
+      {children}
+    </div>
+  )
+}
+
+// ── Page ─────────────────────────────────────────────────────────────────
 
 export default function WorkspacePage() {
   const { user } = useAuth()
   const searchParams = useSearchParams()
   const pinnedComponent = searchParams.get("add") ?? null
-
-  // Pre-select domain from ?domain= param (e.g. from homepage card click)
   const domainParam = searchParams.get("domain") ?? null
-  const preselectedDomain = domainParam && DOMAINS.find(d => d.id === domainParam) ? domainParam : null
 
-  const [activeStep, setActiveStep] = useState<Step>(preselectedDomain ? "problem" : "domain")
-  const [domain, setDomain]   = useState<string | null>(preselectedDomain)
-  const [problem, setProblem] = useState<string>("")
-  const [action, setAction]   = useState<string | null>(null)
-  const [stack, setStack]     = useState<string[]>([])
+  // Cascade state — each value being set reveals the next layer
+  const [problem,  setProblem]  = useState("")
+  const [domain,   setDomain]   = useState<string | null>(
+    domainParam && DOMAINS.find(d => d.id === domainParam) ? domainParam : null
+  )
+  const [action,   setAction]   = useState<string | null>(null)
+  const [stack,    setStack]    = useState<string[]>([])
+  const [launched, setLaunched] = useState(false)
 
-  const completedSteps = STEP_ORDER.slice(0, STEP_ORDER.indexOf(activeStep))
+  // Scroll targets
+  const domainRef   = useRef<HTMLDivElement>(null)
+  const actionRef   = useRef<HTMLDivElement>(null)
+  const stackRef    = useRef<HTMLDivElement>(null)
+  const goRef       = useRef<HTMLDivElement>(null)
 
-  // Furl back to a step and reset everything downstream
-  function furlBackTo(step: Step) {
-    const idx = STEP_ORDER.indexOf(step)
-    setActiveStep(step)
-    if (idx <= 0) setDomain(null)
-    if (idx <= 1) setProblem("")
-    if (idx <= 2) { setAction(null); setStack([]) }
-    if (idx <= 3) setStack([])
+  // Layer visibility — each unlocks when the one above it is complete
+  const showDomain   = problem.trim().length > 0
+  const showAction   = showDomain  && domain  !== null
+  const showStack    = showAction  && action  !== null
+  const showGo       = showStack   && launched
+
+  // Scroll to new layer when it appears
+  function scrollTo(ref: React.RefObject<HTMLDivElement>) {
+    setTimeout(() => {
+      ref.current?.scrollIntoView({ behavior: "smooth", block: "nearest" })
+    }, 80)
   }
 
-  function selectDomain(id: string) {
+  useEffect(() => { if (showDomain && domain === null) scrollTo(domainRef) },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [showDomain])
+  useEffect(() => { if (showAction && action === null) scrollTo(actionRef) },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [showAction])
+  useEffect(() => { if (showStack  && !launched)       scrollTo(stackRef)  },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [showStack])
+  useEffect(() => { if (showGo)                        scrollTo(goRef)     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [showGo])
+
+  // Derived
+  const selectedDomain = DOMAINS.find(d => d.id === domain)
+  const selectedAction = CORE_ACTIONS.find(a => a.id === action)
+  const stackItems     = action ? (STACK_SUGGESTIONS[action] || []) : []
+  const selectedItems  = stackItems.filter(s => stack.includes(s.name))
+  const pinnedItem: StackItem[] = pinnedComponent && !selectedItems.find(s => s.name === pinnedComponent)
+    ? [{ name: pinnedComponent, href: `/library/${pinnedComponent.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`, setup: 0, category: "from library" }]
+    : []
+  const goItems    = [...selectedItems, ...pinnedItem]
+  const totalSetup = selectedItems.reduce((sum, s) => sum + s.setup, 0)
+
+  // Resetters — clear downstream state
+  function resetFrom(layer: "problem" | "domain" | "action" | "stack") {
+    if (layer === "problem") { setProblem(""); setDomain(null); setAction(null); setStack([]); setLaunched(false) }
+    if (layer === "domain")  { setDomain(null); setAction(null); setStack([]); setLaunched(false) }
+    if (layer === "action")  { setAction(null); setStack([]); setLaunched(false) }
+    if (layer === "stack")   { setStack([]); setLaunched(false) }
+  }
+
+  function handleSelectDomain(id: string) {
     setDomain(id)
-    setProblem("")
     setAction(null)
     setStack([])
-    setActiveStep("problem")
+    setLaunched(false)
   }
 
-  function submitProblem() {
-    if (!problem.trim()) return
-    setAction(null)
-    setStack([])
-    setActiveStep("action")
-  }
-
-  function selectAction(id: string) {
+  function handleSelectAction(id: string) {
     setAction(id)
-    setStack((STACK_SUGGESTIONS[id] || []).map((s) => s.name))
-    setActiveStep("stack")
+    setStack((STACK_SUGGESTIONS[id] || []).map(s => s.name))
+    setLaunched(false)
   }
 
-  function goToGo() {
-    setActiveStep("go")
+  function handleLaunch() {
+    setLaunched(true)
   }
 
   function downloadContextPack() {
     if (!selectedDomain || !selectedAction) return
     const md = generateContextMd({
+      problem,
       domainLabel:  selectedDomain.label,
       domainEmoji:  selectedDomain.emoji,
-      problem,
       actionLabel:  selectedAction.label,
       actionDesc:   selectedAction.desc,
       stack:        goItems,
@@ -280,369 +297,333 @@ export default function WorkspacePage() {
     URL.revokeObjectURL(url)
   }
 
-  const selectedDomain = DOMAINS.find((d) => d.id === domain)
-  const selectedAction = CORE_ACTIONS.find((a) => a.id === action)
-  const stackItems     = action ? (STACK_SUGGESTIONS[action] || []) : []
-  const selectedItems  = stackItems.filter((s) => stack.includes(s.name))
-  // Append pinned component from library if not already in stack
-  const pinnedItem = pinnedComponent && !selectedItems.find(s => s.name === pinnedComponent)
-    ? [{ name: pinnedComponent, href: `/library/${pinnedComponent.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`, setup: 0, category: "from library" }]
-    : []
-  const goItems    = [...selectedItems, ...pinnedItem]
-  const totalSetup = selectedItems.reduce((sum, s) => sum + s.setup, 0)
-
-  // Chip label for each completed step
-  function chipLabel(step: Step): string {
-    if (step === "domain")  return selectedDomain ? `${selectedDomain.emoji} ${selectedDomain.label}` : "Domain"
-    if (step === "problem") return problem.length > 44 ? problem.slice(0, 44) + "…" : problem
-    if (step === "action")  return selectedAction ? `${selectedAction.icon} ${selectedAction.label}` : "Action"
-    if (step === "stack")   return `${stack.length} component${stack.length !== 1 ? "s" : ""}`
-    return step
-  }
-
   return (
     <div className="min-h-screen bg-surface-0">
 
-      {/* ── Header — clean, no theater ──────────────────────────────────── */}
+      {/* ── Header ──────────────────────────────────────────────────────── */}
       <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.06] bg-surface-0/90 backdrop-blur-xl">
-        <div className="mx-auto flex h-14 max-w-3xl items-center justify-between px-6">
+        <div className="mx-auto flex h-14 max-w-2xl items-center justify-between px-6">
           <Link href="/" className="flex items-center gap-2.5 group">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-500 transition-shadow group-hover:shadow-lg group-hover:shadow-brand-500/25">
               <Zap className="h-4 w-4 text-black" />
             </div>
-            <span className="text-lg font-semibold tracking-tight">
+            <span className="text-lg font-semibold tracking-tight text-white">
               codefest<span className="text-brand-400">.ai</span>
             </span>
           </Link>
 
-          <span className="text-sm text-zinc-600">workspace</span>
-
-          <div className="flex items-center gap-3">
-            <ThemeToggle />
-            {user ? (
-              <span className="text-sm text-zinc-500 truncate max-w-[120px]">
-                {user.user_metadata?.full_name || user.email?.split("@")[0]}
-              </span>
-            ) : (
-              <Link
-                href="/login"
-                className="text-sm text-zinc-400 hover:text-white transition-colors"
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">
+              workspace
+            </span>
+            {launched && (
+              <button
+                onClick={() => resetFrom("problem")}
+                className="flex items-center gap-1.5 text-xs text-zinc-600 hover:text-zinc-300 transition-colors"
               >
-                Sign in
-              </Link>
+                <RotateCcw className="h-3 w-3" />
+                restart
+              </button>
             )}
           </div>
         </div>
       </header>
 
-      {/* ── Main ──────────────────────────────────────────────────────────── */}
-      <main className="mx-auto max-w-2xl px-6 pt-28 pb-24">
+      {/* ── Cascade ─────────────────────────────────────────────────────── */}
+      <main className="mx-auto max-w-2xl px-6 pt-28 pb-32 space-y-0">
 
-        {/* Pinned component from library */}
+        {/* Pinned component banner */}
         {pinnedComponent && (
           <div className="flex items-center gap-3 rounded-xl border border-brand-500/25 bg-brand-500/5 px-4 py-3 mb-6">
             <BookOpen className="h-4 w-4 text-brand-400 shrink-0" />
-            <div className="flex-1 min-w-0">
-              <span className="text-xs text-zinc-500">From the library — </span>
-              <span className="text-xs font-medium text-brand-400">{pinnedComponent}</span>
-              <span className="text-xs text-zinc-500"> will be added to your stack</span>
-            </div>
+            <span className="text-xs text-zinc-500">
+              <span className="text-brand-400 font-medium">{pinnedComponent}</span>
+              {" "}will be added to your stack
+            </span>
           </div>
         )}
 
-        {/* Breadcrumb chips for completed steps */}
-        {completedSteps.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-10">
-            {completedSteps.map((step) => (
-              <button
-                key={step}
-                onClick={() => furlBackTo(step)}
-                className="flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-surface-1 px-3 py-1 text-xs text-zinc-400 hover:text-white hover:border-white/20 transition-all"
-              >
-                {chipLabel(step)}
-                <X className="h-3 w-3 opacity-40" />
-              </button>
-            ))}
-          </div>
-        )}
-
-        {/* ── Step 1: Domain ─────────────────────────────────────────────── */}
-        {activeStep === "domain" && (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
-            <h1 className="text-2xl font-semibold text-white mb-2">
-              What problem space are you in?
-            </h1>
-            <p className="text-zinc-500 text-sm mb-8">
-              Pick the domain closest to what you&apos;re building.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {DOMAINS.map((d) => (
-                <button
-                  key={d.id}
-                  onClick={() => selectDomain(d.id)}
-                  className="flex items-center gap-3 rounded-xl border border-white/[0.06] bg-surface-1 px-5 py-4 text-left hover:border-brand-500/30 hover:bg-surface-2 transition-all group"
-                >
-                  <span className="text-2xl">{d.emoji}</span>
-                  <span className="text-sm text-zinc-300 group-hover:text-white transition-colors">
-                    {d.label}
-                  </span>
-                </button>
-              ))}
+        {/* ── Layer 0: Problem ──────────────────────────────────────────── */}
+        {(domain !== null || !showDomain) ? (
+          <DoneLayer
+            label={problem.length > 60 ? problem.slice(0, 60) + "…" : problem}
+            onReset={() => resetFrom("problem")}
+          />
+        ) : (
+          <Layer id="layer-problem">
+            <div className="mb-2">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">
+                what are you solving?
+              </span>
             </div>
-          </div>
-        )}
-
-        {/* ── Step 2: Problem ────────────────────────────────────────────── */}
-        {activeStep === "problem" && (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
-            <h1 className="text-2xl font-semibold text-white mb-2">
-              What&apos;s broken?
-            </h1>
-            <p className="text-zinc-500 text-sm mb-5">
-              One sentence. You can refine it later.
-            </p>
-
-            {/* Prompt starters */}
-            <div className="flex flex-wrap gap-2 mb-5">
-              {PROBLEM_PROMPTS.map((prompt) => (
-                <button
-                  key={prompt}
-                  onClick={() => setProblem(prompt + " ")}
-                  className="rounded-full border border-white/[0.06] bg-surface-1 px-3 py-1.5 text-xs text-zinc-500 hover:text-zinc-300 hover:border-white/10 transition-all"
-                >
-                  {prompt}
-                </button>
-              ))}
-            </div>
-
             <textarea
               value={problem}
-              onChange={(e) => setProblem(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) submitProblem()
+              onChange={e => setProblem(e.target.value)}
+              onKeyDown={e => {
+                if (e.key === "Enter" && (e.metaKey || e.ctrlKey) && problem.trim()) {
+                  domainRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" })
+                }
               }}
-              placeholder="e.g. Volunteers can't find local food banks that have capacity right now"
-              className="w-full rounded-xl border border-white/[0.06] bg-surface-1 px-5 py-4 text-sm text-zinc-200 placeholder-zinc-600 resize-none focus:outline-none focus:border-brand-500/50 transition-colors"
-              rows={4}
+              placeholder="Who is stuck, and what are they stuck doing?"
+              className="w-full rounded-xl border border-white/[0.08] bg-surface-1 px-5 py-4 text-sm text-zinc-200 placeholder-zinc-700 resize-none focus:outline-none focus:border-brand-500/40 transition-colors leading-relaxed"
+              rows={3}
               autoFocus
             />
-            <div className="flex items-center justify-between mt-4">
-              <span className="text-xs text-zinc-700">⌘ + Enter to continue</span>
-              <button
-                onClick={submitProblem}
-                disabled={!problem.trim()}
-                className="flex items-center gap-2 rounded-xl bg-brand-500 px-6 py-3 text-sm font-medium text-black hover:bg-brand-400 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-              >
-                Continue <ArrowRight className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* ── Step 3: Core Action ────────────────────────────────────────── */}
-        {activeStep === "action" && (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
-            <h1 className="text-2xl font-semibold text-white mb-2">
-              What does your app do?
-            </h1>
-            <p className="text-zinc-500 text-sm mb-8">
-              Pick the primary thing a user does in your app.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {CORE_ACTIONS.map((a) => (
-                <button
-                  key={a.id}
-                  onClick={() => selectAction(a.id)}
-                  className="flex items-start gap-3 rounded-xl border border-white/[0.06] bg-surface-1 px-5 py-4 text-left hover:border-brand-500/30 hover:bg-surface-2 transition-all group"
-                >
-                  <span className="text-2xl mt-0.5 shrink-0">{a.icon}</span>
-                  <div>
-                    <p className="text-sm font-medium text-zinc-200 group-hover:text-white transition-colors">
-                      {a.label}
-                    </p>
-                    <p className="text-xs text-zinc-600 mt-0.5 leading-relaxed">{a.desc}</p>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* ── Step 4: Stack ──────────────────────────────────────────────── */}
-        {activeStep === "stack" && action && (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
-            <h1 className="text-2xl font-semibold text-white mb-2">
-              Your suggested stack
-            </h1>
-            <p className="text-zinc-500 text-sm mb-8">
-              Deselect anything you already have or don&apos;t need.
-            </p>
-
-            <div className="space-y-2 mb-6">
-              {stackItems.map((item) => {
-                const selected = stack.includes(item.name)
-                return (
-                  <button
-                    key={item.name}
-                    onClick={() =>
-                      setStack(
-                        selected
-                          ? stack.filter((s) => s !== item.name)
-                          : [...stack, item.name]
-                      )
-                    }
-                    className={`w-full flex items-center justify-between rounded-xl border px-5 py-4 text-left transition-all ${
-                      selected
-                        ? "border-brand-500/40 bg-brand-500/5"
-                        : "border-white/[0.04] bg-surface-1/50 opacity-40"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      {/* Checkbox */}
-                      <div
-                        className={`h-4 w-4 rounded border-2 flex items-center justify-center shrink-0 transition-colors ${
-                          selected ? "border-brand-500 bg-brand-500" : "border-zinc-700"
-                        }`}
-                      >
-                        {selected && (
-                          <svg className="h-2.5 w-2.5 text-black" viewBox="0 0 10 10" fill="none">
-                            <path d="M2 5l2.5 2.5L8 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        )}
-                      </div>
-                      <div>
-                        <span className="text-sm text-zinc-200">{item.name}</span>
-                        <span className="ml-2 text-xs text-zinc-600">{item.category}</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-xs text-zinc-600 shrink-0">
-                      <Clock className="h-3 w-3" />
-                      ~{item.setup}m
-                    </div>
-                  </button>
-                )
-              })}
-            </div>
-
-            {/* Total estimate */}
-            {selectedItems.length > 0 && (
-              <div className="flex items-center justify-between rounded-xl border border-white/[0.06] bg-surface-1 px-5 py-3 mb-6">
-                <span className="text-sm text-zinc-500">Estimated setup time</span>
-                <span className="text-sm font-medium text-zinc-200">~{totalSetup} min</span>
-              </div>
+            {problem.trim().length > 0 && (
+              <p className="mt-2 text-[11px] text-zinc-700 font-mono">
+                pick a domain below ↓
+              </p>
             )}
-
-            <button
-              onClick={goToGo}
-              disabled={stack.length === 0}
-              className="flex items-center gap-2 rounded-xl bg-brand-500 px-6 py-3 text-sm font-medium text-black hover:bg-brand-400 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-            >
-              Lock in stack <ArrowRight className="h-4 w-4" />
-            </button>
-          </div>
+          </Layer>
         )}
 
-        {/* ── Step 5: GO ─────────────────────────────────────────────────── */}
-        {activeStep === "go" && (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
-            <span className="inline-block rounded-full bg-brand-500/10 px-3 py-1 text-xs font-medium text-brand-400 mb-5">
-              You&apos;re ready to build
-            </span>
-            <h1 className="text-2xl font-semibold text-white mb-2">Here&apos;s your plan</h1>
-            <p className="text-zinc-500 text-sm mb-8">
-              Set these up in order — each one unblocks the next.
-            </p>
-
-            {/* Problem recap */}
-            <div className="rounded-xl border border-white/[0.06] bg-surface-1 px-5 py-4 mb-6">
-              <p className="text-[11px] uppercase tracking-wider text-zinc-600 mb-1.5">Problem you&apos;re solving</p>
-              <p className="text-sm text-zinc-300 leading-relaxed">{problem}</p>
-            </div>
-
-            {/* Stack sorted by setup time, with doc links */}
-            <div className="space-y-2 mb-6">
-              {goItems
-                .slice()
-                .sort((a, b) => a.setup - b.setup)
-                .map((item, i) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between rounded-xl border border-white/[0.06] bg-surface-1 px-5 py-4 hover:border-white/10 hover:bg-surface-2 transition-all group"
-                  >
-                    <div className="flex items-center gap-4">
-                      <span className="text-xs text-zinc-700 font-mono w-4 shrink-0">{i + 1}</span>
-                      <div>
-                        <p className="text-sm text-zinc-200 group-hover:text-white transition-colors">
-                          {item.name}
-                        </p>
-                        <p className="text-xs text-zinc-600">{item.category}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3 shrink-0">
-                      <span className="text-xs text-zinc-600 flex items-center gap-1">
-                        <Clock className="h-3 w-3" />
-                        ~{item.setup}m
-                      </span>
-                      <ExternalLink className="h-3.5 w-3.5 text-zinc-700 group-hover:text-zinc-400 transition-colors" />
-                    </div>
-                  </a>
-                ))}
-            </div>
-
-            {/* Total */}
-            <div className="flex items-center justify-between rounded-xl border border-brand-500/20 bg-brand-500/5 px-5 py-4 mb-10">
-              <span className="text-sm text-zinc-400">Total estimated setup</span>
-              <span className="text-sm font-semibold text-brand-400">~{totalSetup} min</span>
-            </div>
-
-            {/* Export context pack */}
-            <div className="rounded-xl border border-white/[0.06] bg-surface-1/60 px-5 py-4 mb-6">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-sm font-medium text-zinc-200 mb-1">Export AI context pack</p>
-                  <p className="text-xs text-zinc-500 leading-relaxed">
-                    A <code className="text-zinc-400 bg-surface-3 px-1 py-0.5 rounded text-[11px]">.md</code> file
-                    pre-loaded with your problem, stack, and constraints.
-                    Drop it into Claude, Cursor, or ChatGPT — your AI instantly knows your setup.
-                  </p>
-                </div>
-                <button
-                  onClick={downloadContextPack}
-                  className="shrink-0 rounded-xl bg-brand-500 px-4 py-2.5 text-sm font-semibold text-black hover:bg-brand-400 transition-all flex items-center gap-2 whitespace-nowrap"
-                >
-                  <BookOpen className="h-3.5 w-3.5" />
-                  Export .md
-                </button>
-              </div>
-            </div>
-
-            {/* Actions */}
-            <div className="flex flex-wrap gap-3">
-              {!user && (
-                <Link
-                  href="/login"
-                  className="rounded-xl bg-brand-500 px-5 py-3 text-sm font-medium text-black hover:bg-brand-400 transition-all"
-                >
-                  Save this plan
-                </Link>
+        {/* ── Layer 1: Domain ───────────────────────────────────────────── */}
+        {showDomain && (
+          <>
+            <Connector />
+            <div ref={domainRef}>
+              {(action !== null) ? (
+                <DoneLayer
+                  label={selectedDomain ? `${selectedDomain.emoji} ${selectedDomain.label}` : "Domain"}
+                  onReset={() => resetFrom("domain")}
+                />
+              ) : (
+                <Layer id="layer-domain">
+                  <div className="mb-3">
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">
+                      domain
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    {DOMAINS.map(d => (
+                      <button
+                        key={d.id}
+                        onClick={() => handleSelectDomain(d.id)}
+                        className={`flex items-center gap-2.5 rounded-xl border px-4 py-3 text-left transition-all group
+                          ${domain === d.id
+                            ? "border-brand-500/40 bg-brand-500/8 text-white"
+                            : "border-white/[0.06] bg-surface-1 text-zinc-400 hover:border-brand-500/25 hover:bg-surface-2 hover:text-zinc-200"
+                          }`}
+                      >
+                        <span className="text-lg shrink-0">{d.emoji}</span>
+                        <span className="text-xs font-medium leading-snug">{d.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </Layer>
               )}
-              <Link
-                href="/library"
-                className="rounded-xl border border-white/10 px-5 py-3 text-sm text-zinc-300 hover:text-white hover:border-white/20 transition-all"
-              >
-                Browse component library
-              </Link>
-              <button
-                onClick={() => furlBackTo("domain")}
-                className="rounded-xl border border-white/[0.06] px-5 py-3 text-sm text-zinc-500 hover:text-zinc-300 transition-all"
-              >
-                Start over
-              </button>
             </div>
-          </div>
+          </>
+        )}
+
+        {/* ── Layer 2: Core Action ──────────────────────────────────────── */}
+        {showAction && (
+          <>
+            <Connector />
+            <div ref={actionRef}>
+              {launched ? (
+                <DoneLayer
+                  label={selectedAction ? `${selectedAction.icon} ${selectedAction.label}` : "Action"}
+                  onReset={() => resetFrom("action")}
+                />
+              ) : (
+                <Layer id="layer-action">
+                  <div className="mb-3">
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">
+                      what does it do?
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {CORE_ACTIONS.map(a => (
+                      <button
+                        key={a.id}
+                        onClick={() => handleSelectAction(a.id)}
+                        className={`flex items-start gap-3 rounded-xl border px-4 py-3.5 text-left transition-all group
+                          ${action === a.id
+                            ? "border-brand-500/40 bg-brand-500/8"
+                            : "border-white/[0.06] bg-surface-1 hover:border-brand-500/25 hover:bg-surface-2"
+                          }`}
+                      >
+                        <span className="text-lg shrink-0 mt-0.5">{a.icon}</span>
+                        <div>
+                          <p className={`text-sm font-medium leading-snug transition-colors ${action === a.id ? "text-white" : "text-zinc-300 group-hover:text-white"}`}>
+                            {a.label}
+                          </p>
+                          <p className="text-xs text-zinc-600 mt-0.5 leading-relaxed">{a.desc}</p>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </Layer>
+              )}
+            </div>
+          </>
+        )}
+
+        {/* ── Layer 3: Stack ────────────────────────────────────────────── */}
+        {showStack && (
+          <>
+            <Connector />
+            <div ref={stackRef}>
+              {launched ? (
+                <DoneLayer
+                  label={`${stack.length} component${stack.length !== 1 ? "s" : ""} · ~${totalSetup}min`}
+                  onReset={() => resetFrom("stack")}
+                />
+              ) : (
+                <Layer id="layer-stack">
+                  <div className="mb-3">
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">
+                      your stack
+                    </span>
+                    <span className="ml-3 text-[10px] text-zinc-700">
+                      deselect anything you already have
+                    </span>
+                  </div>
+                  <div className="space-y-1.5 mb-4">
+                    {stackItems.map(item => {
+                      const on = stack.includes(item.name)
+                      return (
+                        <button
+                          key={item.name}
+                          onClick={() => setStack(on ? stack.filter(s => s !== item.name) : [...stack, item.name])}
+                          className={`w-full flex items-center justify-between rounded-xl border px-4 py-3 text-left transition-all ${
+                            on
+                              ? "border-brand-500/30 bg-brand-500/5"
+                              : "border-white/[0.04] bg-surface-1/40 opacity-35"
+                          }`}
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className={`h-4 w-4 rounded border-2 flex items-center justify-center shrink-0 transition-colors ${on ? "border-brand-500 bg-brand-500" : "border-zinc-700"}`}>
+                              {on && (
+                                <svg className="h-2.5 w-2.5 text-black" viewBox="0 0 10 10" fill="none">
+                                  <path d="M2 5l2.5 2.5L8 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                              )}
+                            </div>
+                            <div>
+                              <span className="text-sm text-zinc-200">{item.name}</span>
+                              <span className="ml-2 text-xs text-zinc-600">{item.category}</span>
+                            </div>
+                          </div>
+                          <span className="text-xs text-zinc-600 flex items-center gap-1 shrink-0">
+                            <Clock className="h-3 w-3" />
+                            ~{item.setup}m
+                          </span>
+                        </button>
+                      )
+                    })}
+                  </div>
+
+                  {/* Total + Go */}
+                  <div className="flex items-center justify-between rounded-xl border border-white/[0.06] bg-surface-1 px-4 py-3 mb-4">
+                    <span className="text-xs text-zinc-500">estimated setup</span>
+                    <span className="font-mono text-sm text-zinc-200">~{totalSetup} min</span>
+                  </div>
+                  <button
+                    onClick={handleLaunch}
+                    disabled={stack.length === 0}
+                    className="w-full flex items-center justify-center gap-2 rounded-xl bg-brand-500 px-6 py-3.5 text-sm font-semibold text-black hover:bg-brand-400 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                  >
+                    <Zap className="h-4 w-4" />
+                    Build this
+                  </button>
+                </Layer>
+              )}
+            </div>
+          </>
+        )}
+
+        {/* ── Layer 4: GO ───────────────────────────────────────────────── */}
+        {showGo && (
+          <>
+            <Connector />
+            <div ref={goRef}>
+              <Layer id="layer-go">
+                {/* Header */}
+                <div className="rounded-t-xl border border-b-0 border-brand-500/20 bg-brand-500/[0.04] px-5 py-4">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Zap className="h-3.5 w-3.5 text-brand-400" />
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-brand-500">
+                      ready to build
+                    </span>
+                  </div>
+                  <p className="text-xs text-zinc-500 leading-relaxed">{problem}</p>
+                </div>
+
+                {/* Stack list */}
+                <div className="border border-b-0 border-brand-500/10 bg-surface-1 divide-y divide-white/[0.04]">
+                  {goItems
+                    .slice()
+                    .sort((a, b) => a.setup - b.setup)
+                    .map((item, i) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-between px-5 py-4 hover:bg-surface-2 transition-colors group"
+                      >
+                        <div className="flex items-center gap-4">
+                          <span className="font-mono text-[10px] text-zinc-700 w-4 shrink-0">{i + 1}</span>
+                          <div>
+                            <p className="text-sm text-zinc-200 group-hover:text-white transition-colors">{item.name}</p>
+                            <p className="text-xs text-zinc-600">{item.category}</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3 shrink-0">
+                          <span className="text-xs text-zinc-600 flex items-center gap-1">
+                            <Clock className="h-3 w-3" />
+                            ~{item.setup}m
+                          </span>
+                          <ExternalLink className="h-3.5 w-3.5 text-zinc-700 group-hover:text-zinc-400 transition-colors" />
+                        </div>
+                      </a>
+                    ))}
+                </div>
+
+                {/* Footer — total + export */}
+                <div className="rounded-b-xl border border-brand-500/10 bg-surface-1 px-5 py-4 flex items-center justify-between">
+                  <span className="text-xs text-zinc-500 flex items-center gap-1.5">
+                    <Clock className="h-3.5 w-3.5" />
+                    ~{totalSetup} min total setup
+                  </span>
+                  <button
+                    onClick={downloadContextPack}
+                    className="flex items-center gap-2 rounded-lg bg-brand-500 px-4 py-2 text-xs font-semibold text-black hover:bg-brand-400 transition-all"
+                  >
+                    <BookOpen className="h-3.5 w-3.5" />
+                    Export context pack
+                  </button>
+                </div>
+
+                {/* Secondary actions */}
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {!user && (
+                    <Link
+                      href="/login"
+                      className="rounded-lg border border-brand-500/30 px-4 py-2 text-xs text-brand-400 hover:bg-brand-500/10 transition-colors"
+                    >
+                      Save this plan →
+                    </Link>
+                  )}
+                  <Link
+                    href="/library"
+                    className="rounded-lg border border-white/[0.08] px-4 py-2 text-xs text-zinc-400 hover:text-white hover:border-white/20 transition-colors"
+                  >
+                    Browse full library
+                  </Link>
+                  <button
+                    onClick={() => resetFrom("problem")}
+                    className="rounded-lg border border-white/[0.06] px-4 py-2 text-xs text-zinc-600 hover:text-zinc-400 transition-colors flex items-center gap-1.5"
+                  >
+                    <RotateCcw className="h-3 w-3" />
+                    Start over
+                  </button>
+                </div>
+              </Layer>
+            </div>
+          </>
         )}
       </main>
     </div>
