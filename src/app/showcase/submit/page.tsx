@@ -16,7 +16,7 @@ const PLATFORM_SUGGESTIONS = [
   "Hack the Hood", "AngelHack", "Campus event", "Internal / Company", "Other"
 ]
 
-const DOMAIN_LIST = DOMAINS.map(d => d.name)
+const DOMAIN_LIST = DOMAINS.map(d => d.n)
 const SDG_LIST = SDGS.map(s => s.name)
 
 // Pull component names from the library categories for stack picker

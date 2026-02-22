@@ -139,14 +139,12 @@ export default async function CategoryPage({ params }: { params: Promise<{ cat: 
               <div style={{ display: "flex", gap: "8px", flexShrink: 0, alignItems: "center" }}>
                 {c.github_url && (
                   <a href={c.github_url} target="_blank" rel="noopener noreferrer"
-                    onClick={e => e.stopPropagation()}
                     style={{ fontFamily: "var(--sp-mono)", fontSize: "10px", color: "var(--sp-dim)", textDecoration: "none" }}>
                     GitHub↗
                   </a>
                 )}
                 {c.docs_url && (
                   <a href={c.docs_url} target="_blank" rel="noopener noreferrer"
-                    onClick={e => e.stopPropagation()}
                     style={{ fontFamily: "var(--sp-mono)", fontSize: "10px", color: "var(--sp-dim)", textDecoration: "none" }}>
                     Docs↗
                   </a>

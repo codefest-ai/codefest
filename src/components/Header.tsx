@@ -6,11 +6,13 @@ import { Menu, X, Zap, LogOut, User, GraduationCap, Bookmark } from "lucide-reac
 import { useAuth } from "@/components/AuthProvider"
 import { ThemeToggle } from "@/components/ThemeToggle"
 
-const navItems = [
+type NavItem = { label: string; href: string; soon?: boolean }
+
+const navItems: NavItem[] = [
   { label: "Library", href: "/library" },
   { label: "Workspace", href: "/workspace" },
-  { label: "Teams", href: "/teams" },
-  { label: "Compete", href: "/competitions" },
+  { label: "Teams", href: "/teams", soon: true },
+  { label: "Compete", href: "/competitions", soon: true },
   { label: "Blog", href: "/blog" },
   { label: "Showcase", href: "/showcase" },
 ]

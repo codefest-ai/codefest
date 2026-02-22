@@ -40,7 +40,7 @@ export default function ShowcasePage() {
       .finally(() => setLoading(false))
   }, [domainFilter])
 
-  const domains = DOMAINS.map(d => d.name)
+  const domains = DOMAINS.map(d => d.n)
 
   return (
     <div className="sp-page" style={{ paddingTop: "88px", paddingBottom: "5rem" }}>
