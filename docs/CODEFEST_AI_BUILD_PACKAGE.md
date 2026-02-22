@@ -3,6 +3,39 @@
 
 ---
 
+## ⚠️ HISTORICAL NOTE (Added Feb 2026)
+
+This document was written January 2026 before the product existed. It reflects the original spec. **The actual product diverged from this spec in several meaningful ways.** Read this for architectural intent and database schema reference. For what actually shipped, see:
+
+- `CODEFEST_IMPLEMENTATION_PLAN.md` — Phase 1 complete, with deviation log
+- `PHASE2_SPEC.md` — current forward-looking spec for profiles + discovery
+- `PHASE3_SPEC.md` — live competition + AI assistant layer
+- `PHASE4_SPEC.md` — bounty pools + sponsorship + crypto
+- `WORKSPACE_DESIGN.md` — rationale for the workspace panel order (DSR cascade)
+
+### What Actually Shipped vs. This Spec
+
+**Built but not in this spec:**
+- Workspace with full DSR Chatterjee cascade (6 panels: Problem → SDGs → Domain → Patterns → Stack → GO!)
+- Audience archetypes, soft component suggestions, plain language toggle
+- Individual component SEO pages (48 static pages at `/library/[slug]`)
+- Category editorial pages (7 pages at `/library/category/[cat]`) — teaches WHY before HOW
+- GitHub auto-fill on Showcase submit
+- Three-way system/light/dark theme toggle
+- Deployed to production at codefest.ai (Vercel + Supabase + Namecheap)
+
+**Spec'd here but not built (deferred):**
+- Sidebar layout → replaced by header-only nav
+- Dashboard home page → replaced by landing → workspace direct flow
+- The 9-phase structure in Part 5 → superseded by the Phase 2/3/4 spec docs above
+- Some tables in the schema below not yet created (organizations, messages, tasks-as-specified)
+
+**Migrations actually run:** 001 (users/components/bookmarks), 002 (teams), 003 (projects/tasks), 004 (competitions), 005 (showcase_projects)
+
+**Content production:** All editorial content follows `CODEFEST_EDITORIAL_SMART_PROMPT.md`
+
+---
+
 ## PART 1: THE VISION
 
 ### One-Line Pitch
