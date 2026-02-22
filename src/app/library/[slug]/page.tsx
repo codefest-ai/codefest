@@ -111,8 +111,8 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
               Docs ↗
             </a>
           )}
-          <Link href="/workspace" style={{ fontFamily: "var(--sp-mono)", fontSize: "11px", padding: "8px 16px", background: "var(--sp-surface)", border: "1px solid rgba(34,197,94,0.2)", borderRadius: "8px", color: "var(--sp-brand)", textDecoration: "none" }}>
-            Add to session →
+          <Link href={`/workspace?add=${encodeURIComponent(comp.name)}`} style={{ fontFamily: "var(--sp-mono)", fontSize: "11px", padding: "8px 16px", background: "var(--sp-surface)", border: "1px solid rgba(34,197,94,0.2)", borderRadius: "8px", color: "var(--sp-brand)", textDecoration: "none" }}>
+            Add to workspace →
           </Link>
         </div>
 
@@ -216,8 +216,8 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
             <div style={{ fontSize: "14px", fontWeight: 600, marginBottom: "3px" }}>Building with {comp.name}?</div>
             <div style={{ fontSize: "12px", color: "var(--sp-muted)" }}>Add it to your hackathon session workspace.</div>
           </div>
-          <Link href="/workspace" style={{ fontFamily: "var(--sp-mono)", fontSize: "11px", padding: "10px 18px", background: "var(--sp-brand)", color: "#000", borderRadius: "8px", fontWeight: 700, textDecoration: "none", whiteSpace: "nowrap" }}>
-            Open Workspace →
+          <Link href={`/workspace?add=${encodeURIComponent(comp.name)}`} style={{ fontFamily: "var(--sp-mono)", fontSize: "11px", padding: "10px 18px", background: "var(--sp-brand)", color: "#000", borderRadius: "8px", fontWeight: 700, textDecoration: "none", whiteSpace: "nowrap" }}>
+            Add to workspace →
           </Link>
         </div>
 

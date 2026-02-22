@@ -1,10 +1,11 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { useAuth } from "@/components/AuthProvider"
 import { ThemeToggle } from "@/components/ThemeToggle"
-import { Zap, X, ArrowRight, Clock, ExternalLink } from "lucide-react"
+import { Zap, X, ArrowRight, Clock, ExternalLink, BookOpen } from "lucide-react"
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -130,6 +131,8 @@ const STACK_SUGGESTIONS: Record<string, StackItem[]> = {
 
 export default function WorkspacePage() {
   const { user } = useAuth()
+  const searchParams = useSearchParams()
+  const pinnedComponent = searchParams.get("add") ?? null
 
   const [activeStep, setActiveStep] = useState<Step>("domain")
   const [domain, setDomain]   = useState<string | null>(null)
@@ -178,7 +181,12 @@ export default function WorkspacePage() {
   const selectedAction = CORE_ACTIONS.find((a) => a.id === action)
   const stackItems     = action ? (STACK_SUGGESTIONS[action] || []) : []
   const selectedItems  = stackItems.filter((s) => stack.includes(s.name))
-  const totalSetup     = selectedItems.reduce((sum, s) => sum + s.setup, 0)
+  // Append pinned component from library if not already in stack
+  const pinnedItem = pinnedComponent && !selectedItems.find(s => s.name === pinnedComponent)
+    ? [{ name: pinnedComponent, href: `/library/${pinnedComponent.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`, setup: 0, category: "from library" }]
+    : []
+  const goItems    = [...selectedItems, ...pinnedItem]
+  const totalSetup = selectedItems.reduce((sum, s) => sum + s.setup, 0)
 
   // Chip label for each completed step
   function chipLabel(step: Step): string {
@@ -226,6 +234,18 @@ export default function WorkspacePage() {
 
       {/* ── Main ──────────────────────────────────────────────────────────── */}
       <main className="mx-auto max-w-2xl px-6 pt-28 pb-24">
+
+        {/* Pinned component from library */}
+        {pinnedComponent && (
+          <div className="flex items-center gap-3 rounded-xl border border-brand-500/25 bg-brand-500/5 px-4 py-3 mb-6">
+            <BookOpen className="h-4 w-4 text-brand-400 shrink-0" />
+            <div className="flex-1 min-w-0">
+              <span className="text-xs text-zinc-500">From the library — </span>
+              <span className="text-xs font-medium text-brand-400">{pinnedComponent}</span>
+              <span className="text-xs text-zinc-500"> will be added to your stack</span>
+            </div>
+          </div>
+        )}
 
         {/* Breadcrumb chips for completed steps */}
         {completedSteps.length > 0 && (
@@ -438,7 +458,7 @@ export default function WorkspacePage() {
 
             {/* Stack sorted by setup time, with doc links */}
             <div className="space-y-2 mb-6">
-              {selectedItems
+              {goItems
                 .slice()
                 .sort((a, b) => a.setup - b.setup)
                 .map((item, i) => (
