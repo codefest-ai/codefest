@@ -159,11 +159,12 @@ export const CATEGORY_META: Record<string, {
   },
 }
 
-export const CATEGORIES = ["auth", "ai", "database", "ui", "payments", "api", "devtools"]
+export const CATEGORIES = ["auth", "ai", "database", "ui", "payments", "services", "tooling", "maps", "deploy"]
 
 export const CAT_COLORS: Record<string, string> = {
   auth: "#22d3ee", ai: "#a78bfa", database: "#60a5fa",
-  ui: "#22c55e", payments: "#fbbf24", api: "#fb923c", devtools: "#f472b6",
+  ui: "#22c55e", payments: "#fbbf24", services: "#fb923c", tooling: "#f472b6",
+  maps: "#34d399", deploy: "#818cf8",
 }
 
 export const DIFF_COLORS: Record<string, string> = {
