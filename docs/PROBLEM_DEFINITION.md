@@ -67,9 +67,10 @@ Hackathon participants waste the first 1-3 hours on tool selection, boilerplate 
 | **HackerEarth** | Technical recruitment, assessments | Hackathon building experience |
 | **AngelHack** | Enterprise hackathon-as-a-service | Individual participant needs |
 | **InnovationCast/HYPE** | Corporate idea management | Student/community hackathons |
+| **lablab.ai** | AI-focused hackathons, live countdowns, participant counts | Non-AI events, resource layer during build, project preservation |
 | **GitHub** | Code hosting | Curation, context, hackathon-specific guidance |
 
-**The gap:** Nobody builds for the person at the laptop. Every platform optimizes for the person running the event.
+**The gap:** Nobody builds for the person at the laptop. Every platform optimizes for the person running the event. lablab.ai comes closest — it has live event discovery and participant counts — but remains AI-only and organizer-focused with no tooling layer active during the build.
 
 ---
 
@@ -128,9 +129,6 @@ Same team member (Evren) built a participant-facing tool with similar design ten
 - Efficiency ≠ collaboration
 - Pause points transform interaction
 - Domain expertise enables real validation
-
-### Throughline Systems
-Codefest.ai operates on the same philosophical foundation: coordination infrastructure should serve the person being coordinated, not the institution coordinating them. Hackathon participants are to Codefest what Regional Center consumers are to Throughline — the people the system should center but currently doesn't.
 
 ---
 
