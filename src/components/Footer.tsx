@@ -14,7 +14,7 @@ export function Footer() {
             </span>
           </div>
           <p className="text-sm text-zinc-600">
-            Built for builders. &copy; {new Date().getFullYear()} Throughline Systems, LLC.
+            Built for builders. &copy; {new Date().getFullYear()} Codefest.ai
           </p>
         </div>
       </div>
