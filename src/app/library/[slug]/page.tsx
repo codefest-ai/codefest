@@ -27,6 +27,7 @@ type EnrichedComponent = {
   relatedComponents?: string[]
   skillRequired?: string
   further_reading?: FurtherReadingItem[]
+  github_org?: string
 }
 
 const ALL_COMPONENTS: EnrichedComponent[] = (componentsData as { components: EnrichedComponent[] }).components
@@ -104,13 +105,27 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
 
         {/* Title block */}
         <div style={{ marginBottom: "2rem" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px", flexWrap: "wrap" }}>
-            <span style={{ fontFamily: "var(--sp-mono)", fontSize: "10px", color: catColor, background: `${catColor}18`, border: `1px solid ${catColor}30`, borderRadius: "5px", padding: "2px 8px" }}>{comp.category}</span>
-            <span style={{ fontFamily: "var(--sp-mono)", fontSize: "10px", color: diffColor }}>{comp.difficulty}</span>
-            <span style={{ fontFamily: "var(--sp-mono)", fontSize: "10px", color: "var(--sp-dim)" }}>⏱ {comp.setup_time_minutes} min setup</span>
+          <div style={{ display: "flex", alignItems: "flex-start", gap: "16px", marginBottom: "12px" }}>
+            {/* Logo */}
+            {comp.github_org && (
+              <img
+                src={`https://github.com/${comp.github_org}.png?size=56`}
+                alt={comp.name}
+                width={56}
+                height={56}
+                style={{ borderRadius: "12px", border: "1px solid rgba(255,255,255,0.08)", background: "var(--sp-surface)", flexShrink: 0 }}
+              />
+            )}
+            <div style={{ flex: 1 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "8px", flexWrap: "wrap" }}>
+                <span style={{ fontFamily: "var(--sp-mono)", fontSize: "10px", color: catColor, background: `${catColor}18`, border: `1px solid ${catColor}30`, borderRadius: "5px", padding: "2px 8px" }}>{comp.category}</span>
+                <span style={{ fontFamily: "var(--sp-mono)", fontSize: "10px", color: diffColor }}>{comp.difficulty}</span>
+                <span style={{ fontFamily: "var(--sp-mono)", fontSize: "10px", color: "var(--sp-dim)" }}>⏱ {comp.setup_time_minutes} min setup</span>
+              </div>
+              <h1 style={{ fontSize: "2.2rem", fontWeight: 800, letterSpacing: "-0.04em", marginBottom: "8px" }}>{comp.name}</h1>
+              <p style={{ fontSize: "15px", color: "var(--sp-muted)", lineHeight: 1.7 }}>{comp.description}</p>
+            </div>
           </div>
-          <h1 style={{ fontSize: "2.2rem", fontWeight: 800, letterSpacing: "-0.04em", marginBottom: "10px" }}>{comp.name}</h1>
-          <p style={{ fontSize: "15px", color: "var(--sp-muted)", lineHeight: 1.7 }}>{comp.description}</p>
         </div>
 
         {/* Links */}

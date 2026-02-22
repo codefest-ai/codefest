@@ -30,6 +30,7 @@ type Component = {
   setup_time_minutes: number
   difficulty: string
   tags: string[]
+  github_org?: string
 }
 
 function toSlug(name: string): string {
@@ -389,8 +390,22 @@ export default function LibraryPage() {
                     <Link href={`/library/${toSlug(comp.name)}`} className="absolute inset-0 z-0 rounded-2xl" aria-label={`View ${comp.name} details`} />
                     {/* Top row */}
                     <div className="flex items-start justify-between mb-3">
-                      <div className="min-w-0">
-                        <h3 className="font-semibold text-white text-lg mb-1.5 group-hover:text-brand-400 transition-colors truncate">
+                      <div className="min-w-0 flex items-start gap-3">
+                        {/* Logo */}
+                        {comp.github_org ? (
+                          <img
+                            src={`https://github.com/${comp.github_org}.png?size=40`}
+                            alt=""
+                            className="h-9 w-9 rounded-lg shrink-0 bg-surface-3 object-cover ring-1 ring-white/[0.06]"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className={`h-9 w-9 rounded-lg shrink-0 flex items-center justify-center text-sm font-bold ${catMeta.bg} ${catMeta.color} ring-1 ring-white/[0.06]`}>
+                            {comp.name[0]}
+                          </div>
+                        )}
+                        <div className="min-w-0">
+                        <h3 className="font-semibold text-white text-base mb-1.5 group-hover:text-brand-400 transition-colors truncate">
                           {comp.name}
                         </h3>
                         <div className="flex items-center gap-2">
@@ -405,7 +420,8 @@ export default function LibraryPage() {
                             {comp.difficulty}
                           </span>
                         </div>
-                      </div>
+                        </div>{/* end name+badges */}
+                      </div>{/* end logo+text row */}
                       {user && (
                         <button
                           onClick={() => toggleBookmark(comp.name)}

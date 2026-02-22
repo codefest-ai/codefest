@@ -57,7 +57,8 @@
           "url": "https://supabase.com/blog/supabase-auth",
           "type": "article"
         }
-      ]
+      ],
+      "github_org": "supabase"
     },
     {
       "name": "NextAuth.js",
@@ -117,7 +118,8 @@
           "url": "https://clerk.com/blog/comparing-auth-libraries-nextjs",
           "type": "article"
         }
-      ]
+      ],
+      "github_org": "nextauthjs"
     },
     {
       "name": "Clerk",
@@ -175,7 +177,8 @@
           "url": "https://clerk.com/blog/why-managed-auth",
           "type": "article"
         }
-      ]
+      ],
+      "github_org": "clerkinc"
     },
     {
       "name": "Lucia Auth",
@@ -231,7 +234,8 @@
           "url": "https://lucia-auth.com/guides/validate-session-cookies-/nextjs-app",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "lucia-auth"
     },
     {
       "name": "Better Auth",
@@ -286,7 +290,8 @@
           "url": "https://www.better-auth.com/docs",
           "type": "docs"
         }
-      ]
+      ],
+      "github_org": "better-auth"
     },
     {
       "name": "Stripe",
@@ -349,7 +354,8 @@
           "url": "https://stripe.com/docs/testing",
           "type": "docs"
         }
-      ]
+      ],
+      "github_org": "stripe"
     },
     {
       "name": "LemonSqueezy",
@@ -404,7 +410,8 @@
           "url": "https://docs.lemonsqueezy.com/help/products/creating-products",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "lmsqueezy"
     },
     {
       "name": "OpenAI API",
@@ -474,7 +481,8 @@
           "url": "https://arxiv.org/abs/1706.03762",
           "type": "paper"
         }
-      ]
+      ],
+      "github_org": "openai"
     },
     {
       "name": "Anthropic Claude",
@@ -540,7 +548,8 @@
           "url": "https://arxiv.org/abs/2212.08073",
           "type": "paper"
         }
-      ]
+      ],
+      "github_org": "anthropics"
     },
     {
       "name": "Vercel AI SDK",
@@ -605,7 +614,8 @@
           "url": "https://sdk.vercel.ai/docs/guides/rag-chatbot",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "vercel"
     },
     {
       "name": "LangChain.js",
@@ -667,7 +677,8 @@
           "url": "https://js.langchain.com/docs/tutorials/rag",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "langchain-ai"
     },
     {
       "name": "Pinecone",
@@ -731,7 +742,8 @@
           "url": "https://arxiv.org/abs/2005.11401",
           "type": "paper"
         }
-      ]
+      ],
+      "github_org": "pinecone-io"
     },
     {
       "name": "Replicate",
@@ -789,7 +801,8 @@
           "url": "https://replicate.com/docs/get-started/nodejs",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "replicate"
     },
     {
       "name": "Hugging Face",
@@ -849,7 +862,8 @@
           "url": "https://huggingface.co/docs/transformers/quicktour",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "huggingface"
     },
     {
       "name": "Groq",
@@ -909,7 +923,8 @@
           "url": "https://console.groq.com/docs/models",
           "type": "article"
         }
-      ]
+      ],
+      "github_org": "groq-inc"
     },
     {
       "name": "Mistral API",
@@ -968,7 +983,8 @@
           "url": "https://arxiv.org/abs/2310.06825",
           "type": "paper"
         }
-      ]
+      ],
+      "github_org": "mistralai"
     },
     {
       "name": "Together AI",
@@ -1027,7 +1043,8 @@
           "url": "https://docs.together.ai/docs/quickstart",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "togethercomputer"
     },
     {
       "name": "Supabase",
@@ -1093,7 +1110,8 @@
           "url": "https://supabase.com/blog/postgres-full-text-search",
           "type": "article"
         }
-      ]
+      ],
+      "github_org": "supabase"
     },
     {
       "name": "Neon",
@@ -1151,7 +1169,8 @@
           "url": "https://neon.tech/blog/serverless-postgres",
           "type": "article"
         }
-      ]
+      ],
+      "github_org": "neondatabase"
     },
     {
       "name": "Turso",
@@ -1207,7 +1226,8 @@
           "url": "https://docs.turso.tech/sdk/ts/quickstart",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "tursodatabase"
     },
     {
       "name": "Prisma",
@@ -1266,7 +1286,8 @@
           "url": "https://www.prisma.io/blog/prisma-orm-vs-drizzle",
           "type": "article"
         }
-      ]
+      ],
+      "github_org": "prisma"
     },
     {
       "name": "Drizzle ORM",
@@ -1323,7 +1344,8 @@
           "url": "https://orm.drizzle.team/docs/benchmarks",
           "type": "article"
         }
-      ]
+      ],
+      "github_org": "drizzle-team"
     },
     {
       "name": "Upstash Redis",
@@ -1380,7 +1402,8 @@
           "url": "https://upstash.com/docs/redis/patterns/rate-limiting",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "upstash"
     },
     {
       "name": "shadcn/ui",
@@ -1443,7 +1466,8 @@
           "url": "https://ui.shadcn.com/docs/installation/next",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "shadcn-ui"
     },
     {
       "name": "Radix UI",
@@ -1500,7 +1524,8 @@
           "url": "https://www.radix-ui.com/primitives",
           "type": "article"
         }
-      ]
+      ],
+      "github_org": "radix-ui"
     },
     {
       "name": "Tremor",
@@ -1562,7 +1587,8 @@
           "url": "https://tremor.so/docs/components/area-chart",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "tremorlabs"
     },
     {
       "name": "Recharts",
@@ -1624,7 +1650,8 @@
           "url": "https://recharts.org/en-US/examples",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "recharts"
     },
     {
       "name": "Framer Motion",
@@ -1680,7 +1707,8 @@
           "url": "https://www.framer.com/motion/animation/",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "framer"
     },
     {
       "name": "React Hook Form",
@@ -1742,7 +1770,8 @@
           "url": "https://react-hook-form.com/docs/useform/register",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "react-hook-form"
     },
     {
       "name": "Zod",
@@ -1799,7 +1828,8 @@
           "url": "https://zod.dev/?id=introduction",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "colinhacks"
     },
     {
       "name": "TanStack Table",
@@ -1859,7 +1889,8 @@
           "url": "https://tanstack.com/table/latest/docs/guide/column-defs",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "tanstack"
     },
     {
       "name": "cmdk",
@@ -1915,7 +1946,8 @@
           "url": "https://cmdk.paco.me/#components-commanddialog",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "pacocoursey"
     },
     {
       "name": "Resend",
@@ -1974,7 +2006,8 @@
           "url": "https://resend.com/docs/send-with-nextjs",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "resendlabs"
     },
     {
       "name": "React Email",
@@ -2031,7 +2064,8 @@
           "url": "https://react.email/docs/introduction",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "resendlabs"
     },
     {
       "name": "Twilio",
@@ -2092,7 +2126,8 @@
           "url": "https://www.twilio.com/docs/sms/quickstart/node",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "twilio"
     },
     {
       "name": "Uploadthing",
@@ -2151,7 +2186,8 @@
           "url": "https://docs.uploadthing.com/getting-started/appdir",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "pingdotgg"
     },
     {
       "name": "Cloudinary",
@@ -2209,7 +2245,8 @@
           "url": "https://cloudinary.com/documentation/image_optimization",
           "type": "docs"
         }
-      ]
+      ],
+      "github_org": "cloudinary"
     },
     {
       "name": "Cloudflare R2",
@@ -2267,7 +2304,8 @@
           "url": "https://developers.cloudflare.com/r2/reference/migrate-from-aws-s3/",
           "type": "article"
         }
-      ]
+      ],
+      "github_org": "cloudflare"
     },
     {
       "name": "Inngest",
@@ -2328,7 +2366,8 @@
           "url": "https://www.inngest.com/blog/serverless-queues",
           "type": "article"
         }
-      ]
+      ],
+      "github_org": "inngest"
     },
     {
       "name": "Trigger.dev",
@@ -2388,7 +2427,8 @@
           "url": "https://trigger.dev/docs/quick-start",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "triggerdotdev"
     },
     {
       "name": "Pusher",
@@ -2446,7 +2486,8 @@
           "url": "https://pusher.com/tutorials/realtime-app-nextjs/",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "pusher"
     },
     {
       "name": "Socket.io",
@@ -2503,7 +2544,8 @@
           "url": "https://socket.io/docs/v4/tutorial/introduction",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "socketio"
     },
     {
       "name": "Liveblocks",
@@ -2566,7 +2608,8 @@
           "url": "https://crdt.tech",
           "type": "paper"
         }
-      ]
+      ],
+      "github_org": "liveblocks"
     },
     {
       "name": "Excalidraw",
@@ -2624,7 +2667,8 @@
           "url": "https://docs.excalidraw.com/docs/@excalidraw/excalidraw/api/props/",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "excalidraw"
     },
     {
       "name": "tldraw",
@@ -2680,7 +2724,8 @@
           "url": "https://tldraw.dev/docs/collaboration",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "tldraw"
     },
     {
       "name": "Monaco Editor",
@@ -2735,7 +2780,8 @@
           "url": "https://github.com/microsoft/monaco-editor",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "microsoft"
     },
     {
       "name": "Sandpack",
@@ -2788,7 +2834,8 @@
           "url": "https://sandpack.codesandbox.io/docs/getting-started/install",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "codesandbox"
     },
     {
       "name": "Zustand",
@@ -2844,7 +2891,8 @@
           "url": "https://docs.pmnd.rs/zustand/getting-started/comparison",
           "type": "article"
         }
-      ]
+      ],
+      "github_org": "pmndrs"
     },
     {
       "name": "TanStack Query",
@@ -2903,7 +2951,8 @@
           "url": "https://tanstack.com/query/latest/docs/framework/react/guides/does-this-replace-client-state",
           "type": "article"
         }
-      ]
+      ],
+      "github_org": "tanstack"
     },
     {
       "name": "Posthog",
@@ -2959,7 +3008,8 @@
           "url": "https://posthog.com/docs/getting-started/install",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "posthog"
     },
     {
       "name": "Sentry",
@@ -3015,7 +3065,8 @@
           "url": "https://docs.sentry.io/platforms/javascript/guides/nextjs/",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "getsentry"
     },
     {
       "name": "next-intl",
@@ -3076,7 +3127,8 @@
           "url": "https://next-intl-docs.vercel.app/docs/getting-started/app-router",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "amannn"
     },
     {
       "name": "react-leaflet",
@@ -3144,7 +3196,8 @@
           "url": "https://leafletjs.com/examples.html",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "PaulLeCam"
     },
     {
       "name": "Mapbox GL JS",
@@ -3207,7 +3260,8 @@
           "url": "https://docs.mapbox.com/data/tilesets/guides/",
           "type": "article"
         }
-      ]
+      ],
+      "github_org": "mapbox"
     },
     {
       "name": "Deck.gl",
@@ -3269,7 +3323,8 @@
           "url": "https://deck.gl/examples",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "visgl"
     },
     {
       "name": "Vercel",
@@ -3335,7 +3390,8 @@
           "url": "https://vercel.com/docs/deployments/preview-deployments",
           "type": "article"
         }
-      ]
+      ],
+      "github_org": "vercel"
     },
     {
       "name": "Railway",
@@ -3394,7 +3450,8 @@
           "url": "https://docs.railway.app/quick-start",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "railwayapp"
     },
     {
       "name": "Fly.io",
@@ -3451,7 +3508,8 @@
           "url": "https://fly.io/docs/getting-started/",
           "type": "tutorial"
         }
-      ]
+      ],
+      "github_org": "superfly"
     }
   ]
 }
