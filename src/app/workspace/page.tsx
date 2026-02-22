@@ -344,7 +344,7 @@ export default function WorkspacePage() {
         )}
 
         {/* ── Layer 0: Problem ──────────────────────────────────────────── */}
-        {(domain !== null || !showDomain) ? (
+        {domain !== null ? (
           <DoneLayer
             label={problem.length > 60 ? problem.slice(0, 60) + "…" : problem}
             onReset={() => resetFrom("problem")}
