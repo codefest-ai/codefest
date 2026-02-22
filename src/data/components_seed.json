@@ -220,7 +220,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Lucia Documentation",
+          "url": "https://lucia-auth.com",
+          "type": "docs"
+        },
+        {
+          "title": "Understanding Session-Based Auth vs JWT",
+          "url": "https://lucia-auth.com/guides/validate-session-cookies-/nextjs-app",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "Better Auth",
@@ -269,7 +280,13 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Better Auth Documentation",
+          "url": "https://www.better-auth.com/docs",
+          "type": "docs"
+        }
+      ]
     },
     {
       "name": "Stripe",
@@ -316,7 +333,23 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Stripe Documentation",
+          "url": "https://stripe.com/docs",
+          "type": "docs"
+        },
+        {
+          "title": "Stripe Checkout Quickstart",
+          "url": "https://stripe.com/docs/checkout/quickstart",
+          "type": "tutorial"
+        },
+        {
+          "title": "Testing Stripe Payments",
+          "url": "https://stripe.com/docs/testing",
+          "type": "docs"
+        }
+      ]
     },
     {
       "name": "LemonSqueezy",
@@ -360,7 +393,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "LemonSqueezy Documentation",
+          "url": "https://docs.lemonsqueezy.com",
+          "type": "docs"
+        },
+        {
+          "title": "LemonSqueezy for Digital Products",
+          "url": "https://docs.lemonsqueezy.com/help/products/creating-products",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "OpenAI API",
@@ -480,7 +524,23 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Anthropic API Documentation",
+          "url": "https://docs.anthropic.com",
+          "type": "docs"
+        },
+        {
+          "title": "Prompt Engineering Guide",
+          "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview",
+          "type": "docs"
+        },
+        {
+          "title": "Constitutional AI: Harmlessness from AI Feedback",
+          "url": "https://arxiv.org/abs/2212.08073",
+          "type": "paper"
+        }
+      ]
     },
     {
       "name": "Vercel AI SDK",
@@ -655,7 +715,23 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Pinecone Documentation",
+          "url": "https://docs.pinecone.io",
+          "type": "docs"
+        },
+        {
+          "title": "Vector Databases Explained",
+          "url": "https://www.pinecone.io/learn/vector-database/",
+          "type": "article"
+        },
+        {
+          "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+          "url": "https://arxiv.org/abs/2005.11401",
+          "type": "paper"
+        }
+      ]
     },
     {
       "name": "Replicate",
@@ -702,7 +778,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Replicate Documentation",
+          "url": "https://replicate.com/docs",
+          "type": "docs"
+        },
+        {
+          "title": "Run Open Source Models via API",
+          "url": "https://replicate.com/docs/get-started/nodejs",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "Hugging Face",
@@ -751,7 +838,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Hugging Face Hub Documentation",
+          "url": "https://huggingface.co/docs/hub",
+          "type": "docs"
+        },
+        {
+          "title": "Getting Started with Transformers",
+          "url": "https://huggingface.co/docs/transformers/quicktour",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "Groq",
@@ -800,7 +898,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Groq API Documentation",
+          "url": "https://console.groq.com/docs/openai",
+          "type": "docs"
+        },
+        {
+          "title": "Groq Model Performance Benchmarks",
+          "url": "https://console.groq.com/docs/models",
+          "type": "article"
+        }
+      ]
     },
     {
       "name": "Mistral API",
@@ -848,7 +957,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Mistral AI Documentation",
+          "url": "https://docs.mistral.ai",
+          "type": "docs"
+        },
+        {
+          "title": "Mistral 7B: A High-Performance Language Model",
+          "url": "https://arxiv.org/abs/2310.06825",
+          "type": "paper"
+        }
+      ]
     },
     {
       "name": "Together AI",
@@ -896,7 +1016,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Together AI Documentation",
+          "url": "https://docs.together.ai",
+          "type": "docs"
+        },
+        {
+          "title": "Run Open Source LLMs at Scale",
+          "url": "https://docs.together.ai/docs/quickstart",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "Supabase",
@@ -1009,7 +1140,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Neon Serverless Postgres Docs",
+          "url": "https://neon.tech/docs",
+          "type": "docs"
+        },
+        {
+          "title": "Serverless Postgres: How It Works",
+          "url": "https://neon.tech/blog/serverless-postgres",
+          "type": "article"
+        }
+      ]
     },
     {
       "name": "Turso",
@@ -1054,7 +1196,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Turso Documentation",
+          "url": "https://docs.turso.tech",
+          "type": "docs"
+        },
+        {
+          "title": "SQLite at the Edge with Turso",
+          "url": "https://docs.turso.tech/sdk/ts/quickstart",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "Prisma",
@@ -1159,7 +1312,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Drizzle ORM Documentation",
+          "url": "https://orm.drizzle.team/docs/overview",
+          "type": "docs"
+        },
+        {
+          "title": "Drizzle vs Prisma: Which ORM?",
+          "url": "https://orm.drizzle.team/docs/benchmarks",
+          "type": "article"
+        }
+      ]
     },
     {
       "name": "Upstash Redis",
@@ -1205,7 +1369,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Upstash Redis Documentation",
+          "url": "https://upstash.com/docs/redis/overall/getstarted",
+          "type": "docs"
+        },
+        {
+          "title": "Rate Limiting with Upstash Redis",
+          "url": "https://upstash.com/docs/redis/patterns/rate-limiting",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "shadcn/ui",
@@ -1257,7 +1432,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "shadcn/ui Documentation",
+          "url": "https://ui.shadcn.com/docs",
+          "type": "docs"
+        },
+        {
+          "title": "Why shadcn/ui Wins Hackathons",
+          "url": "https://ui.shadcn.com/docs/installation/next",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "Radix UI",
@@ -1303,7 +1489,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Radix UI Documentation",
+          "url": "https://www.radix-ui.com/docs/primitives/overview/introduction",
+          "type": "docs"
+        },
+        {
+          "title": "Accessible Components Without Compromise",
+          "url": "https://www.radix-ui.com/primitives",
+          "type": "article"
+        }
+      ]
     },
     {
       "name": "Tremor",
@@ -1354,7 +1551,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Tremor Documentation",
+          "url": "https://tremor.so/docs/getting-started/installation",
+          "type": "docs"
+        },
+        {
+          "title": "Building Dashboards with Tremor",
+          "url": "https://tremor.so/docs/components/area-chart",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "Recharts",
@@ -1461,7 +1669,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Framer Motion Documentation",
+          "url": "https://www.framer.com/motion/",
+          "type": "docs"
+        },
+        {
+          "title": "Animation Principles for UI",
+          "url": "https://www.framer.com/motion/animation/",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "React Hook Form",
@@ -1512,7 +1731,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "React Hook Form Documentation",
+          "url": "https://react-hook-form.com/docs",
+          "type": "docs"
+        },
+        {
+          "title": "Form Validation with RHF + Zod",
+          "url": "https://react-hook-form.com/docs/useform/register",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "Zod",
@@ -1558,7 +1788,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Zod Documentation",
+          "url": "https://zod.dev",
+          "type": "docs"
+        },
+        {
+          "title": "Runtime Type Safety with Zod",
+          "url": "https://zod.dev/?id=introduction",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "TanStack Table",
@@ -1607,7 +1848,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "TanStack Table Documentation",
+          "url": "https://tanstack.com/table/latest/docs/introduction",
+          "type": "docs"
+        },
+        {
+          "title": "Headless UI Tables with TanStack",
+          "url": "https://tanstack.com/table/latest/docs/guide/column-defs",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "cmdk",
@@ -1652,7 +1904,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "cmdk Documentation",
+          "url": "https://cmdk.paco.me",
+          "type": "docs"
+        },
+        {
+          "title": "Building a Command Palette in React",
+          "url": "https://cmdk.paco.me/#components-commanddialog",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "Resend",
@@ -1700,7 +1963,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Resend Documentation",
+          "url": "https://resend.com/docs",
+          "type": "docs"
+        },
+        {
+          "title": "Send Email in Next.js with Resend",
+          "url": "https://resend.com/docs/send-with-nextjs",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "React Email",
@@ -1746,7 +2020,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "React Email Documentation",
+          "url": "https://react.email/docs",
+          "type": "docs"
+        },
+        {
+          "title": "Building Email Templates with React",
+          "url": "https://react.email/docs/introduction",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "Twilio",
@@ -1796,7 +2081,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Twilio Documentation",
+          "url": "https://www.twilio.com/docs",
+          "type": "docs"
+        },
+        {
+          "title": "Send SMS in 5 Minutes with Node.js",
+          "url": "https://www.twilio.com/docs/sms/quickstart/node",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "Uploadthing",
@@ -1844,7 +2140,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Uploadthing Documentation",
+          "url": "https://docs.uploadthing.com",
+          "type": "docs"
+        },
+        {
+          "title": "File Uploads in Next.js App Router",
+          "url": "https://docs.uploadthing.com/getting-started/appdir",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "Cloudinary",
@@ -1891,7 +2198,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Cloudinary Documentation",
+          "url": "https://cloudinary.com/documentation",
+          "type": "docs"
+        },
+        {
+          "title": "Image Optimization Best Practices",
+          "url": "https://cloudinary.com/documentation/image_optimization",
+          "type": "docs"
+        }
+      ]
     },
     {
       "name": "Cloudflare R2",
@@ -1938,7 +2256,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Cloudflare R2 Documentation",
+          "url": "https://developers.cloudflare.com/r2/",
+          "type": "docs"
+        },
+        {
+          "title": "R2 vs S3: Zero Egress Object Storage",
+          "url": "https://developers.cloudflare.com/r2/reference/migrate-from-aws-s3/",
+          "type": "article"
+        }
+      ]
     },
     {
       "name": "Inngest",
@@ -1988,7 +2317,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Inngest Documentation",
+          "url": "https://www.inngest.com/docs",
+          "type": "docs"
+        },
+        {
+          "title": "Background Jobs Without Infrastructure",
+          "url": "https://www.inngest.com/blog/serverless-queues",
+          "type": "article"
+        }
+      ]
     },
     {
       "name": "Trigger.dev",
@@ -2037,7 +2377,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Trigger.dev Documentation",
+          "url": "https://trigger.dev/docs",
+          "type": "docs"
+        },
+        {
+          "title": "Background Jobs in Next.js with Trigger.dev",
+          "url": "https://trigger.dev/docs/quick-start",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "Pusher",
@@ -2084,7 +2435,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Pusher Channels Documentation",
+          "url": "https://pusher.com/docs/channels",
+          "type": "docs"
+        },
+        {
+          "title": "Real-time Features in Under 30 Minutes",
+          "url": "https://pusher.com/tutorials/realtime-app-nextjs/",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "Socket.io",
@@ -2130,7 +2492,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Socket.io Documentation",
+          "url": "https://socket.io/docs/v4/",
+          "type": "docs"
+        },
+        {
+          "title": "Real-time Bidirectional Communication",
+          "url": "https://socket.io/docs/v4/tutorial/introduction",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "Liveblocks",
@@ -2177,7 +2550,23 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Liveblocks Documentation",
+          "url": "https://liveblocks.io/docs",
+          "type": "docs"
+        },
+        {
+          "title": "Adding Real-time Collaboration in 10 Minutes",
+          "url": "https://liveblocks.io/docs/get-started",
+          "type": "tutorial"
+        },
+        {
+          "title": "Conflict-free Replicated Data Types (CRDTs)",
+          "url": "https://crdt.tech",
+          "type": "paper"
+        }
+      ]
     },
     {
       "name": "Excalidraw",
@@ -2224,7 +2613,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Excalidraw Documentation",
+          "url": "https://docs.excalidraw.com",
+          "type": "docs"
+        },
+        {
+          "title": "Embed a Whiteboard in Your React App",
+          "url": "https://docs.excalidraw.com/docs/@excalidraw/excalidraw/api/props/",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "tldraw",
@@ -2269,7 +2669,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "tldraw Documentation",
+          "url": "https://tldraw.dev/docs",
+          "type": "docs"
+        },
+        {
+          "title": "Building a Collaborative Whiteboard",
+          "url": "https://tldraw.dev/docs/collaboration",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "Monaco Editor",
@@ -2313,7 +2724,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Monaco Editor Documentation",
+          "url": "https://microsoft.github.io/monaco-editor/docs.html",
+          "type": "docs"
+        },
+        {
+          "title": "Embed VS Code's Editor in Your App",
+          "url": "https://github.com/microsoft/monaco-editor",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "Sandpack",
@@ -2355,7 +2777,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Sandpack Documentation",
+          "url": "https://sandpack.codesandbox.io/docs",
+          "type": "docs"
+        },
+        {
+          "title": "Live Code Playgrounds in React",
+          "url": "https://sandpack.codesandbox.io/docs/getting-started/install",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "Zustand",
@@ -2400,7 +2833,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Zustand Documentation",
+          "url": "https://docs.pmnd.rs/zustand/getting-started/introduction",
+          "type": "docs"
+        },
+        {
+          "title": "When to Use Zustand vs Context",
+          "url": "https://docs.pmnd.rs/zustand/getting-started/comparison",
+          "type": "article"
+        }
+      ]
     },
     {
       "name": "TanStack Query",
@@ -2448,7 +2892,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "TanStack Query Documentation",
+          "url": "https://tanstack.com/query/latest/docs/framework/react/overview",
+          "type": "docs"
+        },
+        {
+          "title": "Server State vs Client State",
+          "url": "https://tanstack.com/query/latest/docs/framework/react/guides/does-this-replace-client-state",
+          "type": "article"
+        }
+      ]
     },
     {
       "name": "Posthog",
@@ -2493,7 +2948,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "PostHog Documentation",
+          "url": "https://posthog.com/docs",
+          "type": "docs"
+        },
+        {
+          "title": "Product Analytics for Open Source Teams",
+          "url": "https://posthog.com/docs/getting-started/install",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "Sentry",
@@ -2538,7 +3004,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Sentry Documentation",
+          "url": "https://docs.sentry.io",
+          "type": "docs"
+        },
+        {
+          "title": "Error Monitoring in Next.js",
+          "url": "https://docs.sentry.io/platforms/javascript/guides/nextjs/",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "next-intl",
@@ -2588,7 +3065,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "next-intl Documentation",
+          "url": "https://next-intl-docs.vercel.app/docs/getting-started",
+          "type": "docs"
+        },
+        {
+          "title": "Internationalization in Next.js App Router",
+          "url": "https://next-intl-docs.vercel.app/docs/getting-started/app-router",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "react-leaflet",
@@ -2770,7 +3258,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Deck.gl Documentation",
+          "url": "https://deck.gl/docs",
+          "type": "docs"
+        },
+        {
+          "title": "Large Scale Data Visualization on Maps",
+          "url": "https://deck.gl/examples",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "Vercel",
@@ -2820,7 +3319,23 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Vercel Documentation",
+          "url": "https://vercel.com/docs",
+          "type": "docs"
+        },
+        {
+          "title": "Deploy Next.js to Vercel in 2 Minutes",
+          "url": "https://vercel.com/docs/frameworks/nextjs",
+          "type": "tutorial"
+        },
+        {
+          "title": "Preview Deployments — Every Branch Gets a URL",
+          "url": "https://vercel.com/docs/deployments/preview-deployments",
+          "type": "article"
+        }
+      ]
     },
     {
       "name": "Railway",
@@ -2868,7 +3383,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Railway Documentation",
+          "url": "https://docs.railway.app",
+          "type": "docs"
+        },
+        {
+          "title": "Deploy a Node.js App to Railway",
+          "url": "https://docs.railway.app/quick-start",
+          "type": "tutorial"
+        }
+      ]
     },
     {
       "name": "Fly.io",
@@ -2914,7 +3440,18 @@
           "ecosystem": null
         }
       },
-      "further_reading": []
+      "further_reading": [
+        {
+          "title": "Fly.io Documentation",
+          "url": "https://fly.io/docs/",
+          "type": "docs"
+        },
+        {
+          "title": "Deploying Containers to Fly.io",
+          "url": "https://fly.io/docs/getting-started/",
+          "type": "tutorial"
+        }
+      ]
     }
   ]
 }

@@ -73,8 +73,23 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
   const catColor = CAT_COLORS[comp.category] ?? "#888"
   const diffColor = DIFF_COLORS[comp.difficulty] ?? "#888"
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": comp.name,
+    "headline": `${comp.name} — Hackathon Setup Guide`,
+    "description": comp.plainLanguageWhat ?? comp.description,
+    "url": `https://codefest.ai/library/${slug}`,
+    "publisher": { "@type": "Organization", "name": "Codefest.ai", "url": "https://codefest.ai" },
+    "timeRequired": `PT${comp.setup_time_minutes}M`,
+    "keywords": [comp.category, comp.difficulty, ...comp.tags].join(", "),
+    ...(comp.docs_url ? { "sameAs": comp.docs_url } : {}),
+    ...(comp.github_url ? { "codeRepository": comp.github_url } : {}),
+  }
+
   return (
     <div style={{ minHeight: "100vh", background: "var(--sp-bg)", color: "var(--sp-text)" }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <Header />
 

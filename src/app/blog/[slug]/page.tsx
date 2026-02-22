@@ -4,16 +4,13 @@ import Script from "next/script"
 import { getPost, getAllPosts, formatPostDate } from "@/lib/blog"
 import type { Metadata } from "next"
 
-interface Props {
-  params: { slug: string }
-}
-
 export async function generateStaticParams() {
   return getAllPosts().map(p => ({ slug: p.slug }))
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = getPost(params.slug)
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const post = getPost(slug)
   if (!post) return { title: "Post not found" }
   return {
     title: post.title,
@@ -44,12 +41,26 @@ const TAG_COLORS: Record<string, string> = {
   "strategy": "#818cf8",
 }
 
-export default function BlogPostPage({ params }: Props) {
-  const post = getPost(params.slug)
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const post = getPost(slug)
   if (!post) notFound()
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.title,
+    "description": post.description,
+    "datePublished": post.date,
+    "author": { "@type": "Person", "name": post.author },
+    "publisher": { "@type": "Organization", "name": "Codefest.ai", "url": "https://codefest.ai" },
+    "url": `https://codefest.ai/blog/${slug}`,
+    "keywords": post.tags.join(", "),
+  }
 
   return (
     <div className="sp-page" style={{ paddingTop: "88px", paddingBottom: "6rem" }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div style={{ maxWidth: "680px", margin: "0 auto", padding: "0 1.5rem" }}>
 
         {/* Back link */}
