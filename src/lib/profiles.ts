@@ -84,6 +84,47 @@ export async function createProfile(profile: {
     })
 
   if (error) return { error: error.message }
+
+  // Award 10 CodePoints for creating a profile
+  await addCodePoints(10, "profile_created")
+
+  return { error: null }
+}
+
+export async function saveWorkspaceSession(data: {
+  audience?: string | null
+  domain?: string | null
+  sdgs?: string[]
+  components_considered?: string[]
+  reached_go_mode?: boolean
+}): Promise<{ error: string | null }> {
+  const supabase = createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return { error: "Not signed in" }
+
+  // Only save if user has a profile
+  const { data: existing } = await supabase
+    .from("profiles")
+    .select("id")
+    .eq("id", user.id)
+    .single()
+
+  if (!existing) return { error: "No profile yet" }
+
+  const { error } = await supabase.from("workspace_sessions").insert({
+    profile_id: user.id,
+    audience: data.audience ?? null,
+    domain: data.domain ?? null,
+    sdgs: data.sdgs ?? [],
+    components_considered: data.components_considered ?? [],
+    reached_go_mode: data.reached_go_mode ?? false,
+  })
+
+  if (error) return { error: error.message }
+
+  // Award 5 CodePoints for completing a workspace session
+  await addCodePoints(5, "workspace_session_completed")
+
   return { error: null }
 }
 

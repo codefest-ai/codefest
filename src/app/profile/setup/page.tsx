@@ -26,6 +26,7 @@ export default function ProfileSetupPage() {
   const [selectedDomains, setSelectedDomains] = useState<string[]>([])
   const [githubUsername, setGithubUsername] = useState("")
   const [submitting, setSubmitting] = useState(false)
+  const [success, setSuccess] = useState(false)
   const [error, setError] = useState("")
 
   useEffect(() => {
@@ -89,10 +90,22 @@ export default function ProfileSetupPage() {
       return
     }
 
-    router.push(`/profile/${username}`)
+    setSuccess(true)
+    setTimeout(() => router.push(`/profile/${username}`), 1600)
   }
 
   if (loading || !user) return null
+
+  if (success) return (
+    <div className="min-h-screen bg-surface-0 flex items-center justify-center px-6">
+      <div className="text-center">
+        <div className="text-6xl mb-5">⚡</div>
+        <h2 className="text-2xl font-bold tracking-tight mb-2">Profile created!</h2>
+        <p className="text-zinc-400 text-sm mb-1">+10 CodePoints earned</p>
+        <p className="text-zinc-600 text-xs font-mono">taking you there now…</p>
+      </div>
+    </div>
+  )
 
   return (
     <div className="min-h-screen bg-surface-0 flex items-center justify-center px-6 py-20">

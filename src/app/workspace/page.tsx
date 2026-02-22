@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useAuth } from "@/components/AuthProvider"
+import { saveWorkspaceSession } from "@/lib/profiles"
 import componentsData from "@/data/components_seed.json"
 import {
   DOMAINS, PATTERNS, SDGS, GO_QUESTIONS, RECS,
@@ -71,6 +72,10 @@ export default function WorkspacePage() {
   const [selectedComponents, setSelectedComponents] = useState<Set<string>>(new Set())
   const [selectedSDGs, setSelectedSDGs] = useState<Set<string>>(new Set())
   const [goState, setGoState] = useState<Record<string, string>>({})
+
+  // Session save state
+  const [sessionSaved, setSessionSaved] = useState(false)
+  const [savingSession, setSavingSession] = useState(false)
 
   // Library search/filter
   const [stackSearch, setStackSearch] = useState("")
@@ -223,6 +228,19 @@ export default function WorkspacePage() {
       const match = ALL_COMPONENTS.find(c => c.name.toLowerCase().includes(s.toLowerCase()))
       if (match) setSelectedComponents(prev => new Set([...prev, match.name]))
     })
+  }
+
+  const handleSaveSession = async () => {
+    setSavingSession(true)
+    await saveWorkspaceSession({
+      audience: selectedAudience,
+      domain: selectedDomain,
+      sdgs: [...selectedSDGs],
+      components_considered: [...selectedComponents],
+      reached_go_mode: true,
+    })
+    setSessionSaved(true)
+    setSavingSession(false)
   }
 
   // Soft suggestion
@@ -736,12 +754,33 @@ export default function WorkspacePage() {
                                 }}>{s}</span>
                               ))}
                             </div>
-                            <button
-                              onClick={() => addRecToStack(rec)}
-                              style={{ marginTop: "12px", fontFamily: "var(--sp-mono)", fontSize: "11px", padding: "7px 14px", background: "var(--sp-brand)", color: "#000", border: "none", borderRadius: "6px", cursor: "pointer", fontWeight: 600 }}
-                            >
-                              + add all to stack
-                            </button>
+                            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginTop: "12px", flexWrap: "wrap" }}>
+                              <button
+                                onClick={() => addRecToStack(rec)}
+                                style={{ fontFamily: "var(--sp-mono)", fontSize: "11px", padding: "7px 14px", background: "var(--sp-brand)", color: "#000", border: "none", borderRadius: "6px", cursor: "pointer", fontWeight: 600 }}
+                              >
+                                + add all to stack
+                              </button>
+                              {user ? (
+                                sessionSaved ? (
+                                  <span style={{ fontFamily: "var(--sp-mono)", fontSize: "10px", color: "var(--sp-brand)" }}>
+                                    ✓ saved · +5 CodePoints
+                                  </span>
+                                ) : (
+                                  <button
+                                    onClick={handleSaveSession}
+                                    disabled={savingSession}
+                                    style={{ fontFamily: "var(--sp-mono)", fontSize: "11px", padding: "7px 14px", background: "none", color: "var(--sp-brand)", border: "1px solid rgba(34,197,94,0.3)", borderRadius: "6px", cursor: savingSession ? "wait" : "pointer", fontWeight: 600, transition: "all 0.15s" }}
+                                  >
+                                    {savingSession ? "saving…" : "save to profile ⚡"}
+                                  </button>
+                                )
+                              ) : (
+                                <Link href="/login" style={{ fontFamily: "var(--sp-mono)", fontSize: "10px", color: "var(--sp-dim)", textDecoration: "none" }}>
+                                  sign in to save →
+                                </Link>
+                              )}
+                            </div>
                           </div>
                         )}
                       </div>

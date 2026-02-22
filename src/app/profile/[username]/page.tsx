@@ -22,6 +22,13 @@ export default function ProfilePage() {
   const [tools, setTools] = useState<ProfileTool[]>([])
   const [loading, setLoading] = useState(true)
   const [notFound, setNotFound] = useState(false)
+  const [copied, setCopied] = useState(false)
+
+  const handleCopyProfile = () => {
+    navigator.clipboard.writeText(`https://codefest.ai/profile/${username}`)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
 
   const isOwnProfile = user && profile && user.id === profile.id
 
@@ -93,9 +100,21 @@ export default function ProfilePage() {
                 </div>
               </div>
 
-              {/* Avatar placeholder */}
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-brand-500/15 border border-brand-500/20 text-2xl font-bold text-brand-400">
-                {profile.username?.[0]?.toUpperCase() ?? "?"}
+              {/* Avatar + share */}
+              <div className="flex flex-col items-end gap-2">
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-brand-500/15 border border-brand-500/20 text-2xl font-bold text-brand-400">
+                  {profile.username?.[0]?.toUpperCase() ?? "?"}
+                </div>
+                <button
+                  onClick={handleCopyProfile}
+                  className="flex items-center gap-1.5 text-xs font-mono text-zinc-600 hover:text-zinc-300 transition-colors"
+                >
+                  {copied ? (
+                    <span className="text-brand-400">✓ copied</span>
+                  ) : (
+                    <span>share ↗</span>
+                  )}
+                </button>
               </div>
             </div>
 
@@ -188,14 +207,19 @@ export default function ProfilePage() {
             </div>
           )}
 
-          {/* Edit profile CTA for own profile */}
+          {/* Own profile footer */}
           {isOwnProfile && (
             <div className="mt-8 pt-6 border-t border-white/[0.06]">
               <div className="flex items-center justify-between">
                 <span className="text-xs text-zinc-600 font-mono">This is your profile</span>
-                <button className="text-xs text-zinc-500 hover:text-white transition-colors">
-                  Edit profile
-                </button>
+                <div className="flex items-center gap-4">
+                  <Link
+                    href="/workspace"
+                    className="text-xs text-brand-400 hover:text-brand-300 transition-colors font-mono"
+                  >
+                    open workspace →
+                  </Link>
+                </div>
               </div>
             </div>
           )}
