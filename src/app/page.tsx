@@ -1,21 +1,29 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Zap, ArrowRight, Clock, Github } from "lucide-react"
+import { Zap, ArrowRight, Clock, Github, Bookmark, TrendingUp } from "lucide-react"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import componentsData from "@/data/components_seed.json"
 import { DOMAINS, PATTERNS, CAT_COLORS, DIFF_COLORS } from "@/data/constants"
+import { createClient } from "@/lib/supabase/client"
 
 type Component = {
   name: string; category: string; description: string;
-  github_url?: string; docs_url?: string;
+  github_url?: string; docs_url?: string; github_org?: string;
   setup_time_minutes: number; difficulty: string; tags: string[];
+}
+
+type EngagementStats = {
+  totalBookmarks: number
+  totalSessions: number
+  trending: Array<{ name: string; category: string; saves: number; github_org?: string }>
 }
 
 const ALL_COMPONENTS: Component[] = (componentsData as { components: Component[] }).components
 const FEATURED = ALL_COMPONENTS.slice(0, 6)
+const COMPONENT_MAP = new Map(ALL_COMPONENTS.map(c => [c.name, c]))
 
 // ─── DIFFICULTY BADGE ────────────────────────────────────────
 function DiffBadge({ d }: { d: string }) {
@@ -27,15 +35,118 @@ function DiffBadge({ d }: { d: string }) {
   )
 }
 
+// ─── TRENDING CARD ────────────────────────────────────────────
+function TrendingCard({ name, category, saves, github_org }: {
+  name: string; category: string; saves: number; github_org?: string
+}) {
+  function toSlug(n: string) { return n.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") }
+  const color = CAT_COLORS[category] ?? "#6b7280"
+
+  return (
+    <Link
+      href={`/library/${toSlug(name)}`}
+      className="group flex items-center gap-3 rounded-xl border border-white/[0.06] bg-surface-1 p-3.5 transition-all hover:border-white/[0.12] hover:bg-surface-2"
+    >
+      {github_org ? (
+        <img
+          src={`https://github.com/${github_org}.png?size=36`}
+          alt=""
+          className="h-9 w-9 rounded-lg shrink-0 bg-surface-3 object-cover ring-1 ring-white/[0.06]"
+          loading="lazy"
+        />
+      ) : (
+        <div
+          className="h-9 w-9 rounded-lg shrink-0 flex items-center justify-center text-sm font-bold ring-1 ring-white/[0.06]"
+          style={{ background: `${color}15`, color }}
+        >
+          {name[0]}
+        </div>
+      )}
+      <div className="min-w-0 flex-1">
+        <div className="text-sm font-medium text-zinc-200 group-hover:text-white transition-colors truncate">{name}</div>
+        <div className="text-xs text-zinc-600 font-mono" style={{ color }}>{category}</div>
+      </div>
+      <div className="flex items-center gap-1 shrink-0">
+        <Bookmark className="h-3 w-3 text-brand-500" />
+        <span className="font-mono text-[10px] text-brand-400">{saves}</span>
+      </div>
+    </Link>
+  )
+}
+
+// ─── SKELETON ────────────────────────────────────────────────
+function StatSkeleton() {
+  return <div className="h-5 w-12 bg-white/[0.06] rounded animate-pulse" />
+}
+
 export default function HomePage() {
   const [hoveredDomain, setHoveredDomain] = useState<string | null>(null)
+  const [stats, setStats] = useState<EngagementStats | null>(null)
+  const [statsLoading, setStatsLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchStats() {
+      try {
+        const supabase = createClient()
+
+        // Total bookmarks count
+        const { count: totalBookmarks } = await supabase
+          .from("bookmarks")
+          .select("*", { count: "exact", head: true })
+
+        // Workspace sessions count
+        const { count: totalSessions } = await supabase
+          .from("workspace_sessions")
+          .select("*", { count: "exact", head: true })
+
+        // Top bookmarked components
+        const { data: rawBookmarks } = await supabase
+          .from("bookmarks")
+          .select("component_name")
+          .limit(2000)
+
+        // Count saves per component
+        const counts: Record<string, number> = {}
+        for (const b of rawBookmarks || []) {
+          counts[b.component_name] = (counts[b.component_name] || 0) + 1
+        }
+
+        const trendingComponents = Object.entries(counts)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 3)
+          .map(([name, saves]) => {
+            const comp = COMPONENT_MAP.get(name)
+            return {
+              name,
+              category: comp?.category ?? "Tool",
+              saves,
+              github_org: comp?.github_org,
+            }
+          })
+
+        setStats({
+          totalBookmarks: totalBookmarks ?? 0,
+          totalSessions: totalSessions ?? 0,
+          trending: trendingComponents,
+        })
+      } catch {
+        // Supabase not yet configured — silently fail
+        setStats({ totalBookmarks: 0, totalSessions: 0, trending: [] })
+      } finally {
+        setStatsLoading(false)
+      }
+    }
+
+    fetchStats()
+  }, [])
+
+  const showTrending = stats && stats.trending.length > 0
 
   return (
     <div className="min-h-screen bg-surface-0 text-white">
       <Header />
 
       {/* ── HERO STRIP ─────────────────────────────────────────── */}
-      {/* Compact, confident — not full-screen. Content follows immediately. */}
       <section className="relative overflow-hidden border-b border-white/[0.05]">
         {/* Subtle grid backdrop */}
         <div
@@ -79,15 +190,27 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* Stats strip */}
+          {/* Stats strip — live data when available */}
           <div className="flex items-center gap-6 mt-10 pt-8 border-t border-white/[0.05]">
             {[
-              { value: `${ALL_COMPONENTS.length}`, label: "curated components" },
-              { value: `${DOMAINS.length}`, label: "challenge domains" },
+              {
+                value: statsLoading ? null : (stats?.totalBookmarks ?? 0) > 0
+                  ? stats!.totalBookmarks.toLocaleString()
+                  : `${ALL_COMPONENTS.length}`,
+                label: (stats?.totalBookmarks ?? 0) > 0 ? "tools bookmarked" : "curated tools",
+              },
+              {
+                value: statsLoading ? null : (stats?.totalSessions ?? 0) > 0
+                  ? stats!.totalSessions.toLocaleString()
+                  : `${DOMAINS.length}`,
+                label: (stats?.totalSessions ?? 0) > 0 ? "sessions started" : "challenge domains",
+              },
               { value: "~15min", label: "avg setup time saved" },
-            ].map(s => (
-              <div key={s.label}>
-                <div className="text-lg font-bold text-brand-400">{s.value}</div>
+            ].map((s, i) => (
+              <div key={i}>
+                <div className="text-lg font-bold text-brand-400">
+                  {s.value === null ? <StatSkeleton /> : s.value}
+                </div>
                 <div className="text-xs text-zinc-600 font-mono">{s.label}</div>
               </div>
             ))}
@@ -95,8 +218,31 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── TRENDING THIS WEEK (only when data exists) ──────────── */}
+      {showTrending && (
+        <section className="border-b border-white/[0.05] py-10">
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="flex items-baseline justify-between mb-5">
+              <div className="flex items-center gap-2">
+                <TrendingUp className="h-4 w-4 text-brand-500" />
+                <span className="font-mono text-[10px] tracking-[0.12em] uppercase text-brand-500">
+                  trending this week
+                </span>
+              </div>
+              <Link href="/library" className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors font-mono">
+                browse all →
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              {stats!.trending.map((t) => (
+                <TrendingCard key={t.name} {...t} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ── CHALLENGE DOMAINS ───────────────────────────────────── */}
-      {/* Content-first: this is the product, not a feature list */}
       <section className="mx-auto max-w-7xl px-6 py-14">
         <div className="flex items-baseline justify-between mb-8">
           <div>
@@ -228,11 +374,21 @@ export default function HomePage() {
                 className="group rounded-xl border border-white/[0.06] bg-surface-1 p-4 transition-all hover:border-white/[0.12] hover:bg-surface-2 block"
               >
                 <div className="flex items-start justify-between mb-2">
-                  <span className="text-sm font-semibold text-zinc-200 group-hover:text-white transition-colors">
-                    {c.name}
-                  </span>
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    {c.github_org ? (
+                      <img
+                        src={`https://github.com/${c.github_org}.png?size=32`}
+                        alt=""
+                        className="h-7 w-7 rounded-md shrink-0 bg-surface-3 object-cover ring-1 ring-white/[0.06]"
+                        loading="lazy"
+                      />
+                    ) : null}
+                    <span className="text-sm font-semibold text-zinc-200 group-hover:text-white transition-colors truncate">
+                      {c.name}
+                    </span>
+                  </div>
                   <span
-                    className="font-mono text-[9px] px-1.5 py-0.5 rounded"
+                    className="font-mono text-[9px] px-1.5 py-0.5 rounded shrink-0 ml-2"
                     style={{ color: CAT_COLORS[c.category], background: `${CAT_COLORS[c.category]}15` }}
                   >
                     {c.category}
