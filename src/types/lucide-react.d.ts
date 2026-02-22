@@ -13,6 +13,7 @@ declare module "lucide-react" {
   export const ArrowUpDown: LucideIcon
   export const BarChart2: LucideIcon
   export const Bookmark: LucideIcon
+  export const ChevronDown: LucideIcon
   export const BookOpen: LucideIcon
   export const CheckCircle: LucideIcon
   export const Mail: LucideIcon
