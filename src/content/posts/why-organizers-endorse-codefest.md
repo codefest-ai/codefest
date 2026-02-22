@@ -1,6 +1,6 @@
 ---
 title: "You're Not Banning Google. Don't Ban This Either."
-description: "The case for making Codefest.ai the launch page of your next hackathon — and why every faculty objection actually points toward endorsing it."
+description: "The research phase was never the pedagogical value of a hackathon. Protecting it isn't protecting learning — it's protecting waste."
 date: "2026-02-22"
 author: "Codefest.ai"
 tags: organizers, faculty, pedagogy, hackathons
@@ -15,6 +15,32 @@ That's what Codefest.ai is. And that's why we think you should make it the first
 
 ---
 
+## The research was never the point
+
+Ask yourself: when a hackathon team does well, what do the judges say at demo day?
+
+They don't say "impressive — tell me about your process for selecting your database." They don't ask how the team discovered that Supabase existed, or how long it took them to learn that Next.js has an App Router now. That entire phase of a hackathon — the tool selection, the googling, the "wait which version is current" — is invisible to every outcome that anyone involved actually cares about.
+
+What judges ask about: the problem you identified, why it matters, whether the thing works, how you'd take it further. What sponsors remember: did these students understand our challenge, did they ship something real, would we want to hire them. What participants remember: the moment something clicked, the time pressure, building with their team.
+
+Nobody has ever said "that was the hackathon that shaped me — I'll never forget the three hours I spent figuring out which authentication library to use."
+
+That friction was never pedagogy. It was always waste. And the question of whether a tool that eliminates it is "appropriate for an academic setting" is a category error — it's asking whether it's okay to remove something that was never teaching anything in the first place.
+
+---
+
+## This is sharper in an AI hackathon
+
+If your event involves AI tools — and increasingly, all of them do — the argument above becomes even more obvious.
+
+In an AI hackathon, the differentiation between teams is almost entirely *what they imagined* and *how they applied* the tools, not whether they knew the tooling existed before the clock started. The interesting question is the problem statement. The creative leap. The application to a specific community or context. Whether the team understood the domain well enough to build something that actually matters.
+
+The team that wins didn't win because they spent longer on npm install. They won because they understood the problem better, scoped smarter, and built something that landed with the judges. Codefest compresses the irrelevant part. It doesn't touch the part that matters.
+
+Penalizing participants for having a curated starting point is like penalizing a carpenter for owning a good set of tools before a timed competition. The craft is the cabinet. Not the time spent at the hardware store.
+
+---
+
 ## What we actually are
 
 Codefest.ai is a curated reference layer for hackathon participants. We link to GitHub repos and official docs. We don't host code, write it for them, or build anything on their behalf. Every component in our library already exists as a public, open-source project — we've just added context: setup time estimates, difficulty ratings, compatibility notes, and which challenge domains each tool is suited for.
@@ -22,16 +48,6 @@ Codefest.ai is a curated reference layer for hackathon participants. We link to 
 Think of it like a physical handbook. Chemistry students use the CRC Handbook during problem sets. It has formulas in it. Nobody calls it cheating. The knowledge was always public — the handbook just makes it findable in the right moment.
 
 Your students are going to look this stuff up anyway. The question is what they find.
-
----
-
-## The first-hour problem is real and it's yours too
-
-Only about 7% of hackathon projects show any activity six months after the event. The most common reason projects fail isn't lack of skill or effort — it's the first two hours. Stack paralysis. Setup time. Trying to figure out which of fifteen authentication libraries to use before anyone has written a single line of application logic.
-
-That friction doesn't just hurt participants. It hurts your hackathon. Lower-quality projects reflect on your event, your sponsors, and your institution. Mentors spend the first quarter of the event answering questions that could have been answered in advance. Teams that fall behind early abandon rather than pivot.
-
-Eliminating the setup bottleneck makes your hackathon look better. That's not a side effect — it's the point.
 
 ---
 
@@ -59,7 +75,7 @@ Curated starting points raise the floor. The ceiling is still entirely up to you
 
 Our library is organized around SDG-aligned challenge domains: climate, health equity, civic infrastructure, financial inclusion, food systems. If you're running a hackathon with a social impact theme — which most institutional hackathons increasingly are — we're organized around the same framework you're using to design the prompt.
 
-We're building organizer tools specifically because we know the challenge prompt is the most important thing you control. When the coding gap between participants is shrinking (and it is, fast), the quality of the problem statement is what determines the quality of the projects. We want to help you design better prompts, brief participants more effectively, and create better alignment between what your sponsors want and what your students build.
+We're building organizer tools specifically because we know the challenge prompt is the most important thing you control. When the execution gap between participants is shrinking (and it is, fast), the quality of the problem statement is what determines the quality of the projects. We want to help you design better prompts, brief participants more effectively, and create better alignment between what your sponsors want and what your students build.
 
 That work is coming. For now, the participant layer is live. It's free. It works offline. And your students will spend less time on setup and more time on the problem you gave them.
 
