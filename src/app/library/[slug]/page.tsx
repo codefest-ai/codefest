@@ -3,6 +3,12 @@ import Link from "next/link"
 import type { Metadata } from "next"
 import componentsData from "@/data/components_seed.json"
 
+type FurtherReadingItem = {
+  title: string
+  url: string
+  type?: "paper" | "article" | "docs" | "tutorial"
+}
+
 type EnrichedComponent = {
   name: string
   category: string
@@ -19,6 +25,7 @@ type EnrichedComponent = {
   commonUse?: string
   relatedComponents?: string[]
   skillRequired?: string
+  further_reading?: FurtherReadingItem[]
 }
 
 const ALL_COMPONENTS: EnrichedComponent[] = (componentsData as { components: EnrichedComponent[] }).components
@@ -206,6 +213,35 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
                   <span style={{ fontFamily: "var(--sp-mono)", fontSize: "12px", color: "var(--sp-dim)", flexShrink: 0, marginLeft: "12px" }}>›</span>
                 </Link>
               ))}
+            </div>
+          </div>
+        )}
+
+        {/* Further reading */}
+        {comp.further_reading && comp.further_reading.length > 0 && (
+          <div style={{ marginBottom: "1.5rem" }}>
+            <div style={{ fontFamily: "var(--sp-mono)", fontSize: "9px", color: "var(--sp-dim)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: "12px" }}>Go deeper</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+              {comp.further_reading.map((item, i) => {
+                const typeColor: Record<string, string> = {
+                  paper: "#a78bfa", article: "#fbbf24", docs: "#22d3ee", tutorial: "#22c55e"
+                }
+                const color = typeColor[item.type ?? "article"] ?? "#888"
+                return (
+                  <a
+                    key={i}
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "11px 16px", background: "var(--sp-surface)", border: "1px solid var(--sp-border)", borderRadius: "10px", textDecoration: "none", transition: "border-color 0.15s", gap: "12px" }}
+                  >
+                    <span style={{ fontSize: "13px", color: "var(--sp-text)", fontWeight: 500 }}>{item.title}</span>
+                    <span style={{ fontFamily: "var(--sp-mono)", fontSize: "9px", color, background: `${color}15`, border: `1px solid ${color}30`, borderRadius: "4px", padding: "2px 7px", whiteSpace: "nowrap", flexShrink: 0 }}>
+                      {item.type ?? "link"}
+                    </span>
+                  </a>
+                )
+              })}
             </div>
           </div>
         )}
