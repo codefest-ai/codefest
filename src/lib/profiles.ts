@@ -11,6 +11,7 @@ export type Profile = {
   code_points: number
   is_edu: boolean
   is_public: boolean
+  school_domain: string | null
   created_at: string
 }
 
@@ -70,6 +71,7 @@ export async function createProfile(profile: {
   if (!user) return { error: "Not signed in" }
 
   const is_edu = user.email?.endsWith(".edu") ?? false
+  const school_domain = is_edu && user.email ? user.email.split("@")[1] ?? null : null
 
   const { error } = await supabase
     .from("profiles")
@@ -81,6 +83,7 @@ export async function createProfile(profile: {
       role: profile.role ?? null,
       github_username: profile.github_username?.trim() || null,
       is_edu,
+      school_domain,
     })
 
   if (error) return { error: error.message }
@@ -147,6 +150,23 @@ export async function updateProfile(updates: Partial<{
 
   if (error) return { error: error.message }
   return { error: null }
+}
+
+export async function getSchoolCount(schoolDomain: string): Promise<number> {
+  const supabase = createClient()
+  const { data } = await supabase.rpc("get_school_count", { domain_input: schoolDomain })
+  return (data as number) ?? 0
+}
+
+export function schoolDisplayName(domain: string): string {
+  // "cgu.edu" → "CGU", "mit.edu" → "MIT"
+  return domain.split(".")[0].toUpperCase()
+}
+
+export function ordinal(n: number): string {
+  const s = ["th", "st", "nd", "rd"]
+  const v = n % 100
+  return n + (s[(v - 20) % 10] || s[v] || s[0])
 }
 
 export async function checkUsernameAvailable(username: string): Promise<boolean> {

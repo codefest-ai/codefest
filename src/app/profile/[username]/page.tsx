@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { useParams } from "next/navigation"
 import Link from "next/link"
 import { Header } from "@/components/Header"
-import { getProfileByUsername, getProfileTools, type Profile, type ProfileTool } from "@/lib/profiles"
+import { getProfileByUsername, getProfileTools, getSchoolCount, schoolDisplayName, ordinal, type Profile, type ProfileTool } from "@/lib/profiles"
 import { useAuth } from "@/components/AuthProvider"
 import { GraduationCap, ExternalLink, Zap } from "lucide-react"
 
@@ -20,6 +20,7 @@ export default function ProfilePage() {
   const { user } = useAuth()
   const [profile, setProfile] = useState<Profile | null>(null)
   const [tools, setTools] = useState<ProfileTool[]>([])
+  const [schoolCount, setSchoolCount] = useState<number | null>(null)
   const [loading, setLoading] = useState(true)
   const [notFound, setNotFound] = useState(false)
   const [copied, setCopied] = useState(false)
@@ -38,6 +39,9 @@ export default function ProfilePage() {
       if (!p) { setNotFound(true); setLoading(false); return }
       setProfile(p)
       getProfileTools(p.id).then(setTools)
+      if (p.school_domain) {
+        getSchoolCount(p.school_domain).then(setSchoolCount)
+      }
       setLoading(false)
     })
   }, [username])
@@ -83,10 +87,15 @@ export default function ProfilePage() {
               <div>
                 <div className="flex items-center gap-2.5 mb-1">
                   <h1 className="text-2xl font-bold tracking-tight">@{profile.username}</h1>
-                  {profile.is_edu && (
+                  {profile.is_edu && profile.school_domain && (
                     <span className="inline-flex items-center gap-1 text-[10px] font-medium text-brand-400 bg-brand-500/10 rounded-full px-2 py-0.5">
                       <GraduationCap className="h-2.5 w-2.5" />
-                      .edu
+                      {schoolDisplayName(profile.school_domain)}
+                    </span>
+                  )}
+                  {profile.school_domain && schoolCount !== null && schoolCount > 0 && (
+                    <span className="text-[10px] text-zinc-600 font-mono">
+                      {ordinal(schoolCount)} builder from {schoolDisplayName(profile.school_domain)}
                     </span>
                   )}
                 </div>
