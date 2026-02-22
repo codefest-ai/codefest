@@ -119,6 +119,14 @@ export function Header() {
                     )}
                   </div>
                   <Link
+                    href="/profile"
+                    onClick={() => setUserMenuOpen(false)}
+                    className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-zinc-400 hover:text-white hover:bg-white/5 transition-colors"
+                  >
+                    <User className="h-3.5 w-3.5" />
+                    My Profile
+                  </Link>
+                  <Link
                     href="/library"
                     onClick={() => setUserMenuOpen(false)}
                     className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-zinc-400 hover:text-white hover:bg-white/5 transition-colors"
@@ -191,15 +199,24 @@ export function Header() {
               )
             )}
             {user ? (
-              <button
-                onClick={() => {
-                  setMobileOpen(false)
-                  signOut()
-                }}
-                className="block w-full mt-3 rounded-lg border border-white/10 px-4 py-3 text-sm text-zinc-300 text-center"
-              >
-                Sign out
-              </button>
+              <>
+                <Link
+                  href="/profile"
+                  onClick={() => setMobileOpen(false)}
+                  className="block px-4 py-3 text-sm text-zinc-400 hover:text-white rounded-lg hover:bg-white/5"
+                >
+                  My Profile
+                </Link>
+                <button
+                  onClick={() => {
+                    setMobileOpen(false)
+                    signOut()
+                  }}
+                  className="block w-full mt-1 rounded-lg border border-white/10 px-4 py-3 text-sm text-zinc-300 text-center"
+                >
+                  Sign out
+                </button>
+              </>
             ) : (
               <>
                 <Link
