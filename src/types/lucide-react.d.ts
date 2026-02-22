@@ -11,8 +11,12 @@ declare module "lucide-react" {
   export const ArrowLeft: LucideIcon
   export const ArrowRight: LucideIcon
   export const ArrowUpDown: LucideIcon
+  export const BarChart2: LucideIcon
   export const Bookmark: LucideIcon
   export const BookOpen: LucideIcon
+  export const CheckCircle: LucideIcon
+  export const Mail: LucideIcon
+  export const Target: LucideIcon
   export const TrendingUp: LucideIcon
   export const Clock: LucideIcon
   export const Code2: LucideIcon
