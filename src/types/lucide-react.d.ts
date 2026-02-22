@@ -8,8 +8,8 @@ declare module "lucide-react" {
 
   export type LucideIcon = FC<IconProps>
 
-  export const ArrowRight: LucideIcon
   export const ArrowLeft: LucideIcon
+  export const ArrowRight: LucideIcon
   export const ArrowUpDown: LucideIcon
   export const Bookmark: LucideIcon
   export const BookOpen: LucideIcon
@@ -18,6 +18,7 @@ declare module "lucide-react" {
   export const ExternalLink: LucideIcon
   export const Filter: LucideIcon
   export const GitFork: LucideIcon
+  export const Github: LucideIcon
   export const GraduationCap: LucideIcon
   export const Layers: LucideIcon
   export const Library: LucideIcon
@@ -29,8 +30,8 @@ declare module "lucide-react" {
   export const Sparkles: LucideIcon
   export const Timer: LucideIcon
   export const Trophy: LucideIcon
-  export const Users: LucideIcon
   export const User: LucideIcon
+  export const Users: LucideIcon
   export const X: LucideIcon
   export const Zap: LucideIcon
 }
