@@ -113,9 +113,11 @@ export default function BlogPostPage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: post.html }}
         />
 
-        {/* EthicalAds — developer-relevant, privacy-respecting, category-filtered */}
-        {/* Replace PUBLISHER_ID once approved at ethicalads.io */}
-        {/* Allowlist: developer tools, cloud, education. Financial products excluded. */}
+        {/* EthicalAds — developer-relevant, privacy-respecting, category-filtered      */}
+        {/* Replace PUBLISHER_ID once approved at ethicalads.io (need ~10k pageviews)  */}
+        {/* Allowlist: developer tools, cloud, education. Financial products excluded.  */}
+        {/* Alternative: Carbon Ads (carbonads.com) — often higher CPM, pickier approval */}
+        {/* To switch: swap the publisher div and script src. Both use text-only format. */}
         <div style={{ margin: "3rem 0" }}>
           <div
             data-ea-publisher="PUBLISHER_ID"

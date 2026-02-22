@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import type { Metadata } from "next"
 import componentsData from "@/data/components_seed.json"
+import { Header } from "@/components/Header"
 
 type FurtherReadingItem = {
   title: string
@@ -43,7 +44,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const comp = ALL_COMPONENTS.find((c) => toSlug(c.name) === slug)
   if (!comp) return {}
   return {
-    title: `${comp.name} — Hackathon Component Library | Codefest.ai`,
+    title: `${comp.name} — Hackathon Component Library`,
     description: `${comp.description} ${comp.plainLanguageWhy ?? ""} Setup time: ${comp.setup_time_minutes} min. Difficulty: ${comp.difficulty}.`.trim(),
     openGraph: {
       title: `${comp.name} for Hackathons — Codefest.ai`,
@@ -75,18 +76,9 @@ export default async function ComponentPage({ params }: { params: Promise<{ slug
   return (
     <div style={{ minHeight: "100vh", background: "var(--sp-bg)", color: "var(--sp-text)" }}>
 
-      {/* Simple header */}
-      <header style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: "rgba(13,17,23,0.92)", backdropFilter: "blur(12px)", borderBottom: "1px solid var(--sp-border)", padding: "0 2rem", height: "52px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <Link href="/" style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none" }}>
-          <div style={{ width: "28px", height: "28px", background: "var(--sp-brand)", borderRadius: "7px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "14px" }}>⚡</div>
-          <span style={{ fontWeight: 700, fontSize: "15px", letterSpacing: "-0.02em", color: "var(--sp-text)" }}>codefest<em style={{ color: "var(--sp-brand)", fontStyle: "normal" }}>.ai</em></span>
-        </Link>
-        <Link href="/library" style={{ fontFamily: "var(--sp-mono)", fontSize: "11px", color: "var(--sp-dim)", textDecoration: "none" }}>
-          ← back to library
-        </Link>
-      </header>
+      <Header />
 
-      <main style={{ maxWidth: "760px", margin: "0 auto", padding: "80px 2rem 4rem" }}>
+      <main style={{ maxWidth: "760px", margin: "0 auto", padding: "96px 2rem 4rem" }}>
 
         {/* Breadcrumb */}
         <div style={{ fontFamily: "var(--sp-mono)", fontSize: "10px", color: "var(--sp-dim)", marginBottom: "1.5rem", display: "flex", alignItems: "center", gap: "6px" }}>
