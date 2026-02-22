@@ -2,35 +2,10 @@
 
 import { useEffect, useState } from "react"
 
-type Theme = "dark" | "system" | "light"
-
-// Cycle order: dark → system → light → dark
-const CYCLE: Theme[] = ["dark", "system", "light"]
-
-const LED_COLOR: Record<Theme, string> = {
-  dark:   "#1f2937",
-  system: "#6b7280",
-  light:  "#fbbf24",
-}
-const LED_GLOW: Record<Theme, string> = {
-  dark:   "none",
-  system: "0 0 4px rgba(107,114,128,0.35)",
-  light:  "0 0 6px #fbbf24, 0 0 12px rgba(251,191,36,0.4)",
-}
-const RING_COLOR: Record<Theme, string> = {
-  dark:   "rgba(255,255,255,0.10)",
-  system: "rgba(107,114,128,0.28)",
-  light:  "rgba(251,191,36,0.50)",
-}
-
-function getSystemPreference(): "light" | "dark" {
-  if (typeof window === "undefined") return "dark"
-  return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"
-}
+type Theme = "dark" | "light"
 
 function applyTheme(theme: Theme) {
-  const resolved = theme === "system" ? getSystemPreference() : theme
-  const isLight = resolved === "light"
+  const isLight = theme === "light"
   document.documentElement.classList.toggle("dark", !isLight)
   document.body.classList.toggle("light", isLight)
 }
@@ -48,7 +23,7 @@ export function ThemeToggle({ mono = false }: { mono?: boolean }) {
   }, [])
 
   const toggle = () => {
-    const next = CYCLE[(CYCLE.indexOf(theme) + 1) % CYCLE.length]
+    const next: Theme = theme === "dark" ? "light" : "dark"
     setTheme(next)
     localStorage.setItem("codefest-theme", next)
     applyTheme(next)
@@ -58,14 +33,14 @@ export function ThemeToggle({ mono = false }: { mono?: boolean }) {
 
   if (!mounted) return <div className="w-8 h-4" />
 
-  const isLight = theme === "light" || (theme === "system" && getSystemPreference() === "light")
+  const isLight = theme === "light"
 
   // ── Mono variant (workspace header) ──────────────────────────
   if (mono) {
     return (
       <button
         onClick={toggle}
-        title={`Theme: ${theme} — click to cycle`}
+        title={isLight ? "Switch to dark mode" : "Switch to light mode"}
         style={{
           fontFamily: "var(--sp-mono)",
           fontSize: "10px",
@@ -79,21 +54,20 @@ export function ThemeToggle({ mono = false }: { mono?: boolean }) {
           alignItems: "center",
           gap: "5px",
           transition: "all 0.2s",
-          minWidth: "56px",
+          minWidth: "52px",
         }}
       >
         <span style={{
           width: "5px",
           height: "5px",
           borderRadius: "50%",
-          background: LED_COLOR[theme],
-          boxShadow: LED_GLOW[theme],
+          background: isLight ? "#fbbf24" : "#374151",
+          boxShadow: isLight ? "0 0 6px #fbbf24" : "none",
           display: "inline-block",
           flexShrink: 0,
           transition: "all 0.3s",
         }} />
-        {/* Flash new name briefly, then settle to theme name */}
-        <span key={flash ?? theme} style={{ transition: "opacity 0.15s" }}>
+        <span key={flash ?? theme}>
           {flash ?? theme}
         </span>
       </button>
@@ -105,33 +79,29 @@ export function ThemeToggle({ mono = false }: { mono?: boolean }) {
     <div style={{ position: "relative", display: "inline-flex", alignItems: "center" }}>
       <button
         onClick={toggle}
-        title={`Theme: ${theme} — click to cycle`}
+        title={isLight ? "Switch to dark mode" : "Switch to light mode"}
         className="relative flex items-center justify-center rounded-lg p-2 transition-colors hover:bg-white/5"
-        aria-label={`Theme: ${theme}. Click to cycle.`}
+        aria-label={isLight ? "Switch to dark mode" : "Switch to light mode"}
       >
         <div className="relative flex items-center justify-center w-5 h-5">
-          {/* Outer ring */}
           <div
             className="absolute inset-0 rounded-full border transition-all duration-300"
             style={{
-              borderColor: RING_COLOR[theme],
-              boxShadow: isLight
-                ? "0 0 8px rgba(251,191,36,0.3), inset 0 0 4px rgba(251,191,36,0.1)"
-                : "none",
+              borderColor: isLight ? "rgba(251,191,36,0.5)" : "rgba(255,255,255,0.12)",
+              boxShadow: isLight ? "0 0 8px rgba(251,191,36,0.3), inset 0 0 4px rgba(251,191,36,0.1)" : "none",
             }}
           />
-          {/* Inner LED */}
           <div
             className="w-2 h-2 rounded-full transition-all duration-300"
             style={{
-              background: LED_COLOR[theme],
-              boxShadow: LED_GLOW[theme],
+              background: isLight ? "#fbbf24" : "#1f2937",
+              boxShadow: isLight ? "0 0 6px #fbbf24, 0 0 12px rgba(251,191,36,0.4)" : "none",
             }}
           />
         </div>
       </button>
 
-      {/* Flash label — appears briefly to the right on click */}
+      {/* Flash label on click */}
       {flash && (
         <span
           key={flash}
