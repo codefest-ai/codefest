@@ -15,6 +15,7 @@ const navItems: NavItem[] = [
   { label: "Blog", href: "/blog" },
   { label: "Showcase", href: "/showcase" },
   { label: "Organizers", href: "/organizers" },
+  { label: "About", href: "/about" },
 ]
 
 export function Header() {
