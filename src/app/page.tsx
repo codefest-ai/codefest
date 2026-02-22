@@ -49,14 +49,6 @@ export default function HomePage() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] bg-brand-500/10 blur-[80px] pointer-events-none" />
 
         <div className="relative mx-auto max-w-7xl px-6 pt-24 pb-16">
-          {/* Eyebrow */}
-          <div className="flex items-center gap-2 mb-6">
-            <span className="flex h-1.5 w-1.5 rounded-full bg-brand-400 animate-pulse" />
-            <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-brand-400">
-              hackathon operating system · live
-            </span>
-          </div>
-
           {/* Headline */}
           <h1 className="text-[clamp(2.4rem,6vw,4.5rem)] font-bold leading-[1.05] tracking-[-0.03em] max-w-3xl mb-5">
             Stop wasting{" "}
@@ -122,7 +114,7 @@ export default function HomePage() {
           {DOMAINS.map((d) => (
             <Link
               key={d.n}
-              href={`/workspace`}
+              href={`/workspace?domain=${d.slug}`}
               onMouseEnter={() => setHoveredDomain(d.n)}
               onMouseLeave={() => setHoveredDomain(null)}
               className="group relative rounded-xl border border-white/[0.06] bg-surface-1 p-4 transition-all duration-150 hover:border-brand-500/25 hover:bg-surface-2 block"

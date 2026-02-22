@@ -134,8 +134,12 @@ export default function WorkspacePage() {
   const searchParams = useSearchParams()
   const pinnedComponent = searchParams.get("add") ?? null
 
-  const [activeStep, setActiveStep] = useState<Step>("domain")
-  const [domain, setDomain]   = useState<string | null>(null)
+  // Pre-select domain from ?domain= param (e.g. from homepage card click)
+  const domainParam = searchParams.get("domain") ?? null
+  const preselectedDomain = domainParam && DOMAINS.find(d => d.id === domainParam) ? domainParam : null
+
+  const [activeStep, setActiveStep] = useState<Step>(preselectedDomain ? "problem" : "domain")
+  const [domain, setDomain]   = useState<string | null>(preselectedDomain)
   const [problem, setProblem] = useState<string>("")
   const [action, setAction]   = useState<string | null>(null)
   const [stack, setStack]     = useState<string[]>([])

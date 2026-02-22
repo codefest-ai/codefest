@@ -3,18 +3,18 @@
 // Imported by page.tsx, workspace/page.tsx, and any future pages.
 
 export const DOMAINS = [
-  { e: "🌍", n: "Climate & Environment", d: "Carbon tracking, energy optimization, climate modeling.", tags: ["GIS", "IoT", "SDG-13"], p: 47 },
-  { e: "🏥", n: "Health & Equity", d: "Patient access, mental health, rural care, public health.", tags: ["SDG-3", "accessibility", "NLP"], p: 61 },
-  { e: "🏙️", n: "Civic Infrastructure", d: "Government services, transit, housing, civic engagement.", tags: ["open-data", "mapping", "SDG-11"], p: 38 },
-  { e: "📚", n: "Education & Access", d: "Learning tools, skill gaps, literacy, student support.", tags: ["SDG-4", "NLP", "mobile"], p: 52 },
-  { e: "💰", n: "Financial Inclusion", d: "Unbanked populations, microfinance, financial literacy.", tags: ["SDG-10", "payments", "mobile"], p: 29 },
-  { e: "🌾", n: "Food Systems", d: "Food insecurity, supply chains, urban farming, nutrition.", tags: ["SDG-2", "GIS", "data"], p: 33 },
-  { e: "⚡", n: "Energy & Grid", d: "Renewable integration, smart grids, energy access.", tags: ["SDG-7", "IoT", "optimization"], p: 24 },
-  { e: "💧", n: "Water & Sanitation", d: "Clean water access, infrastructure monitoring, WASH.", tags: ["SDG-6", "IoT", "sensors"], p: 18 },
-  { e: "🤝", n: "Community & Social", d: "Volunteering, local networks, community resilience.", tags: ["SDG-17", "realtime", "maps"], p: 41 },
-  { e: "♿", n: "Accessibility", d: "Disability tech, language barriers, inclusive design.", tags: ["a11y", "NLP", "hardware"], p: 22 },
-  { e: "🔒", n: "Safety & Justice", d: "Legal access, domestic safety, crisis response.", tags: ["privacy", "realtime", "SDG-16"], p: 17 },
-  { e: "💼", n: "Economic Opportunity", d: "Jobs, skills, gig economy, small business.", tags: ["SDG-8", "matching", "data"], p: 35 },
+  { slug: "climate",   e: "🌍", n: "Climate & Environment", d: "Carbon tracking, energy optimization, climate modeling.", tags: ["GIS", "IoT", "SDG-13"], p: 47 },
+  { slug: "health",    e: "🏥", n: "Health & Equity", d: "Patient access, mental health, rural care, public health.", tags: ["SDG-3", "accessibility", "NLP"], p: 61 },
+  { slug: "civic",     e: "🏙️", n: "Civic Infrastructure", d: "Government services, transit, housing, civic engagement.", tags: ["open-data", "mapping", "SDG-11"], p: 38 },
+  { slug: "education", e: "📚", n: "Education & Access", d: "Learning tools, skill gaps, literacy, student support.", tags: ["SDG-4", "NLP", "mobile"], p: 52 },
+  { slug: "finance",   e: "💰", n: "Financial Inclusion", d: "Unbanked populations, microfinance, financial literacy.", tags: ["SDG-10", "payments", "mobile"], p: 29 },
+  { slug: "food",      e: "🌾", n: "Food Systems", d: "Food insecurity, supply chains, urban farming, nutrition.", tags: ["SDG-2", "GIS", "data"], p: 33 },
+  { slug: "other",     e: "⚡", n: "Energy & Grid", d: "Renewable integration, smart grids, energy access.", tags: ["SDG-7", "IoT", "optimization"], p: 24 },
+  { slug: "other",     e: "💧", n: "Water & Sanitation", d: "Clean water access, infrastructure monitoring, WASH.", tags: ["SDG-6", "IoT", "sensors"], p: 18 },
+  { slug: "civic",     e: "🤝", n: "Community & Social", d: "Volunteering, local networks, community resilience.", tags: ["SDG-17", "realtime", "maps"], p: 41 },
+  { slug: "other",     e: "♿", n: "Accessibility", d: "Disability tech, language barriers, inclusive design.", tags: ["a11y", "NLP", "hardware"], p: 22 },
+  { slug: "safety",    e: "🔒", n: "Safety & Justice", d: "Legal access, domestic safety, crisis response.", tags: ["privacy", "realtime", "SDG-16"], p: 17 },
+  { slug: "finance",   e: "💼", n: "Economic Opportunity", d: "Jobs, skills, gig economy, small business.", tags: ["SDG-8", "matching", "data"], p: 35 },
 ]
 
 export const PATTERNS = [
