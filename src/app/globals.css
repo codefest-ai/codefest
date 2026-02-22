@@ -30,15 +30,15 @@ body.light {
   background: #f8f9fa;
 }
 
-/* Light mode text overrides — flip white/light zinc text to dark */
-body.light [class*="text-white"] { color: #111827 !important; }
+/* Light mode text overrides — on light bg, zinc-N should get DARKER as N increases */
+body.light [class*="text-white"]    { color: #111827 !important; }  /* most prominent */
 body.light [class*="text-zinc-100"] { color: #1f2937 !important; }
 body.light [class*="text-zinc-200"] { color: #374151 !important; }
-body.light [class*="text-zinc-300"] { color: #4b5563 !important; }
-body.light [class*="text-zinc-400"] { color: #6b7280 !important; }
-body.light [class*="text-zinc-500"] { color: #9ca3af !important; }
-body.light [class*="text-zinc-600"] { color: #d1d5db !important; }
-body.light [class*="text-zinc-700"] { color: #e5e7eb !important; }
+body.light [class*="text-zinc-300"] { color: #374151 !important; }
+body.light [class*="text-zinc-400"] { color: #4b5563 !important; }
+body.light [class*="text-zinc-500"] { color: #4b5563 !important; }  /* was #9ca3af — too faint */
+body.light [class*="text-zinc-600"] { color: #6b7280 !important; }  /* was #d1d5db — near invisible */
+body.light [class*="text-zinc-700"] { color: #9ca3af !important; }  /* was #e5e7eb — invisible; dim but readable */
 
 /* Light mode border overrides */
 body.light [class*="border-white"] { border-color: rgba(0,0,0,0.1) !important; }
