@@ -27,11 +27,11 @@ const config: Config = {
           900: '#14532d',
         },
         surface: {
-          0: '#09090b',
-          1: '#0f0f12',
-          2: '#18181b',
-          3: '#1e1e22',
-          4: '#27272a',
+          0: 'rgb(var(--c-surface-0) / <alpha-value>)',
+          1: 'rgb(var(--c-surface-1) / <alpha-value>)',
+          2: 'rgb(var(--c-surface-2) / <alpha-value>)',
+          3: 'rgb(var(--c-surface-3) / <alpha-value>)',
+          4: 'rgb(var(--c-surface-4) / <alpha-value>)',
         },
         accent: {
           lime: '#a3e635',

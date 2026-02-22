@@ -6,12 +6,42 @@
   :root {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
+    /* Surface color channels (RGB, no alpha) — dark mode defaults */
+    --c-surface-0: 9 9 11;
+    --c-surface-1: 15 15 18;
+    --c-surface-2: 24 24 27;
+    --c-surface-3: 30 30 34;
+    --c-surface-4: 39 39 42;
   }
 
   body {
     @apply bg-surface-0 text-white antialiased;
   }
 }
+
+/* ── LIGHT MODE SURFACE VARIABLES ── */
+body.light {
+  --c-surface-0: 248 249 250;
+  --c-surface-1: 255 255 255;
+  --c-surface-2: 240 242 245;
+  --c-surface-3: 228 231 235;
+  --c-surface-4: 209 213 219;
+  color: #111827;
+  background: #f8f9fa;
+}
+
+/* Light mode text overrides — flip white/light zinc text to dark */
+body.light [class*="text-white"] { color: #111827 !important; }
+body.light [class*="text-zinc-100"] { color: #1f2937 !important; }
+body.light [class*="text-zinc-200"] { color: #374151 !important; }
+body.light [class*="text-zinc-300"] { color: #4b5563 !important; }
+body.light [class*="text-zinc-400"] { color: #6b7280 !important; }
+body.light [class*="text-zinc-500"] { color: #9ca3af !important; }
+body.light [class*="text-zinc-600"] { color: #d1d5db !important; }
+body.light [class*="text-zinc-700"] { color: #e5e7eb !important; }
+
+/* Light mode border overrides */
+body.light [class*="border-white"] { border-color: rgba(0,0,0,0.1) !important; }
 
 @layer utilities {
   .text-balance {
