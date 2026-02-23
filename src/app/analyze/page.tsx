@@ -3,7 +3,8 @@
 // Note: metadata must be in a separate server component for pages with "use client"
 // See src/app/analyze/layout.tsx for metadata
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
@@ -69,15 +70,15 @@ const EXAMPLE_URLS = [
 ]
 
 export default function AnalyzePage() {
+  const searchParams = useSearchParams()
   const [url, setUrl] = useState("")
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<AnalyzeResult | null>(null)
   const [error, setError] = useState<string | null>(null)
   const resultsRef = useRef<HTMLDivElement>(null)
 
-  async function handleAnalyze(e: React.FormEvent) {
-    e.preventDefault()
-    if (!url.trim()) return
+  async function runAnalyze(targetUrl: string) {
+    if (!targetUrl.trim()) return
     setLoading(true)
     setError(null)
     setResult(null)
@@ -86,7 +87,7 @@ export default function AnalyzePage() {
       const res = await fetch("/api/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url: url.trim() }),
+        body: JSON.stringify({ url: targetUrl.trim() }),
       })
       const data = await res.json()
       if (!res.ok) {
@@ -102,6 +103,21 @@ export default function AnalyzePage() {
     } finally {
       setLoading(false)
     }
+  }
+
+  // Pre-fill from ?url= query param and auto-run
+  useEffect(() => {
+    const param = searchParams.get("url")
+    if (param) {
+      setUrl(param)
+      runAnalyze(param)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  async function handleAnalyze(e: React.FormEvent) {
+    e.preventDefault()
+    runAnalyze(url)
   }
 
   const sourceLabel: Record<string, string> = {
