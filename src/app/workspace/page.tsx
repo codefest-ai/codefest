@@ -216,7 +216,8 @@ export default function WorkspacePage() {
   const goRef       = useRef<HTMLDivElement>(null)
 
   // Layer visibility — each unlocks when the one above it is complete
-  const showDomain   = problem.trim().length > 0
+  // showDomain also fires when domain is pre-set via ?domain= deep-link
+  const showDomain   = problem.trim().length > 0 || domain !== null
   const showAction   = showDomain  && domain  !== null
   const showStack    = showAction  && action  !== null
   const showGo       = showStack   && launched
@@ -344,7 +345,7 @@ export default function WorkspacePage() {
         )}
 
         {/* ── Layer 0: Problem ──────────────────────────────────────────── */}
-        {domain !== null ? (
+        {domain !== null && problem.trim().length > 0 ? (
           <DoneLayer
             label={problem.length > 60 ? problem.slice(0, 60) + "…" : problem}
             onReset={() => resetFrom("problem")}
