@@ -192,7 +192,7 @@ export default function HomePage() {
           </div>
 
           {/* Stats strip — live data when available */}
-          <div className="flex items-center gap-6 mt-10 pt-8 border-t border-white/[0.05]">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mt-10 pt-8 border-t border-white/[0.05]">
             {[
               {
                 value: statsLoading ? null : (stats?.totalBookmarks ?? 0) > 0

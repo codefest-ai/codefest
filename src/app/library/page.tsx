@@ -507,6 +507,7 @@ export default function LibraryPage() {
             borderRadius: "10px", padding: "10px 18px",
             fontFamily: "ui-monospace, monospace", fontSize: "12px", color: "#f9a8d4",
             boxShadow: "0 4px 24px rgba(0,0,0,0.5)", whiteSpace: "nowrap",
+            maxWidth: "calc(100vw - 32px)", overflow: "hidden", textOverflow: "ellipsis",
             animation: "fadeIn 0.15s ease",
           }}
         >
