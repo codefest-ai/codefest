@@ -6,6 +6,7 @@ import { Zap, ArrowRight, Clock, Github, Bookmark, TrendingUp } from "lucide-rea
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import componentsData from "@/data/components_seed.json"
+import hackathonsData from "@/data/hackathons.json"
 import { DOMAINS, PATTERNS, CAT_COLORS, DIFF_COLORS } from "@/data/constants"
 import { createClient } from "@/lib/supabase/client"
 
@@ -308,12 +309,9 @@ export default function HomePage() {
           {/* Horizontal scroll */}
           <div className="flex gap-4 overflow-x-auto pb-4 -mx-6 px-6" style={{ scrollSnapType: "x mandatory" }}>
             {PATTERNS.map((p) => (
-              <a
+              <div
                 key={p.n}
-                href={p.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-none w-72 rounded-xl border border-white/[0.06] bg-surface-1 p-5 hover:border-white/[0.12] hover:bg-surface-2 transition-all block"
+                className="flex-none w-72 rounded-xl border border-white/[0.06] bg-surface-1 p-5 flex flex-col"
                 style={{ scrollSnapAlign: "start" }}
               >
                 {/* Place badge */}
@@ -334,7 +332,7 @@ export default function HomePage() {
                 <div className="text-xs text-zinc-500 leading-relaxed mb-4 line-clamp-2">{p.d}</div>
 
                 {/* Stack pills */}
-                <div className="flex gap-1.5 flex-wrap">
+                <div className="flex gap-1.5 flex-wrap mb-4">
                   {p.stack.map((s) => (
                     <span
                       key={s}
@@ -343,6 +341,79 @@ export default function HomePage() {
                       {s}
                     </span>
                   ))}
+                </div>
+
+                {/* Actions */}
+                <div className="mt-auto flex gap-2">
+                  <Link
+                    href={`/workspace?domain=${p.domainSlug}`}
+                    className="flex-1 text-center text-[10px] font-mono rounded-lg border border-brand-500/25 text-brand-400 py-1.5 hover:bg-brand-500/10 transition-colors"
+                  >
+                    build this →
+                  </Link>
+                  <a
+                    href={p.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 text-center text-[10px] font-mono rounded-lg border border-white/[0.08] text-zinc-500 py-1.5 hover:text-zinc-300 hover:border-white/20 transition-colors"
+                  >
+                    view project ↗
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── UPCOMING HACKATHONS ─────────────────────────────────── */}
+      <section className="border-t border-white/[0.05] py-14">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="flex items-baseline justify-between mb-8">
+            <div>
+              <div className="font-mono text-[10px] tracking-[0.12em] uppercase text-brand-500 mb-2">
+                03 · compete
+              </div>
+              <h2 className="text-xl font-semibold tracking-tight">Upcoming Hackathons</h2>
+              <p className="text-sm text-zinc-500 mt-1">Events worth preparing for. Show up ready.</p>
+            </div>
+            <a
+              href="https://mlh.io/seasons/2026/events"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors font-mono shrink-0"
+            >
+              all events on MLH →
+            </a>
+          </div>
+
+          <div className="flex gap-3 overflow-x-auto pb-2 -mx-6 px-6" style={{ scrollSnapType: "x mandatory" }}>
+            {hackathonsData.hackathons.map((h) => (
+              <a
+                key={h.name}
+                href={h.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ scrollSnapAlign: "start" }}
+                className="flex-none w-60 rounded-xl border border-white/[0.06] bg-surface-1 p-4 hover:border-white/[0.12] hover:bg-surface-2 transition-all block"
+              >
+                <div className="flex items-start justify-between gap-2 mb-3">
+                  <span className={`font-mono text-[9px] px-1.5 py-0.5 rounded-full border shrink-0 ${
+                    h.registrationOpen
+                      ? "text-brand-400 bg-brand-500/10 border-brand-500/20"
+                      : "text-zinc-500 bg-white/[0.03] border-white/[0.06]"
+                  }`}>
+                    {h.registrationOpen ? "open" : "soon"}
+                  </span>
+                  <span className="font-mono text-[9px] text-zinc-600 uppercase tracking-wider">
+                    {h.format}
+                  </span>
+                </div>
+                <div className="text-sm font-semibold text-zinc-100 mb-0.5">{h.name}</div>
+                <div className="text-[11px] text-zinc-600 mb-3">{h.org}</div>
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[10px] text-zinc-500">{h.date}</span>
+                  <ArrowRight className="h-3 w-3 text-zinc-700" />
                 </div>
               </a>
             ))}
@@ -356,7 +427,7 @@ export default function HomePage() {
           <div className="flex items-baseline justify-between mb-8">
             <div>
               <div className="font-mono text-[10px] tracking-[0.12em] uppercase text-brand-500 mb-2">
-                03 · build
+                04 · build
               </div>
               <h2 className="text-xl font-semibold tracking-tight">Component Library</h2>
               <p className="text-sm text-zinc-500 mt-1">

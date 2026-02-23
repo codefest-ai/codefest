@@ -1,0 +1,64 @@
+{
+  "hackathons": [
+    {
+      "name": "HackIllinois",
+      "org": "University of Illinois",
+      "date": "Mar 2026",
+      "format": "in-person",
+      "location": "Urbana-Champaign, IL",
+      "href": "https://hackillinois.org",
+      "domains": ["Open"],
+      "registrationOpen": true
+    },
+    {
+      "name": "HopHacks",
+      "org": "Johns Hopkins University",
+      "date": "Mar 2026",
+      "format": "in-person",
+      "location": "Baltimore, MD",
+      "href": "https://hophacks.com",
+      "domains": ["Health", "Civic", "Open"],
+      "registrationOpen": true
+    },
+    {
+      "name": "HackPrinceton",
+      "org": "Princeton University",
+      "date": "Apr 2026",
+      "format": "in-person",
+      "location": "Princeton, NJ",
+      "href": "https://hackprinceton.com",
+      "domains": ["Open"],
+      "registrationOpen": false
+    },
+    {
+      "name": "HackDavis",
+      "org": "UC Davis",
+      "date": "Apr 2026",
+      "format": "in-person",
+      "location": "Davis, CA",
+      "href": "https://hackdavis.io",
+      "domains": ["Social Good"],
+      "registrationOpen": false
+    },
+    {
+      "name": "SteelHacks",
+      "org": "University of Pittsburgh",
+      "date": "Apr 2026",
+      "format": "in-person",
+      "location": "Pittsburgh, PA",
+      "href": "https://steelhacks.com",
+      "domains": ["Open"],
+      "registrationOpen": false
+    },
+    {
+      "name": "SB Hacks",
+      "org": "UC Santa Barbara",
+      "date": "May 2026",
+      "format": "in-person",
+      "location": "Santa Barbara, CA",
+      "href": "https://sbhacks.com",
+      "domains": ["Open"],
+      "registrationOpen": false
+    }
+  ]
+}
