@@ -16,7 +16,7 @@ import { Settings } from "lucide-react"
 
 const DOMAIN_KEYWORDS: Record<string, string[]> = {
   climate:   ["climate", "carbon", "emission", "energy", "solar", "renewable", "sustainability",
-               "green", "pollution", "waste", "recycling", "temperature", "weather", "forest",
+               "green", "pollution", "recycling", "temperature", "weather", "forest",
                "water", "drought", "wildfire", "ecosystem", "biodiversity", "greenhouse"],
   health:    ["health", "medical", "patient", "doctor", "hospital", "clinic", "mental health",
                "wellness", "disability", "chronic", "aging", "elderly", "medicine", "prescription",
@@ -190,6 +190,7 @@ type StackTool = {
   desc: string
   tradeoff?: string
   competesWidth?: string[]
+  optIn?: boolean  // when true, not selected by default — user opts in
 }
 
 type CustomComponent = {
@@ -223,6 +224,7 @@ const LIBRARY_TOOLS: Record<string, StackTool[]> = {
       desc: "Beautiful custom maps with powerful styling and layer control.",
       tradeoff: "Best if: design matters or need advanced layers. Requires API key — free tier is generous.",
       competesWidth: ["react-leaflet"],
+      optIn: true,
     },
   ],
   form: [
@@ -246,6 +248,7 @@ const LIBRARY_TOOLS: Record<string, StackTool[]> = {
       desc: "Powerful chains and agents for complex AI flows.",
       tradeoff: "Best if: building RAG pipelines or multi-step agents. Steeper learning curve.",
       competesWidth: ["Vercel AI SDK"],
+      optIn: true,
     },
     { name: "Groq", href: "https://console.groq.com/docs/openai", setup: 10, category: "llm", desc: "Fast LLM inference, free tier, OpenAI-compatible API." },
   ],
@@ -265,6 +268,7 @@ const LIBRARY_TOOLS: Record<string, StackTool[]> = {
       desc: "Beautiful, animated charts with responsive support.",
       tradeoff: "Best if: visual quality matters and you have time to configure. Larger bundle.",
       competesWidth: ["Recharts"],
+      optIn: true,
     },
     { name: "shadcn/ui",      href: "https://ui.shadcn.com",                               setup: 10, category: "ui",     desc: "Copy-paste components." },
     { name: "Tanstack Table", href: "https://tanstack.com/table/latest/docs/introduction", setup: 15, category: "tables", desc: "Headless data table — sort, filter, paginate." },
@@ -622,7 +626,7 @@ export default function WorkspacePage() {
   function confirmActions() {
     if (actions.length === 0) return
     const { tools, custom } = getStackForActions(actions, domains)
-    setStack(tools.map(t => t.name))
+    setStack(tools.filter(t => !t.optIn).map(t => t.name))
     setCustomStack(custom.map(c => c.id))
     setActionsConfirmed(true)
     scrollTo(stackRef)
