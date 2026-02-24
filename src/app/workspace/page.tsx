@@ -7,6 +7,7 @@ import { useAuth } from "@/components/AuthProvider"
 import {
   Zap, Clock, ExternalLink, BookOpen, ArrowRight,
   RotateCcw, ChevronDown, FileText, Layers, CheckCircle2,
+  Copy, X, Upload,
 } from "lucide-react"
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore — lucide-react typings incomplete in this install
@@ -325,6 +326,64 @@ ${customSection}
 `
 }
 
+// ── Import template ────────────────────────────────────────────────────────
+
+const IMPORT_TEMPLATE = `I'm setting up my hackathon workspace on codefest.ai. Based on what you know about our project, please fill out this template exactly — don't add extra commentary, just fill in the fields:
+
+---BEGIN CODEFEST SESSION---
+
+PROBLEM: [one or two sentences — who is stuck and what are they stuck doing?]
+
+DOMAINS: [comma-separated, choose any that apply: climate, health, education, food, finance, civic, safety, transport, other]
+
+FEATURES:
+- [pick from these exactly, one per line:
+  Help people find resources near them
+  Help people get from A to B
+  Screen people and collect their information
+  Match people to what they need
+  Let people ask questions and get plain-language answers
+  Show patterns in data to decision-makers
+  Notify people when something changes
+  Let people see their progress or status
+  Let people coordinate or communicate in real-time
+  Capture and share what was learned]
+
+STACK (optional — list tools/libraries you're already using):
+- [one per line, or leave blank]
+
+---END CODEFEST SESSION---`
+
+function parseImport(text: string): {
+  problem?: string
+  domains?: string[]
+  actions?: string[]
+} {
+  // Try to extract between markers; fall back to full text
+  const markerMatch = text.match(/---BEGIN CODEFEST SESSION---\n([\s\S]*?)---END CODEFEST SESSION---/)
+  const content = markerMatch ? markerMatch[1] : text
+
+  // PROBLEM
+  const problemMatch = content.match(/PROBLEM:\s*([\s\S]+?)(?=\n\s*\n[A-Z]+:|$)/)
+  const problem = problemMatch?.[1]?.replace(/\[.*?\]/g, "").trim()
+
+  // DOMAINS — match by id
+  const domainsMatch = content.match(/DOMAINS:\s*([\s\S]+?)(?=\n\s*\n[A-Z]+:|$)/)
+  const domainText = (domainsMatch?.[1] || "").toLowerCase()
+  const domains = DOMAINS
+    .filter(d => domainText.includes(d.id))
+    .map(d => d.id)
+
+  // FEATURES — fuzzy match first ~25 chars of userNeed
+  const featuresMatch = content.match(/FEATURES:\s*([\s\S]+?)(?=\n\s*\n[A-Z]+:|---END|$)/)
+  const featuresText = (featuresMatch?.[1] || "").toLowerCase()
+  const actions = ACTIONS
+    .filter(a => featuresText.includes(a.userNeed.toLowerCase().slice(0, 25)))
+    .map(a => a.id)
+
+  return { problem, domains, actions }
+}
+
 // ── Board zone component ───────────────────────────────────────────────────
 
 function BoardZone({
@@ -368,6 +427,11 @@ export default function WorkspacePage() {
   const [launched,         setLaunched]         = useState(false)
   const [expandedActions,  setExpandedActions]  = useState<Set<string>>(new Set())
   const [sessionName]                           = useState("Hackathon Session")
+  const [showImport,     setShowImport]         = useState(false)
+  const [importStep,     setImportStep]         = useState<"copy" | "paste">("copy")
+  const [importText,     setImportText]         = useState("")
+  const [importCopied,   setImportCopied]       = useState(false)
+  const [importError,    setImportError]        = useState("")
 
   const actionRef = useRef<HTMLDivElement>(null)
   const stackRef  = useRef<HTMLDivElement>(null)
@@ -475,6 +539,39 @@ export default function WorkspacePage() {
     URL.revokeObjectURL(url)
   }
 
+  function copyTemplate() {
+    navigator.clipboard.writeText(IMPORT_TEMPLATE)
+    setImportCopied(true)
+    setTimeout(() => setImportCopied(false), 2000)
+  }
+
+  function applyImport() {
+    const parsed = parseImport(importText)
+    if (!parsed.problem && (!parsed.domains || parsed.domains.length === 0)) {
+      setImportError("Couldn't parse this — make sure you pasted the AI's full response.")
+      return
+    }
+    // Reset everything
+    resetFrom("problem")
+    // Apply parsed values
+    if (parsed.problem) setProblem(parsed.problem)
+    if (parsed.domains && parsed.domains.length > 0) {
+      setDomains(parsed.domains)
+      setDomainsConfirmed(true)
+    }
+    if (parsed.actions && parsed.actions.length > 0) {
+      setActions(parsed.actions)
+      setActionsConfirmed(true)
+      const { tools, custom } = getStackForActions(parsed.actions, parsed.domains || [])
+      setStack(tools.filter(t => !t.optIn).map(t => t.name))
+      setCustomStack(custom.map(c => c.id))
+    }
+    setShowImport(false)
+    setImportText("")
+    setImportStep("copy")
+    setImportError("")
+  }
+
   // ── Render ──────────────────────────────────────────────────────────
   return (
     <div className="h-screen bg-surface-0 flex flex-col overflow-hidden">
@@ -502,6 +599,13 @@ export default function WorkspacePage() {
 
           {/* Right: actions */}
           <div className="flex items-center gap-3 shrink-0">
+            <button
+              onClick={() => { setShowImport(true); setImportStep("copy") }}
+              className="flex items-center gap-1.5 rounded-lg border border-white/[0.08] px-3 py-1.5 text-xs text-zinc-400 hover:text-white hover:border-white/20 transition-colors"
+            >
+              <Upload className="h-3 w-3" />
+              Import from AI
+            </button>
             {launched && (
               <button
                 onClick={downloadContextPack}
@@ -972,6 +1076,89 @@ export default function WorkspacePage() {
           </div>
         </div>
       </div>
+
+      {/* ── Import from AI modal ──────────────────────────────────── */}
+      {showImport && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+          <div className="w-full max-w-lg rounded-2xl border border-white/[0.08] bg-surface-1 shadow-2xl">
+            {/* Modal header */}
+            <div className="flex items-center justify-between px-5 py-4 border-b border-white/[0.06]">
+              <div>
+                <h3 className="text-sm font-semibold text-zinc-100">Import from AI</h3>
+                <p className="text-[10px] font-mono text-zinc-600 mt-0.5">
+                  {importStep === "copy" ? "Step 1 of 2 — copy this prompt" : "Step 2 of 2 — paste the response"}
+                </p>
+              </div>
+              <button onClick={() => { setShowImport(false); setImportStep("copy"); setImportText(""); setImportError("") }}>
+                <X className="h-4 w-4 text-zinc-600 hover:text-zinc-300 transition-colors" />
+              </button>
+            </div>
+
+            {importStep === "copy" ? (
+              /* Step 1: Copy template prompt */
+              <div className="p-5">
+                <p className="text-xs text-zinc-400 mb-3 leading-relaxed">
+                  Your AI already has your project context. Paste this prompt into it — it will fill out your session template, then bring it back here.
+                </p>
+                <div className="relative rounded-xl border border-white/[0.06] bg-surface-0 p-4 mb-4">
+                  <pre className="text-[10px] text-zinc-500 font-mono leading-relaxed whitespace-pre-wrap max-h-52 overflow-y-auto" style={{ scrollbarWidth: "thin" }}>
+                    {IMPORT_TEMPLATE}
+                  </pre>
+                </div>
+                <div className="flex gap-2">
+                  <button
+                    onClick={copyTemplate}
+                    className="flex-1 flex items-center justify-center gap-2 rounded-xl border border-brand-500/30 bg-brand-500/[0.06] px-4 py-2.5 text-xs font-medium text-brand-400 hover:bg-brand-500/12 transition-all"
+                  >
+                    <Copy className="h-3.5 w-3.5" />
+                    {importCopied ? "Copied!" : "Copy prompt"}
+                  </button>
+                  <button
+                    onClick={() => setImportStep("paste")}
+                    className="flex-1 flex items-center justify-center gap-2 rounded-xl border border-white/[0.08] px-4 py-2.5 text-xs text-zinc-400 hover:text-white hover:border-white/20 transition-colors"
+                  >
+                    I've got the response →
+                  </button>
+                </div>
+              </div>
+            ) : (
+              /* Step 2: Paste response */
+              <div className="p-5">
+                <p className="text-xs text-zinc-400 mb-3 leading-relaxed">
+                  Paste your AI's filled-out response below. We'll extract the fields and populate your session board.
+                </p>
+                <textarea
+                  value={importText}
+                  onChange={e => { setImportText(e.target.value); setImportError("") }}
+                  placeholder="Paste the AI's response here..."
+                  className="w-full rounded-xl border border-white/[0.08] bg-surface-0 px-4 py-3 text-xs text-zinc-300 placeholder-zinc-700 resize-none focus:outline-none focus:border-brand-500/40 transition-colors font-mono leading-relaxed mb-2"
+                  rows={10}
+                  autoFocus
+                />
+                {importError && (
+                  <p className="text-[10px] text-red-400 font-mono mb-3">{importError}</p>
+                )}
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setImportStep("copy")}
+                    className="px-4 py-2.5 text-xs text-zinc-600 hover:text-zinc-400 transition-colors"
+                  >
+                    ← back
+                  </button>
+                  <button
+                    onClick={applyImport}
+                    disabled={importText.trim().length === 0}
+                    className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-brand-500 px-4 py-2.5 text-xs font-semibold text-black hover:bg-brand-400 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                  >
+                    <Zap className="h-3.5 w-3.5" />
+                    Populate my session
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
