@@ -3,7 +3,7 @@ title: "Stop Wasting the First Hour"
 description: "Every hackathon has the same bottleneck: the first 60 minutes. Here's why it happens and what to do instead."
 date: "2026-02-10"
 tags: "strategy,planning"
-author: "Evren Arat"
+author: "codefest.ai"
 ---
 
 The clock starts. Twelve teams open their laptops. And almost every single one of them spends the first hour doing the same thing: debating which framework to use.

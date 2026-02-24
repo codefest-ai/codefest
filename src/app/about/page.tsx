@@ -92,7 +92,7 @@ export default function AboutPage() {
             </p>
             <p>
               It was built by{" "}
-              <span className="text-zinc-200">Evren Arat</span> — a hackathon
+              <span className="text-zinc-200">codefest.ai</span> — a hackathon
               participant, not a hackathon vendor — out of the specific
               frustration of wasting the first hour every time.
             </p>

@@ -3,7 +3,7 @@ title: "Auth Patterns for Hackathons: Pick One and Commit"
 description: "Authentication kills more hackathon projects than bad ideas do. Here's the decision framework to get past it in under 10 minutes."
 date: "2026-02-14"
 tags: "auth,strategy"
-author: "Evren Arat"
+author: "codefest.ai"
 ---
 
 Auth is a trap. Not because it's technically hard — it isn't, anymore — but because it *feels* like a decision that matters, so teams debate it. Meanwhile the clock is running.

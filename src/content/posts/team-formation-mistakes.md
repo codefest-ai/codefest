@@ -3,7 +3,7 @@ title: "The 5 Team Formation Mistakes That Kill Hackathon Projects"
 description: "Bad team dynamics surface faster in a 24-hour sprint than anywhere else. Here's what to watch for before the clock starts."
 date: "2026-02-18"
 tags: "teams,strategy,lessons"
-author: "Evren Arat"
+author: "codefest.ai"
 ---
 
 The hardest part of a hackathon isn't the code. It's the people.

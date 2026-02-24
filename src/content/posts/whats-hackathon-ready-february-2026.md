@@ -3,7 +3,7 @@ title: "What's Hackathon-Ready in February 2026"
 description: "New tools worth your attention this month — and the ones to skip. A curated look at what's actually useful when the clock is ticking."
 date: 2026-02-22
 tags: resources, strategy
-author: Evren Arat
+author: codefest.ai
 ---
 
 Every month, something new lands in the developer ecosystem. Most of it is noise. Some of it genuinely changes what you can build in a hackathon weekend. This is the filter.

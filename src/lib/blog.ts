@@ -129,7 +129,7 @@ export function getAllPosts(): PostMeta[] {
         description: meta.description ?? "",
         date: meta.date ?? "2026-01-01",
         tags: meta.tags ? meta.tags.split(",").map(t => t.trim()) : [],
-        author: meta.author ?? "Evren Arat",
+        author: meta.author ?? "codefest.ai",
         readingTime: estimateReadingTime(body),
       }
     })
@@ -149,7 +149,7 @@ export function getPost(slug: string): Post | null {
     description: meta.description ?? "",
     date: meta.date ?? "2026-01-01",
     tags: meta.tags ? meta.tags.split(",").map(t => t.trim()) : [],
-    author: meta.author ?? "Evren Arat",
+    author: meta.author ?? "codefest.ai",
     readingTime: estimateReadingTime(body),
     content: body,
     html: markdownToHtml(body),

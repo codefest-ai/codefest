@@ -3,7 +3,7 @@ title: "The Default Stack for First-Time Hackathon Teams"
 description: "Stop researching. Here's the exact stack to use when you don't have time to evaluate options. Next.js, Supabase, and Vercel — and why everything else can wait."
 date: "2026-02-16"
 tags: "resources,strategy,stack"
-author: "Evren Arat"
+author: "codefest.ai"
 ---
 
 One of the most expensive decisions in a hackathon is the decision that never gets made — the endless comparing of options while the clock runs down.

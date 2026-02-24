@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   },
   description: DESCRIPTION,
   keywords: ["hackathon", "hackathon tools", "component library", "hackathon OS", "team formation", "project planning", "SDG", "codefest"],
-  authors: [{ name: "Evren Arat", url: "https://codefest.ai" }],
+  authors: [{ name: "codefest.ai", url: "https://codefest.ai" }],
   creator: "Codefest.ai",
   openGraph: {
     type: "website",

@@ -3,7 +3,7 @@ title: "The Two-Word Project Name Pattern"
 description: "Why the best hackathon projects sound the same — and what that tells you about winning."
 date: "2026-02-23"
 tags: strategy, planning
-author: "Evren Arat"
+author: "codefest.ai"
 ---
 
 Look at a list of top hackathon winners long enough and a pattern emerges.

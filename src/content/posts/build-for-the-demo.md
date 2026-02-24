@@ -3,7 +3,7 @@ title: "Build for the Demo, Not the Dream"
 description: "The most common way hackathon projects fail isn't a bad idea — it's building the wrong version of a good idea. Here's how to scope for a 3-minute demo from the start."
 date: "2026-02-20"
 tags: "strategy,planning,demo"
-author: "Evren Arat"
+author: "codefest.ai"
 ---
 
 You have 24 hours. You have a great idea. And sometime around hour 18, you realize you've been building the version of the project that exists in your head — not the version that can be shown on a projector in 3 minutes.

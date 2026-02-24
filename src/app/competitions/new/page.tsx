@@ -213,7 +213,7 @@ export default function NewCompetitionPage() {
       </main>
 
       <footer className="sp-footer">
-        <div className="sp-foot-l"><span>⚡</span><span>codefest.ai</span><span>·</span><span>throughline systems llc</span></div>
+        <div className="sp-foot-l"><span>⚡</span><span>codefest.ai</span><span>·</span></div>
         <div className="sp-foot-r">built for builders · © 2026</div>
       </footer>
     </div>
