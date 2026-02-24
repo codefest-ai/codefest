@@ -54,7 +54,7 @@ const REFUSING = [
   "Gamification that optimizes for engagement over outcomes",
   "Organizer lock-in — we want participants to come back because it helped, not because they have to",
   "Keeping projects siloed — the Preservation Layer is coming because knowledge should compound",
-  "Becoming another event management platform — Devpost exists; we're not trying to replace it",
+  "Becoming an event management platform — registration, judging pipelines, and organizer tooling are a different problem",
 ]
 
 export default function AboutPage() {
@@ -79,22 +79,23 @@ export default function AboutPage() {
 
           <div className="max-w-2xl space-y-4 text-zinc-400 text-base leading-relaxed">
             <p>
-              Every platform in the hackathon ecosystem serves organizers.
-              Devpost manages registrations. TAIKAI handles judging. HackerEarth
-              runs pipelines. None of them are open when the clock starts and
-              a team of four is trying to figure out which database to use.
+              When the clock starts, every team faces the same first hour:
+              which database, which auth library, which deployment target.
+              That friction isn&rsquo;t teaching anything — the learning is in the
+              building, the scoping, the problem itself.
             </p>
             <p>
-              Codefest.ai is the tool that was missing. The curated resource
-              layer. The workspace that gets teams aligned before they write
-              a line of code. The place where the work from last year&rsquo;s
-              hackathon still lives, forkable and learnable from.
+              Codefest.ai is built to remove that overhead for everyone — not
+              to give any one team an advantage over another, but to lower the
+              barriers that get in the way of building great things. Technical
+              or non-technical, first-time or veteran: the goal is to get every
+              team in front of what they need as fast as possible, so they can
+              start doing the actual work.
             </p>
             <p>
-              It was built by{" "}
-              <span className="text-zinc-200">codefest.ai</span> — a hackathon
-              participant, not a hackathon vendor — out of the specific
-              frustration of wasting the first hour every time.
+              It grew out of direct experience with that first hour — and a
+              belief that the hackathon should be about what you build,
+              not how long it takes to find the right tool.
             </p>
           </div>
         </div>
