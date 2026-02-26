@@ -589,8 +589,8 @@ export default function WorkspacePage() {
             </span>
           </Link>
 
-          {/* Center: session name + template badge */}
-          <div className="flex items-center gap-2">
+          {/* Center: session name + template badge — hidden on mobile */}
+          <div className="hidden md:flex items-center gap-2">
             <span className="text-sm font-medium text-zinc-300">{sessionName}</span>
             <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-600 border border-white/[0.06] rounded px-1.5 py-0.5">
               default template
@@ -598,27 +598,27 @@ export default function WorkspacePage() {
           </div>
 
           {/* Right: actions */}
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex items-center gap-2 md:gap-3 shrink-0">
             <button
               onClick={() => { setShowImport(true); setImportStep("copy") }}
-              className="flex items-center gap-1.5 rounded-lg border border-white/[0.08] px-3 py-1.5 text-xs text-zinc-400 hover:text-white hover:border-white/20 transition-colors"
+              className="flex items-center gap-1.5 rounded-lg border border-white/[0.08] px-2.5 md:px-3 py-1.5 text-xs text-zinc-400 hover:text-white hover:border-white/20 transition-colors"
             >
               <Upload className="h-3 w-3" />
-              Import from AI
+              <span className="hidden md:inline">Import from AI</span>
             </button>
             {launched && (
               <button
                 onClick={downloadContextPack}
-                className="flex items-center gap-1.5 rounded-lg bg-brand-500 px-3 py-1.5 text-xs font-semibold text-black hover:bg-brand-400 transition-all"
+                className="flex items-center gap-1.5 rounded-lg bg-brand-500 px-2.5 md:px-3 py-1.5 text-xs font-semibold text-black hover:bg-brand-400 transition-all"
               >
                 <BookOpen className="h-3 w-3" />
-                Export .md
+                <span className="hidden md:inline">Export .md</span>
               </button>
             )}
             {!user && launched && (
               <Link
                 href="/login"
-                className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors border border-white/[0.06] rounded-lg px-3 py-1.5"
+                className="hidden md:inline text-xs text-zinc-500 hover:text-zinc-300 transition-colors border border-white/[0.06] rounded-lg px-3 py-1.5"
               >
                 Save session
               </Link>
@@ -628,19 +628,19 @@ export default function WorkspacePage() {
               className="flex items-center gap-1.5 text-xs text-zinc-600 hover:text-zinc-400 transition-colors"
             >
               <RotateCcw className="h-3 w-3" />
-              restart
+              <span className="hidden md:inline">restart</span>
             </button>
           </div>
         </div>
       </header>
 
       {/* ── Main split ────────────────────────────────────────────────── */}
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex flex-col md:flex-row overflow-y-auto md:overflow-hidden">
 
         {/* ── LEFT PANEL: Control / Cascade ─────────────────────────── */}
         <div
           ref={leftRef}
-          className="w-[400px] shrink-0 border-r border-white/[0.06] overflow-y-auto flex flex-col"
+          className="w-full md:w-[400px] shrink-0 border-b md:border-b-0 md:border-r border-white/[0.06] md:overflow-y-auto flex flex-col"
           style={{ scrollbarWidth: "none" }}
         >
           <div className="p-5 space-y-5">
@@ -901,7 +901,7 @@ export default function WorkspacePage() {
         </div>
 
         {/* ── RIGHT PANEL: Board ─────────────────────────────────────── */}
-        <div className="flex-1 overflow-y-auto bg-surface-0" style={{ scrollbarWidth: "thin", scrollbarColor: "rgba(255,255,255,0.06) transparent" }}>
+        <div className="flex-1 md:overflow-y-auto bg-surface-0" style={{ scrollbarWidth: "thin", scrollbarColor: "rgba(255,255,255,0.06) transparent" }}>
           <div className="p-6 space-y-3 max-w-2xl">
 
             {/* Board header */}
