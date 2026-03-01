@@ -206,7 +206,7 @@ export default function HomePage() {
                   : `${DOMAINS.length}`,
                 label: (stats?.totalSessions ?? 0) > 0 ? "sessions started" : "challenge domains",
               },
-              { value: "~15min", label: "avg setup time saved" },
+              { value: "16min", label: "avg setup time, all 58 tools" },
             ].map((s, i) => (
               <div key={i}>
                 <div className="text-lg font-bold text-brand-400">

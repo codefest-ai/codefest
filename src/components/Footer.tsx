@@ -13,9 +13,19 @@ export function Footer() {
               codefest<span className="text-brand-400">.ai</span>
             </span>
           </div>
-          <p className="text-sm text-zinc-600">
-            Built for builders. &copy; {new Date().getFullYear()} Codefest.ai
-          </p>
+          <div className="flex items-center gap-4">
+            <a
+              href="https://ko-fi.com/codefest"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-zinc-600 hover:text-brand-400 transition-colors"
+            >
+              ☕ Support codefest
+            </a>
+            <p className="text-sm text-zinc-600">
+              Built for builders. &copy; {new Date().getFullYear()} Codefest.ai
+            </p>
+          </div>
         </div>
       </div>
     </footer>

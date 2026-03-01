@@ -615,6 +615,15 @@ export default function WorkspacePage() {
                 <span className="hidden md:inline">Export .md</span>
               </button>
             )}
+            <a
+              href="https://ko-fi.com/codefest"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:flex items-center gap-1.5 text-xs text-zinc-500 hover:text-brand-400 transition-colors border border-white/[0.06] hover:border-brand-500/25 rounded-lg px-2.5 py-1.5"
+              title="Support codefest"
+            >
+              ☕ <span className="hidden md:inline">Support</span>
+            </a>
             {!user && launched && (
               <Link
                 href="/login"
