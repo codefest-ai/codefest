@@ -1,0 +1,1424 @@
+{
+  "employers": [
+    {
+      "id": "islamic-relief",
+      "name": "Islamic Relief Worldwide",
+      "industry": "nonprofit",
+      "sub_industry": "humanitarian",
+      "revenue_sources": [
+        {
+          "source": "Charitable donations",
+          "pct": 85
+        },
+        {
+          "source": "Grants",
+          "pct": 15
+        }
+      ],
+      "positives": [
+        "islamic_mission",
+        "humanitarian",
+        "zakat_eligible"
+      ],
+      "company_type": "islamic_org",
+      "publicly_traded": false,
+      "employee_count": 3000,
+      "hq_country": "UK",
+      "careers_url": "https://www.islamic-relief.org/careers",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "wahed-invest",
+      "name": "Wahed Invest",
+      "industry": "islamic_finance",
+      "sub_industry": "robo_advisor",
+      "revenue_sources": [
+        {
+          "source": "Asset management fees",
+          "pct": 80
+        },
+        {
+          "source": "Platform subscriptions",
+          "pct": 20
+        }
+      ],
+      "positives": [
+        "shariah_compliant",
+        "muslim_founded",
+        "ethical_finance"
+      ],
+      "company_type": "muslim_founded",
+      "publicly_traded": false,
+      "employee_count": 200,
+      "hq_country": "US",
+      "careers_url": "https://wahedinvest.com/careers",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "zoya-financial",
+      "name": "Zoya Financial",
+      "industry": "islamic_finance",
+      "sub_industry": "stock_screening",
+      "revenue_sources": [
+        {
+          "source": "Premium subscriptions",
+          "pct": 90
+        },
+        {
+          "source": "API access",
+          "pct": 10
+        }
+      ],
+      "positives": [
+        "shariah_compliant",
+        "muslim_founded",
+        "ethical_finance"
+      ],
+      "company_type": "muslim_founded",
+      "publicly_traded": false,
+      "employee_count": 30,
+      "hq_country": "US",
+      "careers_url": "https://zoya.finance/careers",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "launchgood",
+      "name": "LaunchGood",
+      "industry": "technology",
+      "sub_industry": "crowdfunding",
+      "revenue_sources": [
+        {
+          "source": "Platform fees on campaigns",
+          "pct": 85
+        },
+        {
+          "source": "Premium services",
+          "pct": 15
+        }
+      ],
+      "positives": [
+        "muslim_founded",
+        "humanitarian"
+      ],
+      "company_type": "muslim_founded",
+      "publicly_traded": false,
+      "employee_count": 50,
+      "hq_country": "US",
+      "careers_url": "https://www.launchgood.com/careers",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "cair",
+      "name": "CAIR (Council on American-Islamic Relations)",
+      "industry": "nonprofit",
+      "sub_industry": "civil_rights",
+      "revenue_sources": [
+        {
+          "source": "Donations",
+          "pct": 70
+        },
+        {
+          "source": "Grants",
+          "pct": 30
+        }
+      ],
+      "positives": [
+        "islamic_mission",
+        "humanitarian"
+      ],
+      "company_type": "islamic_org",
+      "publicly_traded": false,
+      "employee_count": 300,
+      "hq_country": "US",
+      "careers_url": "https://www.cair.com/about/careers/",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "isna",
+      "name": "Islamic Society of North America (ISNA)",
+      "industry": "nonprofit",
+      "sub_industry": "religious_org",
+      "revenue_sources": [
+        {
+          "source": "Membership fees",
+          "pct": 30
+        },
+        {
+          "source": "Conference revenue",
+          "pct": 40
+        },
+        {
+          "source": "Donations",
+          "pct": 30
+        }
+      ],
+      "positives": [
+        "islamic_mission",
+        "zakat_eligible"
+      ],
+      "company_type": "islamic_org",
+      "publicly_traded": false,
+      "employee_count": 100,
+      "hq_country": "US",
+      "careers_url": "https://isna.net/careers/",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "saffron-road",
+      "name": "Saffron Road",
+      "industry": "halal_food",
+      "sub_industry": "packaged_food",
+      "revenue_sources": [
+        {
+          "source": "Halal food product sales",
+          "pct": 100
+        }
+      ],
+      "positives": [
+        "halal_certified",
+        "muslim_founded"
+      ],
+      "company_type": "halal_certified",
+      "publicly_traded": false,
+      "employee_count": 80,
+      "hq_country": "US",
+      "careers_url": "https://saffronroad.com",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "ifanca",
+      "name": "IFANCA (Islamic Food and Nutrition Council of America)",
+      "industry": "halal_food",
+      "sub_industry": "certification",
+      "revenue_sources": [
+        {
+          "source": "Certification fees",
+          "pct": 80
+        },
+        {
+          "source": "Consulting",
+          "pct": 20
+        }
+      ],
+      "positives": [
+        "islamic_mission",
+        "halal_certified"
+      ],
+      "company_type": "islamic_org",
+      "publicly_traded": false,
+      "employee_count": 40,
+      "hq_country": "US",
+      "careers_url": "https://www.ifanca.org",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "saturna-capital",
+      "name": "Saturna Capital (Amana Funds)",
+      "industry": "islamic_finance",
+      "sub_industry": "mutual_funds",
+      "revenue_sources": [
+        {
+          "source": "Fund management fees",
+          "pct": 90
+        },
+        {
+          "source": "Advisory services",
+          "pct": 10
+        }
+      ],
+      "positives": [
+        "shariah_compliant",
+        "ethical_finance"
+      ],
+      "company_type": "halal_certified",
+      "publicly_traded": false,
+      "employee_count": 100,
+      "hq_country": "US",
+      "careers_url": "https://www.saturna.com/careers",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "muslim-pro",
+      "name": "Muslim Pro",
+      "industry": "technology",
+      "sub_industry": "mobile_app",
+      "revenue_sources": [
+        {
+          "source": "Premium subscriptions",
+          "pct": 60
+        },
+        {
+          "source": "Advertising",
+          "pct": 40
+        }
+      ],
+      "positives": [
+        "islamic_mission",
+        "muslim_founded"
+      ],
+      "company_type": "muslim_founded",
+      "publicly_traded": false,
+      "employee_count": 80,
+      "hq_country": "SG",
+      "careers_url": "https://www.muslimpro.com/careers",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "google",
+      "name": "Google (Alphabet)",
+      "industry": "technology",
+      "sub_industry": "search_advertising",
+      "revenue_sources": [
+        {
+          "source": "Advertising",
+          "pct": 80
+        },
+        {
+          "source": "Cloud services",
+          "pct": 12
+        },
+        {
+          "source": "Hardware/other",
+          "pct": 8
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 180000,
+      "hq_country": "US",
+      "careers_url": "https://careers.google.com",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "DOUBTFUL",
+      "activities": [
+        "entertainment_mixed"
+      ]
+    },
+    {
+      "id": "microsoft",
+      "name": "Microsoft",
+      "industry": "technology",
+      "sub_industry": "software",
+      "revenue_sources": [
+        {
+          "source": "Cloud (Azure)",
+          "pct": 40
+        },
+        {
+          "source": "Productivity software",
+          "pct": 35
+        },
+        {
+          "source": "Gaming",
+          "pct": 15
+        },
+        {
+          "source": "Other",
+          "pct": 10
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 220000,
+      "hq_country": "US",
+      "careers_url": "https://careers.microsoft.com",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "DOUBTFUL",
+      "activities": [
+        "entertainment_mixed"
+      ]
+    },
+    {
+      "id": "amazon",
+      "name": "Amazon",
+      "industry": "technology",
+      "sub_industry": "ecommerce_cloud",
+      "revenue_sources": [
+        {
+          "source": "E-commerce retail",
+          "pct": 45
+        },
+        {
+          "source": "AWS cloud",
+          "pct": 30
+        },
+        {
+          "source": "Advertising",
+          "pct": 10
+        },
+        {
+          "source": "Subscriptions",
+          "pct": 10
+        },
+        {
+          "source": "Other",
+          "pct": 5
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 1500000,
+      "hq_country": "US",
+      "careers_url": "https://www.amazon.jobs",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "DOUBTFUL",
+      "activities": [
+        "alcohol_service",
+        "entertainment_mixed"
+      ]
+    },
+    {
+      "id": "salesforce",
+      "name": "Salesforce",
+      "industry": "technology",
+      "sub_industry": "crm_saas",
+      "revenue_sources": [
+        {
+          "source": "SaaS subscriptions",
+          "pct": 94
+        },
+        {
+          "source": "Professional services",
+          "pct": 6
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 73000,
+      "hq_country": "US",
+      "careers_url": "https://careers.salesforce.com",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "mozilla",
+      "name": "Mozilla Foundation",
+      "industry": "technology",
+      "sub_industry": "open_source",
+      "revenue_sources": [
+        {
+          "source": "Search partnerships",
+          "pct": 85
+        },
+        {
+          "source": "Donations",
+          "pct": 10
+        },
+        {
+          "source": "Other",
+          "pct": 5
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": false,
+      "employee_count": 800,
+      "hq_country": "US",
+      "careers_url": "https://careers.mozilla.org",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "jpmorgan",
+      "name": "JPMorgan Chase",
+      "industry": "financial_services",
+      "sub_industry": "investment_banking",
+      "revenue_sources": [
+        {
+          "source": "Interest-based lending",
+          "pct": 45
+        },
+        {
+          "source": "Investment banking fees",
+          "pct": 25
+        },
+        {
+          "source": "Asset management",
+          "pct": 20
+        },
+        {
+          "source": "Trading",
+          "pct": 10
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 300000,
+      "hq_country": "US",
+      "careers_url": "https://careers.jpmorgan.com",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "DOUBTFUL",
+      "activities": [
+        "interest_based_revenue",
+        "speculation_heavy"
+      ]
+    },
+    {
+      "id": "goldman-sachs",
+      "name": "Goldman Sachs",
+      "industry": "financial_services",
+      "sub_industry": "investment_banking",
+      "revenue_sources": [
+        {
+          "source": "Investment banking",
+          "pct": 25
+        },
+        {
+          "source": "Trading/markets",
+          "pct": 35
+        },
+        {
+          "source": "Asset management",
+          "pct": 25
+        },
+        {
+          "source": "Consumer banking",
+          "pct": 15
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 45000,
+      "hq_country": "US",
+      "careers_url": "https://www.goldmansachs.com/careers",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "DOUBTFUL",
+      "activities": [
+        "interest_based_revenue",
+        "speculation_heavy"
+      ]
+    },
+    {
+      "id": "stripe",
+      "name": "Stripe",
+      "industry": "technology",
+      "sub_industry": "payments",
+      "revenue_sources": [
+        {
+          "source": "Payment processing fees",
+          "pct": 95
+        },
+        {
+          "source": "Financial infrastructure",
+          "pct": 5
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": false,
+      "employee_count": 8000,
+      "hq_country": "US",
+      "careers_url": "https://stripe.com/jobs",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "nih",
+      "name": "National Institutes of Health (NIH)",
+      "industry": "government",
+      "sub_industry": "research",
+      "revenue_sources": [
+        {
+          "source": "Federal funding",
+          "pct": 100
+        }
+      ],
+      "positives": [
+        "humanitarian"
+      ],
+      "company_type": "conventional",
+      "publicly_traded": false,
+      "employee_count": 20000,
+      "hq_country": "US",
+      "careers_url": "https://jobs.nih.gov",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "unitedhealth",
+      "name": "UnitedHealth Group",
+      "industry": "healthcare",
+      "sub_industry": "health_insurance",
+      "revenue_sources": [
+        {
+          "source": "Health insurance premiums",
+          "pct": 65
+        },
+        {
+          "source": "Healthcare services (Optum)",
+          "pct": 35
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 400000,
+      "hq_country": "US",
+      "careers_url": "https://careers.unitedhealthgroup.com",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "DOUBTFUL",
+      "activities": [
+        "conventional_insurance"
+      ]
+    },
+    {
+      "id": "mayo-clinic",
+      "name": "Mayo Clinic",
+      "industry": "healthcare",
+      "sub_industry": "hospital",
+      "revenue_sources": [
+        {
+          "source": "Patient care",
+          "pct": 85
+        },
+        {
+          "source": "Research grants",
+          "pct": 10
+        },
+        {
+          "source": "Education",
+          "pct": 5
+        }
+      ],
+      "positives": [
+        "humanitarian"
+      ],
+      "company_type": "conventional",
+      "publicly_traded": false,
+      "employee_count": 76000,
+      "hq_country": "US",
+      "careers_url": "https://jobs.mayoclinic.org",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "khan-academy",
+      "name": "Khan Academy",
+      "industry": "education",
+      "sub_industry": "edtech",
+      "revenue_sources": [
+        {
+          "source": "Donations/philanthropy",
+          "pct": 80
+        },
+        {
+          "source": "Grants",
+          "pct": 20
+        }
+      ],
+      "positives": [
+        "humanitarian"
+      ],
+      "company_type": "conventional",
+      "publicly_traded": false,
+      "employee_count": 250,
+      "hq_country": "US",
+      "careers_url": "https://www.khanacademy.org/careers",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "lockheed-martin",
+      "name": "Lockheed Martin",
+      "industry": "manufacturing",
+      "sub_industry": "defense",
+      "revenue_sources": [
+        {
+          "source": "Aeronautics (fighter jets)",
+          "pct": 40
+        },
+        {
+          "source": "Missiles & fire control",
+          "pct": 20
+        },
+        {
+          "source": "Rotary/mission systems",
+          "pct": 20
+        },
+        {
+          "source": "Space systems",
+          "pct": 20
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 116000,
+      "hq_country": "US",
+      "careers_url": "https://www.lockheedmartinjobs.com",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "DOUBTFUL",
+      "activities": [
+        "weapons_manufacturing",
+        "defense_contractor"
+      ]
+    },
+    {
+      "id": "raytheon",
+      "name": "RTX (Raytheon Technologies)",
+      "industry": "manufacturing",
+      "sub_industry": "defense",
+      "revenue_sources": [
+        {
+          "source": "Missile systems",
+          "pct": 30
+        },
+        {
+          "source": "Defense electronics",
+          "pct": 30
+        },
+        {
+          "source": "Commercial aerospace",
+          "pct": 40
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 185000,
+      "hq_country": "US",
+      "careers_url": "https://careers.rtx.com",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "DOUBTFUL",
+      "activities": [
+        "weapons_manufacturing",
+        "defense_contractor"
+      ]
+    },
+    {
+      "id": "diageo",
+      "name": "Diageo",
+      "industry": "manufacturing",
+      "sub_industry": "beverages",
+      "revenue_sources": [
+        {
+          "source": "Alcoholic beverage sales",
+          "pct": 100
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 30000,
+      "hq_country": "UK",
+      "careers_url": "https://www.diageo.com/careers",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "NON_COMPLIANT",
+      "activities": [
+        "alcohol_production"
+      ]
+    },
+    {
+      "id": "ab-inbev",
+      "name": "AB InBev",
+      "industry": "manufacturing",
+      "sub_industry": "beverages",
+      "revenue_sources": [
+        {
+          "source": "Beer and alcoholic beverage sales",
+          "pct": 100
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 164000,
+      "hq_country": "BE",
+      "careers_url": "https://careers.ab-inbev.com",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "NON_COMPLIANT",
+      "activities": [
+        "alcohol_production"
+      ]
+    },
+    {
+      "id": "draftkings",
+      "name": "DraftKings",
+      "industry": "technology",
+      "sub_industry": "gambling",
+      "revenue_sources": [
+        {
+          "source": "Sports betting",
+          "pct": 70
+        },
+        {
+          "source": "Daily fantasy sports",
+          "pct": 20
+        },
+        {
+          "source": "iGaming",
+          "pct": 10
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 5000,
+      "hq_country": "US",
+      "careers_url": "https://careers.draftkings.com",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "NON_COMPLIANT",
+      "activities": [
+        "gambling"
+      ]
+    },
+    {
+      "id": "pfizer",
+      "name": "Pfizer",
+      "industry": "healthcare",
+      "sub_industry": "pharmaceutical",
+      "revenue_sources": [
+        {
+          "source": "Pharmaceutical drug sales",
+          "pct": 95
+        },
+        {
+          "source": "Licensing",
+          "pct": 5
+        }
+      ],
+      "positives": [
+        "humanitarian"
+      ],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 83000,
+      "hq_country": "US",
+      "careers_url": "https://www.pfizer.com/about/careers",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "DOUBTFUL",
+      "activities": [
+        "pharmaceutical_mixed"
+      ]
+    },
+    {
+      "id": "tesla",
+      "name": "Tesla",
+      "industry": "manufacturing",
+      "sub_industry": "automotive",
+      "revenue_sources": [
+        {
+          "source": "Electric vehicle sales",
+          "pct": 80
+        },
+        {
+          "source": "Energy/solar",
+          "pct": 10
+        },
+        {
+          "source": "Services",
+          "pct": 10
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 140000,
+      "hq_country": "US",
+      "careers_url": "https://www.tesla.com/careers",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "netflix",
+      "name": "Netflix",
+      "industry": "media",
+      "sub_industry": "streaming",
+      "revenue_sources": [
+        {
+          "source": "Streaming subscriptions",
+          "pct": 90
+        },
+        {
+          "source": "Advertising tier",
+          "pct": 10
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 13000,
+      "hq_country": "US",
+      "careers_url": "https://jobs.netflix.com",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "DOUBTFUL",
+      "activities": [
+        "entertainment_mixed"
+      ]
+    },
+    {
+      "id": "meta",
+      "name": "Meta (Facebook)",
+      "industry": "technology",
+      "sub_industry": "social_media",
+      "revenue_sources": [
+        {
+          "source": "Advertising",
+          "pct": 97
+        },
+        {
+          "source": "Reality Labs/VR",
+          "pct": 3
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 67000,
+      "hq_country": "US",
+      "careers_url": "https://www.metacareers.com",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "DOUBTFUL",
+      "activities": [
+        "entertainment_mixed"
+      ]
+    },
+    {
+      "id": "apple",
+      "name": "Apple",
+      "industry": "technology",
+      "sub_industry": "consumer_electronics",
+      "revenue_sources": [
+        {
+          "source": "iPhone/hardware",
+          "pct": 55
+        },
+        {
+          "source": "Services (App Store, iCloud)",
+          "pct": 25
+        },
+        {
+          "source": "Mac/iPad",
+          "pct": 15
+        },
+        {
+          "source": "Wearables",
+          "pct": 5
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 160000,
+      "hq_country": "US",
+      "careers_url": "https://jobs.apple.com",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "DOUBTFUL",
+      "activities": [
+        "entertainment_mixed"
+      ]
+    },
+    {
+      "id": "deloitte",
+      "name": "Deloitte",
+      "industry": "consulting",
+      "sub_industry": "professional_services",
+      "revenue_sources": [
+        {
+          "source": "Consulting",
+          "pct": 40
+        },
+        {
+          "source": "Audit",
+          "pct": 30
+        },
+        {
+          "source": "Tax",
+          "pct": 20
+        },
+        {
+          "source": "Advisory",
+          "pct": 10
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": false,
+      "employee_count": 415000,
+      "hq_country": "UK",
+      "careers_url": "https://www.deloitte.com/careers",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "mckinsey",
+      "name": "McKinsey & Company",
+      "industry": "consulting",
+      "sub_industry": "management_consulting",
+      "revenue_sources": [
+        {
+          "source": "Management consulting fees",
+          "pct": 100
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": false,
+      "employee_count": 45000,
+      "hq_country": "US",
+      "careers_url": "https://www.mckinsey.com/careers",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "state-farm",
+      "name": "State Farm",
+      "industry": "financial_services",
+      "sub_industry": "insurance",
+      "revenue_sources": [
+        {
+          "source": "Insurance premiums",
+          "pct": 80
+        },
+        {
+          "source": "Investment income",
+          "pct": 20
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": false,
+      "employee_count": 53000,
+      "hq_country": "US",
+      "careers_url": "https://www.statefarm.com/careers",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "DOUBTFUL",
+      "activities": [
+        "conventional_insurance",
+        "interest_based_revenue"
+      ]
+    },
+    {
+      "id": "philip-morris",
+      "name": "Philip Morris International",
+      "industry": "manufacturing",
+      "sub_industry": "tobacco",
+      "revenue_sources": [
+        {
+          "source": "Cigarettes",
+          "pct": 60
+        },
+        {
+          "source": "Heated tobacco (IQOS)",
+          "pct": 35
+        },
+        {
+          "source": "Other nicotine",
+          "pct": 5
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 82000,
+      "hq_country": "US",
+      "careers_url": "https://www.pmi.com/careers",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "DOUBTFUL",
+      "activities": [
+        "tobacco"
+      ]
+    },
+    {
+      "id": "tyson-foods",
+      "name": "Tyson Foods",
+      "industry": "manufacturing",
+      "sub_industry": "food_processing",
+      "revenue_sources": [
+        {
+          "source": "Beef",
+          "pct": 35
+        },
+        {
+          "source": "Chicken",
+          "pct": 30
+        },
+        {
+          "source": "Pork",
+          "pct": 20
+        },
+        {
+          "source": "Prepared foods",
+          "pct": 15
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 142000,
+      "hq_country": "US",
+      "careers_url": "https://www.tysonfoods.com/careers",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "NON_COMPLIANT",
+      "activities": [
+        "pork_processing"
+      ]
+    },
+    {
+      "id": "mercy-corps",
+      "name": "Mercy Corps",
+      "industry": "nonprofit",
+      "sub_industry": "humanitarian",
+      "revenue_sources": [
+        {
+          "source": "Government grants",
+          "pct": 60
+        },
+        {
+          "source": "Private donations",
+          "pct": 30
+        },
+        {
+          "source": "Other grants",
+          "pct": 10
+        }
+      ],
+      "positives": [
+        "humanitarian"
+      ],
+      "company_type": "conventional",
+      "publicly_traded": false,
+      "employee_count": 5500,
+      "hq_country": "US",
+      "careers_url": "https://www.mercycorps.org/careers",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "un",
+      "name": "United Nations",
+      "industry": "government",
+      "sub_industry": "international_org",
+      "revenue_sources": [
+        {
+          "source": "Member state contributions",
+          "pct": 100
+        }
+      ],
+      "positives": [
+        "humanitarian"
+      ],
+      "company_type": "conventional",
+      "publicly_traded": false,
+      "employee_count": 44000,
+      "hq_country": "US",
+      "careers_url": "https://careers.un.org",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "hilton",
+      "name": "Hilton",
+      "industry": "hospitality",
+      "sub_industry": "hotel",
+      "revenue_sources": [
+        {
+          "source": "Hotel management fees",
+          "pct": 50
+        },
+        {
+          "source": "Franchise fees",
+          "pct": 30
+        },
+        {
+          "source": "Owned properties",
+          "pct": 20
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 159000,
+      "hq_country": "US",
+      "careers_url": "https://jobs.hilton.com",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "DOUBTFUL",
+      "activities": [
+        "alcohol_service"
+      ]
+    },
+    {
+      "id": "nvidia",
+      "name": "NVIDIA",
+      "industry": "technology",
+      "sub_industry": "semiconductors",
+      "revenue_sources": [
+        {
+          "source": "Data center / AI chips",
+          "pct": 75
+        },
+        {
+          "source": "Gaming GPUs",
+          "pct": 18
+        },
+        {
+          "source": "Automotive / other",
+          "pct": 7
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 30000,
+      "hq_country": "US",
+      "careers_url": "https://www.nvidia.com/en-us/about-nvidia/careers/",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "shopify",
+      "name": "Shopify",
+      "industry": "technology",
+      "sub_industry": "ecommerce",
+      "revenue_sources": [
+        {
+          "source": "Merchant subscriptions",
+          "pct": 30
+        },
+        {
+          "source": "Merchant solutions (payments, shipping)",
+          "pct": 70
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 12000,
+      "hq_country": "CA",
+      "careers_url": "https://www.shopify.com/careers",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "penny-appeal",
+      "name": "Penny Appeal",
+      "industry": "nonprofit",
+      "sub_industry": "humanitarian",
+      "revenue_sources": [
+        {
+          "source": "Charitable donations",
+          "pct": 90
+        },
+        {
+          "source": "Institutional grants",
+          "pct": 10
+        }
+      ],
+      "positives": [
+        "islamic_mission",
+        "humanitarian",
+        "zakat_eligible"
+      ],
+      "company_type": "islamic_org",
+      "publicly_traded": false,
+      "employee_count": 500,
+      "hq_country": "UK",
+      "careers_url": "https://pennyappeal.org/careers",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "human-appeal",
+      "name": "Human Appeal",
+      "industry": "nonprofit",
+      "sub_industry": "humanitarian",
+      "revenue_sources": [
+        {
+          "source": "Charitable donations",
+          "pct": 85
+        },
+        {
+          "source": "Grants",
+          "pct": 15
+        }
+      ],
+      "positives": [
+        "islamic_mission",
+        "humanitarian",
+        "zakat_eligible"
+      ],
+      "company_type": "islamic_org",
+      "publicly_traded": false,
+      "employee_count": 1500,
+      "hq_country": "UK",
+      "careers_url": "https://humanappeal.org.uk/careers",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "cisco",
+      "name": "Cisco Systems",
+      "industry": "technology",
+      "sub_industry": "networking",
+      "revenue_sources": [
+        {
+          "source": "Networking hardware",
+          "pct": 45
+        },
+        {
+          "source": "Software subscriptions",
+          "pct": 35
+        },
+        {
+          "source": "Services",
+          "pct": 20
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 85000,
+      "hq_country": "US",
+      "careers_url": "https://jobs.cisco.com",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "mindful-muslimah",
+      "name": "Mindful Muslimah (Startup)",
+      "industry": "healthcare",
+      "sub_industry": "mental_health",
+      "revenue_sources": [
+        {
+          "source": "Therapy sessions",
+          "pct": 70
+        },
+        {
+          "source": "Course subscriptions",
+          "pct": 30
+        }
+      ],
+      "positives": [
+        "muslim_founded",
+        "islamic_mission"
+      ],
+      "company_type": "muslim_founded",
+      "publicly_traded": false,
+      "employee_count": 15,
+      "hq_country": "US",
+      "careers_url": "https://mindfulmuslimah.com",
+      "classification_source": "public_information",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "COMPLIANT",
+      "activities": []
+    },
+    {
+      "id": "wyndham",
+      "name": "Wyndham Hotels & Resorts",
+      "industry": "hospitality",
+      "sub_industry": "hotel",
+      "revenue_sources": [
+        {
+          "source": "Franchise fees",
+          "pct": 60
+        },
+        {
+          "source": "Hotel management",
+          "pct": 30
+        },
+        {
+          "source": "Other",
+          "pct": 10
+        }
+      ],
+      "positives": [],
+      "company_type": "conventional",
+      "publicly_traded": true,
+      "employee_count": 2400,
+      "hq_country": "US",
+      "careers_url": "https://careers.wyndhamhotels.com",
+      "classification_source": "public_filings",
+      "last_reviewed": "2026-03-05",
+      "screening_status": "DOUBTFUL",
+      "activities": [
+        "alcohol_service"
+      ]
+    }
+  ]
+}
